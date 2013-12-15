@@ -1,4 +1,4 @@
-autohotkey（自分用）
+autohotkey
 ==========
 
 autohotkeyスクリプトです。
