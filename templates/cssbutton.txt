@@ -1,0 +1,33 @@
+%selector% {
+	display: inline-block;
+	padding: 4px 10px 4px;
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	text-shadow: 1px -1px 0px rgba(0, 0, 0, 1);
+	border-radius: 4px;
+	color: rgba(255, 255, 255, 0.9);
+	border: 1px solid #%color%;
+	background-color: #%color%;
+	background-image: -webkit-linear-gradient(top, #%color1%, #%color2%);
+	background-image: -moz-linear-gradient(top, #%color1%, #%color2%);
+	background-image: -ms-linear-gradient(top, #%color1%, #%color2%);
+	background-image: -o-linear-gradient(top, #%color1%, #%color2%);
+	background-image: linear-gradient(top, #%color1%, #%color2%);
+	background-repeat: repeat-x;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+%selector%:hover {
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid #%hover_color%;
+	background-color: #%hover_color%;
+	background-image: -webkit-linear-gradient(top, #%hover_color1%, #%hover_color2%);
+	background-image: -moz-linear-gradient(top, #%hover_color1%, #%hover_color2%);
+	background-image: -ms-linear-gradient(top, #%hover_color1%, #%hover_color2%);
+	background-image: -o-linear-gradient(top, #%hover_color1%, #%hover_color2%);
+	background-image: linear-gradient(top, #%hover_color1%, #%hover_color2%);
+}
