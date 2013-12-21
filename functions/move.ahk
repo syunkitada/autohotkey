@@ -58,7 +58,7 @@ down() {
     Return
 }
 
-home() {
+move_home() {
     if is_visual() {
         Send +{Home}       
     } else {
@@ -67,7 +67,7 @@ home() {
 	Return
 }
 
-end() {
+move_end() {
     if is_visual() {
         Send +{End}       
     } else {
@@ -104,20 +104,6 @@ lefts(n) {
 rights(n) {
     Loop %n% {
         right()
-    }
-	Return
-}
-
-downs(n) {
-    Loop %n% {
-        down()
-    }
-	Return
-}
-
-ups(n) {
-    Loop %n% {
-        up()
     }
 	Return
 }

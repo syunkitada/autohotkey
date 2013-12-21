@@ -25,10 +25,29 @@ run_command() {
 		html_escape(c2)
 	else if (c1 = "bash")
 		bash(c2)
+	else if (c1 = "ahk") {
+		ahk(c2)
+	}
     reset_colon()
     Return
 }
 
+ahk(command) {
+	if (command = "" or command = "reload" or command = "r") {
+		Reload
+	} else if (command = "history" or command = "h") {
+		KeyHistory
+	} else if (command = "listhotkeys" or command = "lh") {
+		ListHotkeys
+	} else if (command = "listlines" or command = "ll") {
+		ListLines
+	} else if (command = "listvars" or command = "lv") {
+		ListVars
+	} else if (command = "edit" or command = "e") {
+		Edit
+	}
+	Return
+}
 
 help(command) {
     if (command = "grad")

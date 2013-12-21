@@ -1,10 +1,9 @@
 +ESC::
     if bypass() {
-        Send +{ESC}
+        send +{ESC}
     } else if browsing {
     } else {
-		Send {vkF2sc070}
-		Send {vkF3sc029}
+		IME_SET(0)
 		set_browsing()
     }
     Return
@@ -17,7 +16,7 @@
     }
 	Return
 
-+vkBAsc028:: ;コロン
++sc028:: ;コロン
     if bypass() {
         Send +:
     } else {
@@ -44,12 +43,13 @@
     Return
 
 +c::
-    if bypass()
+    if bypass() {
         Send +c
-	else if browsing {
+	} else if browsing {
         operate("C")
-	} else
+	} else {
         Send +c
+	}
     Return
 
 +d::
@@ -106,19 +106,15 @@
     Return
 
 +j::
-    if bypass()
+    if bypass() {
         Send +j
-    else if browsing {
-		downs(4)
     } else
         Send +j
     Return
 
 +k::
-    if bypass()
+    if bypass() {
         Send +k
-    else if browsing {
-		ups(4)
     } else
         Send +k
     Return

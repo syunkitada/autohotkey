@@ -37,9 +37,9 @@ operate(motion) {
             } if (motion = "/") {
                 Send ^f
             } else if (motion = "$") {
-                end()
+                move_end()
             } else if (motion = "0") {
-                home()
+                move_home()
             } else if (motion = "a") {
                 Send {Right}
                 reset_all()
@@ -137,12 +137,12 @@ op_copy(motion) {
     } else if (motion = "b") {
         backward_word()
     } else if (motion = "0") {
-        home()
+        move_home()
     } else if (motion = "$") {
-        end()
+        move_end()
     } else if (motion = "y") {
         Send {Home}
-        end()
+        move_end()
     }
     copy(null)
     reset_visual()

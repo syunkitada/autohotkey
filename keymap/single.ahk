@@ -15,9 +15,7 @@ ESC::
     if bypass() {
         Send {Esc}
     } else if is_browsing() {
-    } else { ;半角英数にしてからESCする
-        ;Send {vkF2sc070} ;カタカナひらがなキー
-        ;Send {vkF3sc029} ;半角/全角キー
+    } else {
 		IME_SET(0)
         Send {Esc} 
     }
@@ -187,7 +185,7 @@ Right::
     } else if colon {
         set_colon()
 	} else if browsing {
-		end()
+		move_end()
 	} else {
         Send :
     }
@@ -199,7 +197,7 @@ Right::
     } else if colon {
         append_colon(";")
 	} else if browsing {
-		home()
+		move_home()
     } else {
         Send `;
     }
@@ -457,9 +455,15 @@ j::
     }
     Return
 
-j & k::AltTab
+j & k::
+	set_operator_count(2)
+	operate("j")
+	Return
 
-j & l::ShiftAltTab
+j & l::
+	set_operator_count(4)
+	operate("j")
+	Return
 
 j & i::
     WinGetClass, className, A
@@ -477,6 +481,16 @@ k::
         Send k
     }
     Return
+
+k & j::
+	set_operator_count(2)
+	operate("k")
+	Return
+
+k & h::
+	set_operator_count(4)
+	operate("k")
+	Return
 
 l::
     if bypass() {

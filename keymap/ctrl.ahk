@@ -8,7 +8,7 @@
         set_visual()
     Return
 
-^vkBAsc028:: ;colon
+^sc028:: ;colon
     if bypass()
         Send ^vkBAsc028
     else

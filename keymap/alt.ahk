@@ -3,98 +3,99 @@
 ;; ------------------------------
 
 !Esc::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !Esc
-	else
+	} else {
         set_visual()
-    Return
-
-!+Esc::
-	if bypass() or is_terminal()
-		Send !+Esc
-	else {
-		if is_visual() {
-			if is_eclipse()
-				Send !+a
-			reset_visual()
-		} else {
-			if is_eclipse()
-				Send !+a
-			set_visual()
-		}
 	}
     Return
 
+; search
 !/::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !/
-    else {
-        focus_addressbar()
+	} else {
+		search()
     }
     Return
 
+; addressbar
+!sc073::
+	if bypass() {
+		Send !/
+	} else {
+        focus_addressbar()
+	}
+	Return
 
 !;::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !`;
-    else
-        home()
+    } else {
+        move_home()
+	}
     Return
 
 !+;::
-	if bypass()
+	if bypass() {
 		Send !+`;
-	else
+	} else {
 		Send +`;
+	}
 	Return
 
-!vkBAsc028:: ;コロン
-    if bypass() or is_terminal()
+!sc028:: ;コロン
+    if bypass() or is_terminal() {
         Send !:
-    else
-        end()
+    } else {
+        move_end()
+	}
     Return
 
-!+vkBAsc028:: ;コロン
-    if bypass()
+!+sc028:: ;コロン
+    if bypass() {
         Send !+:
-    else
+    } else {
 		Send *
+	}
     Return
-
 
 ^,::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send ^{,}
-    else
+    } else {
         backward_history()
+	}
     Return
 
 ^.::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send ^.
-    else
+    } else {
         forward_history()
+	}
     Return
 
 !a::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !a
-	else if is_eclipse()
+	} else if is_eclipse() {
 		Send ^{Space}
-	else if is_vim()
+	} else if is_vim() {
 		Send ^n
-	else if is_terminal()
+	} else if is_terminal() {
 		Send ^n
-	else
+	} else {
 		Send !a
+	}
 	Return
 
 !b::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !b
-    else
+    } else {
         backward_word()
+	}
     Return
 
 ;    KeyHistory
@@ -103,113 +104,141 @@
 ;    Return
 
 !d::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !d
-    else
+    } else {
         delete()
+	}
     Return
 
 !e::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !e
-     else
+    } else {
         delete_forward_word()
+	}
     Return
 
 !+e::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !+e
-	else if is_terminal() {
+	} else if is_terminal() {
 		Send {Esc}
 		Sleep 10
 		Send d
-    } else
+    } else {
         Send !+e
+	}
     Return
 
 !f::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !f
-	else 
+	} else {
 		Send !f
+	}
     Return
 
 !+f::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !+f
-	else 
+	} else {
 		Send !+f
+	}
+	Return
+
+; goto shortcut
+!g::
+	if bypass() {
+		Send !g
+	} else if is_terminal() or is_vim() {
+		; use unite
+		Send {Esc},u
+	} else if is_eclipse() {
+		; open resource
+		Send ^+r
+	} else {
+		Send !g
+	}
 	Return
 
 !h::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !h
-    else
+    } else {
         left()                 
+	}
     Return
 
 !i::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !i
-    else
+    } else {
 		forward_word()
+	}
     Return
 
 !+i::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !+i
-    else if is_terminal() {
+    } else if is_terminal() {
 		Send {Esc}	
 		Sleep 10
 		Send f
-	} else
+	} else {
         Send !+i
+	}
     Return
 	
 
 !j::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !j
-    else if browsing
+    } else if browsing {
         move_focus("down")
-    else
+    } else {
         down()
+	}
     Return
 
 !+j::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !+j
-    if is_eclipse()
+    } if is_eclipse() {
         Send ^+{Down}
-    else
+    } else {
         Send !+j
+	}
     Return
 
 !k::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !k
-    else if browing
+    } else if browing {
         move_focus("up")
-    else 
+    } else {
         up()
+	}
     Return
 
 !+k::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !+k
-    if is_eclipse()
+    } if is_eclipse() {
         Send ^+{Up}
-    else
+    } else {
         Send !+k
+	}
     Return
 
 !l::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !l
-    else if browsing
+    } else if browsing {
         move_focus("right")
-    else
+    } else {
         right()
+	}
     Return
 
 !o::
@@ -222,16 +251,17 @@
     Return
 
 !+o::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !+o
-	else
+	} else {
 		Send {Up}{End}{Enter}
+	}
 	Return
 
 !p::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !p
-	else {
+	} else {
 		Send ^s
 		Sleep, 50
 		Send !{Tab}
@@ -243,72 +273,78 @@
 	Return
 
 !q::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !q
-	else if is_eclipse()
+	} else if is_eclipse() {
 		Send ^1
-	else
+	} else {
 		Send !q
+	}
 	Return
 
 !r::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !r
-    else if is_eclipse()
+    } else if is_eclipse() {
         Send !+r
-    else
+    } else {
         Send {F2}
+	}
     Return
 
 !s::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !s
-	else
+	} else {
 		backspace()
+	}
 	Return
 
 !t::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !t
-	else
+	} else {
 		copy_current_line()
+	}
 	Return
 
 !u::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !u
-	else {
+	} else {
 		backward_word()
 	}
 	Return
 
 !+u::
-    if bypass() or is_terminal()
+    if bypass() or is_terminal() {
         Send !+u
-    else if is_terminal() {
+    } else if is_terminal() {
 		Send {Esc}
 		Sleep 10
 		Send b	
-	} else
+	} else {
         Send !+u
+	}
     Return
 
 !w::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !w
-	else {
+	} else {
 		delete_backward_word()
 	}
 	Return
 
 !+w::
-	if bypass() or is_terminal()
+	if bypass() or is_terminal() {
 		Send !+w
-	else if is_terminal() {
+	} else if is_terminal() {
 		; puttyで動作しない
 		SendInput ^w
-	} else 
+	} else {
 		Send !+w
+	}
     Return
 
 !z::Reload

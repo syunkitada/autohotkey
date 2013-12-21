@@ -1,4 +1,10 @@
-
+search() {
+	if is_vim() {
+		Send {Esc}/
+    } else {
+        send ^f
+    }
+}
 
 copy_current_line() {
 	Send {Home}
@@ -42,14 +48,15 @@ previous_tab() {
 }
 
 focus_addressbar()  {
-    if is_browser()
+    if is_browser() {
         Send {F6}
-    else if is_explorer()
+    } else if is_explorer() {
         Send !d
-    else if is_eclipse()
+    } else if is_eclipse() {
         Send !+b
-    else
+    } else {
 		Send ^/
+	}
 	Return
 }
 
