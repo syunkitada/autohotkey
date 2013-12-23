@@ -95,10 +95,19 @@ reset_all() {
     Return
 }
 
-set_operator_count(count) {
+set_operator_count(count, is_check_browsing=1) {
+	if bypass() {
+		Return 0
+	}
+	if append_colon(count) {
+		Return 1
+	}
+	if is_check_browsing and !is_browsing() {
+		Return 0
+	}
     global operator_count
     operator_count := count
-    Return
+    Return 1
 }
 
 is_operator_count() {
@@ -138,17 +147,26 @@ reset_operator() {
 }
 
 set_colon() {
+	if bypass() {
+		Return 0
+	}
 	reset_all()
+    global colon = 1
 	append_colon("")
-    Return
+    Return 1
 }
 
 append_colon(str) {
+	if bypass() {
+		Return 0
+	}
+	if !is_colon() {
+		Return 0
+	}
     global command
     command = %command%%str%
-    global colon = 1
     ToolTip, :%command%, 34, 0, 4
-    Return
+    Return 1
 }
 
 bs_colon() {
@@ -172,10 +190,13 @@ is_colon() {
 }
 
 set_visual() {
+	if bypass() or is_terminal() {
+		Return 0
+	}
 	set_browsing()
     global visual = 1
     ToolTip, visual, 53, 0, 2
-    Return
+    Return 1
 }
 
 is_visual() {
@@ -198,9 +219,13 @@ switch_visual() {
 }
 
 set_browsing() {
+	if bypass() {
+		Return 0
+	}
+	IME_SET(0)
     global browsing = 1
     ToolTip, browsing, 100, 0, 5
-    Return
+    Return 1
 }
 
 reset_browsing() {
@@ -247,4 +272,15 @@ switch_gimp() {
     Return
 }
 
+escape() {
+    if bypass() {
+		Return 0
+    } else if is_browsing() {
+    } else {
+		IME_SET(0)
+        Send {Esc} 
+    }
+	reset_all()
+    Return 1
+}
 

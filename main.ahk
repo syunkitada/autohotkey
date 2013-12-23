@@ -20,6 +20,7 @@ FileEncoding UTF-8
 #Include operator\operator.ahk
 
 #Include keymap\single.ahk
+#Include keymap\double.ahk
 #Include keymap\shift.ahk
 #Include keymap\ctrl.ahk
 #Include keymap\alt.ahk

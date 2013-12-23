@@ -22,20 +22,10 @@
     run firefox.exe
     Return
 
-; TODO Git, git mode
-#g::
-    Return
-
-; switch auto hide task bar
 #h::
-    Send {LWin} 
-    Send {Esc}
-    Send !{Enter}
-    Sleep 400
-    Send u
-    Send {Enter}
-    Return
-
+	switch_taskbar_display()
+	Return
+		
 #i::
     run iexplore.exe
     Return
@@ -53,11 +43,7 @@
     Return
 
 #s::
-    MouseGetPos, x, y
-    PixelGetColor, hexRGB, %x%, %y%, RGB    ;hexRGB = 0xFFFFFF
-    StringTrimLeft, RGB, hexRGB, 2    ;RGB = FFFFFF
-    StringLower, rgb, RGB    ;rgb = ffffff
-    clipboard = %rgb%
+	get_color_on_mouseposition()
     Return
 
 #t::

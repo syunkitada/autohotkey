@@ -1,249 +1,149 @@
 +ESC::
-    if bypass() {
+    if !set_browsing()
         send +{ESC}
-    } else if browsing {
-    } else {
-		IME_SET(0)
-		set_browsing()
-    }
     Return
 
 +;::
-	if bypass() {
+	if bypass()
 		Send +`;
-	} else {
+	else
 		Send '
-    }
 	Return
 
 +sc028:: ;コロン
-    if bypass() {
+    if bypass()
         Send +:
-    } else {
+    else
         Send "
-    }
     Return
 
 +a::
-    if bypass()
-        Send +a
-    else if browsing {
-        Send {End}
-        reset_all()
-    } else
+    if !operate("+a")
         Send +a
     Return
 
 +b::
-    if bypass()
-        Send +b
-    else if browsing {
-    } else
+    if !operate("+b")
         Send +b     
     Return
 
 +c::
-    if bypass() {
+    if !operate("+c")
         Send +c
-	} else if browsing {
-        operate("C")
-	} else {
-        Send +c
-	}
     Return
 
 +d::
-    if bypass()
-        Send +d
-    else if browsing {
-        operate("+d")
-    } else     
+    if !operate("+d")
         Send +d
     Return
 
 +e::
-    if bypass()
-        Send +e
-    else if browsing {
-    } else
+    if !operate("+e")
         Send +e     
     Return
 
 +f::
-    if bypass()
-        Send +f
-    else if browsing {
-    } else
+    if !operate("+f")
         Send +f     
     Return
 
 +g::
-    if bypass()
-        Send +g
-    else if browsing
-        Send ^{End}                  
-    else
+    if !operate("+g")
         Send +g    
     Return
 
 +h::
-    if bypass()
-        Send +h
-    else if browsing {
-        lefts(4)
-    } else
+    if !operate("+h")
         Send +h
     Return
 
 +i::
-    if bypass()
-        Send +i
-    else if browsing {
-        Send {Home}            
-        reset_browsing()          
-    } else
+    if !operate("+i")
         Send +i
     Return
 
 +j::
-    if bypass() {
-        Send +j
-    } else
+    if !operate("+j")
         Send +j
     Return
 
 +k::
-    if bypass() {
-        Send +k
-    } else
+    if !operate("+k")
         Send +k
     Return
 
 +l::
-    if bypass()
-        Send +l
-    else if browsing {
-        rights(4)
-    } else
+    if !operate("+l")
         Send +l
     Return
 
 +m::
-    if bypass()
+    if !operate("+m")
         Send +m
-    else if browsing {
-    } else
-        Send +m     
     Return
 
 +n::
-    if bypass()
+    if !operate("+n")
         Send +n
-    else if browsing {
-    } else
-        Send +n     
     Return
 
 +o::
-    if bypass()
-        Send +o
-    else if browsing {    
-        Send {Home}{Enter}{Up} 
-        reset_browsing()
-    } else
+    if !operate("+o")
         Send +o
     Return
 
 +p::
-    if bypass()
-        Send +p
-    else if browsing {
-        operate("+p")
-    } else
+    if !operate("+p")
         Send +p
     Return
 
 +q::
-    if bypass()
+    if !operate("+q")
         Send +q
-    else if vi {
-    } else
-        Send +q     
     Return
 
 +r::
-    if bypass()
-        Send +r
-    else if vi {
-    } else
+	if !operate("+r")
         Send +r     
     Return
 
 +s::
-    if bypass()
-        Send +s
-    else if vi {
-    } else
+    if !operate("+s")
         Send +s
     Return
 
 +t::
-    if bypass()
-        Send +t
-    else if vi {
-    } else
+    if !operate("+t")
         Send +t     
     Return
 
 +u::
-    if bypass()
+    if !operate("+u")
         Send +u
-    else if vi {
-    } else
-        Send +u     
     Return
 
 +v::
-    if bypass()
+    if !operate("+v")
         Send +v
-    else if vi {
-    } else
-        Send +v     
     Return
 
 +w::
-    if bypass()
+    if !operate("+w")
         Send +w
-    else if vi {
-    } else
-        Send +w     
     Return
 
 +x::
-    if bypass()
-        Send +x
-    else if browsing {
-        operate("+x")
-    } else
+    if !operate("+x")
         Send +x
     Return
 
 +y:: 
-    if bypass()
-        Send +y
-    else if vi {
-        Send +{End}
-        Sleep, 5       
-        Send ^c       
-        reset_visual() 
-    } else
+    if !operate("+y")
         Send +y
     Return
 
 +z::
-    if bypass()
-        Send +z
-    else if vi {
-    } else
+    if !operate("+z")
         Send +z     
     Return
+

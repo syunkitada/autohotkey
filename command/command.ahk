@@ -1,4 +1,10 @@
+
+
 run_command() {
+	if bypass() or !is_colon() {
+		Return 0
+	}
+
     global command
     ClipSaved := ClipboardAll ;クリップボードの全内容を保存
     StringSplit, c, command, ";"
@@ -8,7 +14,7 @@ run_command() {
 	else if (c1 = "y")
 		copy(c2)
 	else if (c1 = "p")
-		paste(c2, 0, 0, 0)
+		paste(c2)
     else if (c1 = "grad")
         css_gradation(c2, c3)
     else if (c1 ="line")
@@ -29,7 +35,8 @@ run_command() {
 		ahk(c2)
 	}
     reset_colon()
-    Return
+
+    Return 1
 }
 
 ahk(command) {

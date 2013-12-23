@@ -1,4 +1,21 @@
-copy(id) {
+; コピー、ペースト関連の関数群です。
+
+cut() {
+	if bypass() {
+		Return 0
+	} else if is_terminal() {
+		copy()
+	} else {
+		Send ^x
+	}
+	Return 1
+}
+
+copy(id=0) {
+	if bypass() {
+		Return 0
+	}
+
     if (id)
         clipsaved = %clipboard%
 
@@ -90,10 +107,14 @@ copy(id) {
     if (id)
         clipboard = %clipsaved%
 
-    Return
+    Return 1
 }
 
-paste(id, filename, is_create, is_append) {
+paste(id=0, filename=0, is_create=0, is_append=0) {
+	if bypass() {
+		Return 0
+	}
+
 	clipsaved = %clipboard%
 	
 	if (id = "a") {
@@ -208,6 +229,6 @@ paste(id, filename, is_create, is_append) {
 
 	clipboard = %clipsaved%
 
-	Return
+	Return 1
 }
 

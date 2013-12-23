@@ -1,115 +1,160 @@
-left() {
-    if is_visual() {
-        Send +{Left}
-    } else {
-        Send {Left}
-    }
-    Return
-}
+; 移動関連の関数群です。
+; 関数名はすべてmove_で始まります。
 
-right() {
-    if is_visual() {
-        Send +{Right}
-    } else {
-        Send {Right}
-    }
-    Return
-}
-
-up() {
-    if is_visual() {
-		if is_sendinput() {
-			SendInput +{Up}
-		} else if is_sendplay() {
-			SendPlay +{Up}
-		} else {
-			Send +{Up}
-        }
-    } else {
-		if is_sendinput() {
-			SendInput {Up}
-		} else if is_sendplay() {
-			SendPlay {Up}
-		} else {
-			Send {Up}
-        }
+move_left(count=1) {
+	if bypass() {
+		Return 0
 	}
-    Return
+	
+	Loop, %count% {
+		if is_visual() {
+			Send +{Left}
+		} else {
+			Send {Left}
+		}
+	}
+	Return 1
 }
 
-down() {
-    if is_visual() {
-		if is_sendinput() {
-			SendInput +{Down}
-		} else if is_sendplay() {
-			SendPlay +{Down}
+move_right(count=1) {
+	if bypass() {
+		Return 0
+    }
+	
+	Loop, %count% {
+		if is_visual() {
+			Send +{Right}
 		} else {
-			Send +{Down}
-        }
-    } else {
-		if is_sendinput() {
-			SendInput {Down}
-		} else if is_sendplay {
-			SendPlay {Down}
-		} else {
-			Send {Down}
-        }
+			Send {Right}
+		}
 	}
-    Return
+    Return 1
+}
+
+move_up(count=1) {
+	if bypass() {
+		Return 0
+	}
+
+	Loop, %count% {
+		if is_visual() {
+			if is_sendinput() {
+				SendInput +{Up}
+			} else if is_sendplay() {
+				SendPlay +{Up}
+			} else {
+				Send +{Up}
+			}
+		} else {
+			if is_sendinput() {
+				SendInput {Up}
+			} else if is_sendplay() {
+				SendPlay {Up}
+			} else {
+				Send {Up}
+			}
+		}
+	}
+    Return 1
+}
+
+move_down(count=1) {
+	if bypass() {
+		Return 0
+	}
+
+	Loop, %count% {
+		if is_visual() {
+			if is_sendinput() {
+				SendInput +{Down}
+			} else if is_sendplay() {
+				SendPlay +{Down}
+			} else {
+				Send +{Down}
+			}
+		} else {
+			if is_sendinput() {
+				SendInput {Down}
+			} else if is_sendplay {
+				SendPlay {Down}
+			} else {
+				Send {Down}
+			}
+		}
+	}
+    Return 1
 }
 
 move_home() {
-    if is_visual() {
+	if bypass() {
+		Return 0
+	} else if is_visual() {
         Send +{Home}       
     } else {
-        Send {Home}       
+        Send {Home} 
     }
-	Return
+	Return 1
 }
 
 move_end() {
-    if is_visual() {
+	if bypass() {
+		Return 0
+    } else if is_visual() {
         Send +{End}       
     } else {
         Send {End}       
     }
-	Return
+	Return 1
 }
 
-pageup() {
-    if is_visual() {
+move_half_pageup() {
+	if bypass() {
+		Return 0
+	} else if is_eclipse() or is_vim() or is_terminal() {
+		Send ^u
+	} else {
+        move_pageup()
+	}
+	Return 1
+}
+
+move_pageup() {
+	if bypass() {
+		Return 0
+	} else if is_visual() {
         Send +{PgUp}       
     } else {
         Send {PgUp}       
     }
-	Return
+	Return 1
 }
 
-pagedown() {
-    if is_visual() {
-        Send +{PgDn}       
+move_pagedown() {
+	if bypass() {
+		Return 0
+    } else if is_visual() {
+        Send +{PgDn} 
     } else {
         Send {PgDn}       
     }
-	Return
+	Return 1
 }
 
-lefts(n) {
-    Loop %n% {
-        left()
-    }
-	Return
+move_half_pagedown() {
+	if bypass() {
+		Return 0
+	} else if is_eclipse() or is_vim() or is_terminal() {
+		Send ^d
+	} else {
+        move_pagedown()
+	}
+    Return 1
 }
 
-rights(n) {
-    Loop %n% {
-        right()
-    }
-	Return
-}
-
-backward_word() {
-    if is_visual() {
+move_backward_word() {
+	if bypass() {
+		Return 0
+    } else if is_visual() {
         Send +^{Left}
 	} else if is_terminal() {
         Send {Esc}
@@ -117,11 +162,13 @@ backward_word() {
     } else {
         Send ^{Left}         
     }
-    Return
+    Return 1
 }
 
-forward_word() {
-    if is_visual() {
+move_forward_word() {
+	if bypass()
+		Return 0
+    else if is_visual() {
         Send +^{Right}
 	} else if is_terminal() {
         Send {Esc}
@@ -129,5 +176,15 @@ forward_word() {
     } else {
         Send ^{Right}
     }
-    Return
+    Return 1
+}
+
+move_newline() {
+	if bypass() or is_terminal() or is_vim() {
+		Return 0
+	} else {
+		Send {End}{Enter}
+		reset_all()
+	}
+	Return 1
 }

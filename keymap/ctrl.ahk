@@ -2,62 +2,33 @@
 ;; ctrl - key mapping
 ;; ------------------------------
 ^Esc::
-    if bypass()
+    if !set_visual()
         Send ^{Esc}
-    else
-        set_visual()
     Return
 
 ^sc028:: ;colon
-    if bypass()
-        Send ^vkBAsc028
-    else
-		set_colon()
+    if !set_colon()
+        Send ^{sc028}
     Return
 
-
 ^a::
-    if bypass()
+    if !select_all()
         Send ^a
-    else {
-        if is_vim() {
-            Send {Esc}
-            Send +g
-            Send +v
-            Send gg
-        } else {
-            Send ^a
-        }
-    }
     Return
 
 ^b::
-    if bypass()
+    if !bookmark()
         Send ^b
-    else {
-        if is_browser()
-            Send ^d
-        else if is_explorer()
-            Send ^d
-        else
-            Send ^b
-    }
     Return
 
 ^d::
-    if bypass()
+    if !move_half_pagedown()
         Send ^d
-    else if is_eclipse() or is_vim() or is_terminal()
-		Send ^d
-	else
-        pagedown()
     Return
 
 ^h::
-    if bypass()
+    if !previous_tab()
         Send ^h
-    else 
-        previous_tab()
     Return
 
 LCtrl & j::AltTab
@@ -67,85 +38,19 @@ LCtrl & k::ShiftAltTab
 RCtrl & k::ShiftAltTab
 
 ^l::
-    if bypass()
+    if !next_tab()
         Send ^l
-    else 
-        next_tab()
-    Return
-
-^m::
-	if bypass()
-		Send ^m
-	else if is_eclipse()
-		Send ^{F7}
-	else
-		Send ^m
-	Return
-
-^+m::
-	if bypass()
-		Send ^+m
-	else if is_eclipse()
-		Send ^+{F7}
-	else
-		Send ^+m
-	Return
-
-^n:: 
-    if bypass()
-        Send ^n
-    else if is_eclipse()
-        Send !/
-    else
-        Send ^n
-    Return
-
-^r::
-    if bypass()
-        Send ^r
-    else if is_xmind()
-		Send ^l
-	else
-        Send ^r                 
-    Return
-
-^s::
-    if bypass()
-        Send ^s
-    else if is_vim() {
-        Send {Esc}
-        Send :w
-        Send {Enter}
-    } else
-        Send ^s                 
     Return
 
 ^t::
-    if bypass()
-        Send ^t
-    else if is_vim() {
-		Send {Esc}
-		Send :tabe{Space}
-    } else
+    if !new_tab()
         Send ^t
     Return
 
 ^u::
-    if bypass()
-        Send ^u
-	else if is_eclipse() or is_vim() or is_terminal()
+    if !move_half_pageup()
 		Send ^u
-    else
-        pageup()
     Return
 
-^v::
-    if bypass()
-        Send ^v
-    else if is_terminal()
-        Send ^v
-    else
-		paste(0, 0, 0, 0)
-    Return
 
 
