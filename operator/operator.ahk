@@ -7,6 +7,10 @@ operate(command, is_check_browsing=1) {
 		Return 1
 	}
 
+	if operate_mouse(command) {
+		Return 1
+	}
+
 	if is_check_browsing and !is_browsing() {
 		Return 0
 	}
@@ -45,7 +49,7 @@ operate(command, is_check_browsing=1) {
                 operator = %pre_operator%
                 operator_count = %pre_operator_count%
                 operate(pre_operator_command, 0)
-            } if (command = "/") {
+            } else if (command = "/") {
                 Send ^f
             } else if (command = "$") {
                 move_end()

@@ -8,7 +8,7 @@ Enter::
     Return
 
 ESC::
-	if is_browsing()
+	if is_browsing() or is_mouse()
 		reset_all()
 	else if !escape()
 		Send {Esc}

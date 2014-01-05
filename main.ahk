@@ -19,6 +19,7 @@ FileEncoding UTF-8
 
 #Include operator\operator.ahk
 #Include operator\operators.ahk
+#Include operator\mouse.ahk
 
 #Include keymap\single.ahk
 #Include keymap\double.ahk

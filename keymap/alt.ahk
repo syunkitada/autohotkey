@@ -3,8 +3,7 @@
 ;; ------------------------------
 
 !Esc::
-	IME_SET(0)
-	reset_all()
+	set_mouse()
     Return
 
 !/::

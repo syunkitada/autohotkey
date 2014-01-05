@@ -88,9 +88,9 @@ colon = 0
 command =
 visual = 0
 browsing = 0
-gimp = 0
 operator = 
 operator_count = 1
+mouse = 0
 pre_operator = 
 pre_operator_count = 
 pre_operator_command = 
@@ -99,7 +99,7 @@ reset_all() {
     reset_browsing()
 	reset_visual()
     reset_colon()
-	reset_gimp()
+	reset_mouse()
     reset_operator()
     Return
 }
@@ -107,11 +107,11 @@ reset_all() {
 set_operator_count(count, is_check_browsing=1) {
 	if bypass() {
 		Return 0
-	}
-	if append_colon(count) {
+	} else if append_colon(count) {
 		Return 1
-	}
-	if is_check_browsing and !is_browsing() {
+	} else if operate_mouse(count) {
+		Return 1
+	} if is_check_browsing and !is_browsing() {
 		Return 0
 	}
     global operator_count
@@ -256,29 +256,25 @@ switch_browsing() {
     Return
 }
 
-set_gimp() {
-    global gimp = 1
-    ToolTip, gimp, 100, 0, 5
-    Return
+set_mouse() {
+	if bypass() {
+		Return 0
+	}
+	IME_SET(0)
+    global mouse = 1
+    ToolTip, mouse, 100, 0, 5
+    Return 1
 }
 
-reset_gimp() {
-    global gimp = 0
+reset_mouse() {
+    global mouse = 0
     ToolTip, , , , 5
     Return
 }
 
-is_gimp() {
-    global gimp
-    return gimp
-}
-
-switch_gimp() {
-    if is_gimp()
-        reset_gimp()
-    else
-        set_gimp()
-    Return
+is_mouse() {
+    global mouse
+    return mouse
 }
 
 escape() {
