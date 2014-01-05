@@ -1,9 +1,9 @@
-operate(motion, is_check_browsing=1) {
+operate(command, is_check_browsing=1) {
 	if bypass() {
 		Return 0
 	}
 
-	if append_colon(motion) {
+	if append_colon(command) {
 		Return 1
 	}
 
@@ -14,92 +14,94 @@ operate(motion, is_check_browsing=1) {
     global operator
     global operator_count
     global pre_operator
-    global pre_operator_motion
+    global pre_operator_command
     global pre_operator_count
 
-    if (motion != ".") {
+    if (command != ".") {
         pre_operator = %operator%
-        pre_operator_motion = %motion%
+        pre_operator_command = %command%
         pre_operator_count = %operator_count%
     }
 
     Loop %operator_count% {
         if (operator) {
             if (operator = "c") {
-                op_delete(motion)
+                op_delete(command)
                 reset_all()
             } else if (operator = "d") {
-                op_delete(motion)
+                op_delete(command)
             } else if (operator = "f") {
-                op_find(motion)
+                op_find(command)
             } else if (operator = "g") {
                 Send ^{Home}
             } else if (operator = "r") {
-                op_replace(motion)
+                op_replace(command)
             } else if (operator = "y") {
-                op_copy(motion)
+                op_copy(command)
             }
             reset_operator()
         } else {
-            if (motion = ".") {
+            if (command = ".") {
                 operator = %pre_operator%
                 operator_count = %pre_operator_count%
-                operate(pre_operator_motion, 0)
-            } if (motion = "/") {
+                operate(pre_operator_command, 0)
+            } if (command = "/") {
                 Send ^f
-            } else if (motion = "$") {
+            } else if (command = "$") {
                 move_end()
-            } else if (motion = ":") {
-                set_colon()
-            } else if (motion = "0") {
+            } else if (command = ";") {
                 move_home()
-            } else if (motion = "a") {
+            } else if (command = ":") {
+                move_end()
+            } else if (command = "0") {
+                move_home()
+            } else if (command = "a") {
                 Send {Right}
                 reset_all()
-			} else if (motion = "+a") {
+			} else if (command = "+a") {
 				move_end()
 				reset_all()
-            } else if (motion = "b") {
+            } else if (command = "b") {
                 move_backward_word()
-            } else if (motion = "c") {
+            } else if (command = "c") {
                 set_operator("c")
-            } else if (motion = "d") {
+            } else if (command = "d") {
                 set_operator("d")
-            } else if (motion = "+d") {
+            } else if (command = "+d") {
                 op_delete("$")
-            } else if (motion = "f") {
+            } else if (command = "f") {
                 set_operator("f")
-            } else if (motion = "g") {
+            } else if (command = "g") {
                 set_operator("g")
-            } else if (motion = "+g") {
+            } else if (command = "+g") {
 				Send ^{End}
-            } else if (motion = "h") {
+            } else if (command = "h") {
                 move_left()
-            } else if (motion = "i") {
+            } else if (command = "i") {
                 reset_all()
-            } else if (motion = "+i") {
+            } else if (command = "+i") {
 				move_home()
 				reset_browsing()
-            } else if (motion = "j") {
+            } else if (command = "j") {
                 move_down()
-            } else if (motion = "k") {
+            } else if (command = "k") {
                 move_up()
-            } else if (motion = "l") {
+            } else if (command = "l") {
                 move_right()
-            } else if (motion = "m") {
+            } else if (command = "m") {
                 move_pageup()
-            } else if (motion = "n") {
+            } else if (command = "n") {
                 move_pagedown()
-            } else if (motion = "o") {
+            } else if (command = "o") {
                 Send {End}{Enter}
                 reset_all()
-            } else if (motion = "+o") {
+            } else if (command = "+o") {
 				Send {Home}{Enter}{Up} 
 				reset_browsing()
-            } else if (motion = "p") {
+            } else if (command = "p") {
                 paste()
                 reset_visual()  
-            } else if (motion = "+p") {
+            } else if (command = "+p") {
                 if is_terminal() {
                     Send ^y
                 } else {
@@ -107,29 +109,29 @@ operate(motion, is_check_browsing=1) {
                     paste()
                     reset_visual()  
                 }
-            } else if (motion = "r") {
+            } else if (command = "r") {
                 set_operator("r")
-            } else if (motion = "s") {
+            } else if (command = "s") {
                 Send {RButton}
                 Send v
-            } else if (motion = "u") {
+            } else if (command = "u") {
                 move_pageup()
-            } else if (motion = "v") {
+            } else if (command = "v") {
                 switch_visual()
-            } else if (motion = "w") {
+            } else if (command = "w") {
                 move_forward_word()
-            } else if (motion = "x") {
+            } else if (command = "x") {
                 delete_right_char()
-            } else if (motion = "+x") {
+            } else if (command = "+x") {
                 delete_left_char()
-            } else if (motion = "y") {
+            } else if (command = "y") {
                 if is_visual() {
                     copy()
                     reset_visual()           
                 } else {
                     set_operator("y")
                 }
-            } else if (motion = "+y") {
+            } else if (command = "+y") {
 				Send +{End}
 				Sleep, 5
 				Send ^c
@@ -142,60 +144,3 @@ operate(motion, is_check_browsing=1) {
 	Return 1
 }
 
-op_delete(motion) {
-    if (motion = "0") {
-        delete_forward_line()
-    } else if (motion = "$") {
-        delete_backward_line()
-    } else if (motion = "b") {
-        delete_forward_word()
-    } else if (motion = "d") {
-        delete_current_line()    
-    } else if (motion = "h") {
-        delete_left_char()
-    } else if (motion = "l") {
-        delete_right_char()    
-    } if (motion = "w") {
-        delete_backward_word()
-    }
-    Return
-}
-
-op_copy(motion) {
-    set_visual()
-    if (motion = "w") {
-        move_forward_word()
-    } else if (motion = "b") {
-        move_backward_word()
-    } else if (motion = "0") {
-        move_home()
-    } else if (motion = "$") {
-        move_end()
-    } else if (motion = "y") {
-        Send {Home}
-        move_end()
-    }
-    copy()
-    reset_visual()
-    Return
-}
-
-op_find(motion) {
-    clipsaved := clipboard
-    Loop, 10 {
-        Send {Right}
-        Send +{Right}
-        Send ^c
-        Send {Left}
-        clip = %clipboard%
-        if (clip = motion) {
-            break
-        }
-    }
-    clipboard := clipsaved 
-}
-
-op_replace(motion) {
-    delete_right_char()
-    Send %motion%
-}

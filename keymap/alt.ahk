@@ -3,8 +3,8 @@
 ;; ------------------------------
 
 !Esc::
-	if !set_visual()
-		Send !Esc
+	IME_SET(0)
+	reset_all()
     Return
 
 !/::

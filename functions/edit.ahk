@@ -6,6 +6,9 @@ delete_right_char() {
 		Return 0
 	} else if is_colon() {
         bs_colon()
+	} else if is_vim() {
+		Send {Esc}
+		Send lcl
     } else if is_terminal() {
         Send ^d
     } else {
@@ -19,6 +22,9 @@ delete_left_char() {
 		Return 0
 	} else if is_colon() {
         bs_colon()
+    } else if is_vim() {
+        Send {Esc}
+		Send cl
     } else if is_terminal() {
         Send ^h
     } else {
@@ -34,7 +40,7 @@ delete_backward_word() {
 	} else if is_eclipse() {
 		Send ^{Backspace}
 	} else if is_vim() {
-		Send {Esc}ldbi
+		Send {Esc}dbcl
 	} else if is_terminal() {
         Send {Esc}
         Send d
@@ -51,7 +57,8 @@ delete_forward_word() {
 	} else if is_eclipse() {
 		Send ^{Del}
 	} else if is_vim() {
-		Send {Esc}ldwi
+		Send {Esc}
+		Send lcw
 	} else if is_terminal() {
         Send ^w
 	} else {
@@ -64,7 +71,10 @@ delete_forward_word() {
 delete_forward_line() {
 	if bypass() {
 		Return 0
-    } if is_terminal() {
+	} else if is_vim() {
+		Send {Esc}
+		Send c$
+    } else if is_terminal() {
         Send ^u
     } else {
         Send +{End}
@@ -76,6 +86,9 @@ delete_forward_line() {
 delete_backward_line() {
 	if bypass() {
 		Return 0
+	} else if is_vim() {
+		Send {Esc}
+		Send c0
     } else if is_terminal() {
         Send ^k
     } else {

@@ -100,7 +100,7 @@ move_end() {
 	if bypass() {
 		Return 0
     } else if is_visual() {
-        Send +{End}       
+        Send +{End}
     } else {
         Send {End}       
     }
@@ -110,7 +110,7 @@ move_end() {
 move_half_pageup() {
 	if bypass() {
 		Return 0
-	} else if is_eclipse() or is_vim() or is_terminal() {
+	} else if is_eclipse() or is_vim() {
 		Send ^u
 	} else {
         move_pageup()
@@ -143,10 +143,32 @@ move_pagedown() {
 move_half_pagedown() {
 	if bypass() {
 		Return 0
-	} else if is_eclipse() or is_vim() or is_terminal() {
+	} else if is_eclipse() or is_vim() {
 		Send ^d
 	} else {
         move_pagedown()
+	}
+    Return 1
+}
+
+move_top() {
+	if bypass() {
+		Return 0
+	} else if is_eclipse() or is_vim() {
+		Send {Esc}gg
+	} else {
+        Send {Home}
+	}
+    Return 1
+}
+
+move_bottom() {
+	if bypass() {
+		Return 0
+	} else if is_eclipse() or is_vim() {
+		Send {Esc}+g
+	} else {
+        Send {End}
 	}
     Return 1
 }
@@ -156,6 +178,9 @@ move_backward_word() {
 		Return 0
     } else if is_visual() {
         Send +^{Left}
+	} else if is_vim() {
+		escape()
+		Send bi
 	} else if is_terminal() {
         Send {Esc}
         Send b
@@ -166,10 +191,13 @@ move_backward_word() {
 }
 
 move_forward_word() {
-	if bypass()
+	if bypass() {
 		Return 0
-    else if is_visual() {
+    } else if is_visual() {
         Send +^{Right}
+	} else if is_vim() {
+		escape()
+		Send lwi
 	} else if is_terminal() {
         Send {Esc}
         Send f
@@ -180,8 +208,12 @@ move_forward_word() {
 }
 
 move_newline() {
-	if bypass() or is_terminal() or is_vim() {
+	if bypass() {
 		Return 0
+	} else if is_vim() {
+		Send {Esc}o
+	} else if is_terminal() {
+		Send ^c
 	} else {
 		Send {End}{Enter}
 		reset_all()

@@ -18,6 +18,7 @@ FileEncoding UTF-8
 #Include command\command.ahk
 
 #Include operator\operator.ahk
+#Include operator\operators.ahk
 
 #Include keymap\single.ahk
 #Include keymap\double.ahk

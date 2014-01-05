@@ -19,8 +19,8 @@ copy(id=0) {
     if (id)
         clipsaved = %clipboard%
 
-    if (terminal) {
-        Send !v
+    if is_terminal() {
+        Send ^{Ins}
     } else {
         Send ^c
     }

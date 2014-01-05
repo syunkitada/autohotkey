@@ -8,7 +8,9 @@ Enter::
     Return
 
 ESC::
-	if !escape()
+	if is_browsing()
+		reset_all()
+	else if !escape()
 		Send {Esc}
     Return
 
@@ -91,7 +93,7 @@ sc028:: ;colon
     Return
 
 `;::
-    if !append_colon(";")
+    if !operate(";")
         Send `;
     Return
 
