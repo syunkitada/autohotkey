@@ -1,10 +1,10 @@
 op_delete(command) {
     if (command = "0") {
-        delete_forward_line()
-    } else if (command = "$") {
         delete_backward_line()
+    } else if (command = "$") {
+        delete_forward_line()
     } else if (command = "b") {
-        delete_forward_word()
+        delete_backward_word()
     } else if (command = "d") {
         delete_current_line()    
     } else if (command = "h") {
@@ -12,7 +12,7 @@ op_delete(command) {
     } else if (command = "l") {
         delete_right_char()    
     } if (command = "w") {
-        delete_backward_word()
+        delete_forward_word()
     }
     Return
 }

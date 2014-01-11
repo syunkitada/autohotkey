@@ -1,6 +1,9 @@
 ;; ------------------------------
 ;; double - key mapping
+;; 入力が早過ぎると同時押しとみなされてしまう
+;; よくおすキーは最初に設定しないほうが良さそう
 ;; ------------------------------
+
 
 d & h::
 	delete_left_char()
@@ -126,19 +129,19 @@ l & e::
 	move_end()
 	Return
 
-w & h::
+z & h::
 	previous_tab()
 	Return
 
-w & j::AltTab
+z & j::AltTab
 
-w & k::ShiftAltTab
+z & k::ShiftAltTab
 
-w & l::
+z & l::
 	next_tab()
 	Return
 
-w & i::
+z & i::
 	change_same_task()
 	Return
 

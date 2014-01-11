@@ -22,10 +22,9 @@ FileEncoding UTF-8
 #Include operator\mouse.ahk
 
 #Include keymap\single.ahk
-#Include keymap\double.ahk
 #Include keymap\shift.ahk
 #Include keymap\ctrl.ahk
-#Include keymap\alt.ahk
+#Include keymap\esc.ahk
 #Include keymap\windows.ahk
 #Include keymap\numpad.ahk
 #Include keymap\mouse.ahk

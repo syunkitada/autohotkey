@@ -1,27 +1,21 @@
+
 ;; ------------------------------
 ;; alt keys
 ;; ------------------------------
 
-!Esc::
-	set_mouse()
-    Return
+Esc & /::search()
 
-!/::
-    if !search()
-        Send !/
-    Return
-
-!sc073::
+Esc & sc073::
 	if !focus_addressbar()
 		Send !{sc073}
 	Return
 
-!;::
+Esc & `;::
     if !move_home()
         Send !`;
     Return
 
-!+;::
+Esc & +::
 	if bypass() {
 		Send !+`;
 	} else {
@@ -29,12 +23,12 @@
 	}
 	Return
 
-!sc028:: ;コロン
+Esc & sc028:: ;コロン
     if !move_end()
         Send !:
     Return
 
-!+sc028:: ;コロン
+Esc & *:: ;コロン
     if bypass() {
         Send !+:
     } else {
@@ -42,116 +36,101 @@
 	}
     Return
 
-^,::
-    if !backward_history()
-        Send ^{,}
-    Return
-
-^.::
-    if !forward_history()
-        Send ^.
-    Return
-
-!a::
+Esc & a::
 	if !content_assist()
 		Send !a
 	Return
 
-!b::
-    if !move_backward_word()
-        Send !b
-    Return
 
-!d::
-    if !delete_right_char()
+Esc & d::
+	if GetKeyState("Shift") {
+		if !delete_current_line()
+			Send !+d
+    } else if !delete_right_char()
         Send !d
     Return
 
-!+d::
-    if !delete_current_line()
-        Send !d
-    Return
-
-!e::
-    if !delete_forward_word()
+Esc & e::
+	if GetKeyState("Shift") {
+		if !delete_forward_line()
+			Send !e
+    } else if !delete_forward_word()
         Send !e
     Return
 
-!+e::
-    if !delete_forward_line()
-        Send !e
-    Return
-
-!g::
+Esc & g::
 	if !filer()
 		Send !g
 	Return
 
-!h::
+Esc & h::
     if !move_left()                 
         Send !h
     Return
 
-!i::
+Esc & i::
     if !move_forward_word()
         Send !i
     Return
 
-!j::
+Esc & j::
     if !move_down()
         Send !j
     Return
 
-!k::
+Esc & k::
     if !move_up()
         Send !k
     Return
 
-!l::
+Esc & l::
     if !move_right()
         Send !l
     Return
 
-!o::
+Esc & o::
 	if !move_newline()
         Send !o
     Return
 
-!p::
+Esc & p::
 	if !reload_previous_task()
 		Send !p
 	Return
 
-!q::
+Esc & q::
 	if !quick_fix()
 		Send !q
 	Return
 
-!r::
+Esc & r::
     if !rename()
         Send !r
     Return
 
-!s::
+Esc & s::
 	if !delete_left_char()
 		Send !s
 	Return
 
-!u::
-	if !move_backward_word()
-		Send !u
+Esc & u::
+	move_backward_word()
 	Return
 
-!w::
-	if !delete_backward_word()
+Esc & w::
+	if GetKeyState("Shift") {
+		if !delete_backward_line()
+			Send !+w
+	} else if !delete_backward_word()
 		Send !w
 	Return
 
-; autohotkeyで使えない？
-!+w::
-	MsgBox, test
-	if !delete_backward_line()
-		Send !w
+Esc & z::Reload
+
+RAlt::
+	MsgBox alt
 	Return
 
-!z::Reload
+<^z::
+	MsgBox test
+	Return

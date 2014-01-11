@@ -42,8 +42,7 @@ delete_backward_word() {
 	} else if is_vim() {
 		Send {Esc}dbcl
 	} else if is_terminal() {
-        Send {Esc}
-        Send d
+        Send ^w
 	} else {
 		Send +^{Left}
 		Send {Del}
@@ -60,7 +59,8 @@ delete_forward_word() {
 		Send {Esc}
 		Send lcw
 	} else if is_terminal() {
-        Send ^w
+        Send {Esc}
+        Send d
 	} else {
 		Send +^{Right}
 		Send {Del}
@@ -75,7 +75,7 @@ delete_forward_line() {
 		Send {Esc}
 		Send c$
     } else if is_terminal() {
-        Send ^u
+        Send ^k
     } else {
         Send +{End}
         Send {Del}
@@ -90,7 +90,7 @@ delete_backward_line() {
 		Send {Esc}
 		Send c0
     } else if is_terminal() {
-        Send ^k
+        Send ^u
     } else {
         Send +{Home}
         Send {Del}
