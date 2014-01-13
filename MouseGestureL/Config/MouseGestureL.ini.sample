@@ -1,0 +1,16 @@
+﻿#=== Target Definitions =================================
+[Disable]
+
+[Menu]
+WClass=#32768
+
+[DialogBox]
+WClass=#32770
+
+[Explorer]
+WClass=CabinetWClass
+WClass=ExploreWClass
+
+[Caption]
+Custom=MG_HitTest()=="Caption"
+

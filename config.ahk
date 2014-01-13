@@ -279,6 +279,7 @@ is_mouse() {
 
 escape() {
     if bypass() {
+		Send {Esc}
 		Return 0
     }
 	IME_SET(0)

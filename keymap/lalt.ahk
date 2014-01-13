@@ -1,53 +1,58 @@
 ;; ------------------------------
 ;; ctrl - key mapping
 ;; ------------------------------
-^Esc::
-    if !set_visual()
-        Send ^{Esc}
-    Return
+LAlt::
+	if !set_browsing()
+		Send {Alt}
+	Return
 
-^sc028:: ;colon
++LAlt::set_mouse()
+
+<!sc028:: ;colon
     if !set_colon()
         Send ^{sc028}
     Return
 
-^a::
+<!a::
     if !select_all()
         Send ^a
     Return
 
-^b::
+<!b::
     if !bookmark()
         Send ^b
     Return
 
-^d::
+<!d::
     if !move_half_pagedown()
         Send ^d
     Return
 
-^h::
+<!h::
     if !previous_tab()
         Send ^h
     Return
 
-LCtrl & j::AltTab
-RCtrl & j::AltTab
+<!j::AltTab
 
-LCtrl & k::ShiftAltTab
-RCtrl & k::ShiftAltTab
+<!k::ShiftAltTab
 
-^l::
+<!l::
     if !next_tab()
         Send ^l
     Return
 
-^t::
+<!p::
+	if !reload_previous_task()
+		Send ^p
+	Return
+
+<!t::
     if !new_tab()
         Send ^t
     Return
 
-^u::
+<!u::
     if !move_half_pageup()
 		Send ^u
     Return

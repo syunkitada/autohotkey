@@ -7,8 +7,7 @@ delete_right_char() {
 	} else if is_colon() {
         bs_colon()
 	} else if is_vim() {
-		Send {Esc}
-		Send lcl
+		Send {Del}
     } else if is_terminal() {
         Send ^d
     } else {
@@ -23,8 +22,7 @@ delete_left_char() {
 	} else if is_colon() {
         bs_colon()
     } else if is_vim() {
-        Send {Esc}
-		Send cl
+		Send {BS}
     } else if is_terminal() {
         Send ^h
     } else {
@@ -102,7 +100,7 @@ delete_current_line() {
 	if bypass() {
 		Return 0
 	} else if is_vim() {
-		Send {Esc}dd
+		Send {Esc}ddi
 	} else if is_terminal() {
 		Send {Home}
 		Send ^k

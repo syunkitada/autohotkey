@@ -168,6 +168,19 @@ next_tab() {
     Return 1
 }
 
+previous_tab() {
+	if bypass() {
+		Return 0
+	} else if is_vim() {
+        Send {Esc}:tabp{Enter}
+	} else if is_terminal() {
+		Send {Esc}:tabp{Enter}
+    } else {
+        Send ^+{Tab}
+    }
+    Return 1
+}
+
 new_tab() {
 	if bypass() {
 		Return 0
@@ -180,17 +193,25 @@ new_tab() {
 	Return 1
 }
 
-previous_tab() {
+close_tab() {
 	if bypass() {
 		Return 0
-	} else if is_vim() {
-        Send {Esc}:tabp{Enter}
-	} else if is_terminal() {
-		Send {Esc}:tabp{Enter}
+    } else if is_vim() {
+		Send {Esc}
+		Send :q{Enter}
     } else {
-        Send ^+{Tab}
-    }
-    Return 1
+        Send ^w
+	}
+	Return 1
+}
+
+close_window() {
+	if bypass() {
+		Return 0
+	} else {
+		Send !{F4}
+	}
+	Return 1
 }
 
 focus_addressbar()  {

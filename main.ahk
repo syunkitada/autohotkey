@@ -4,7 +4,8 @@
 #MaxHotkeysPerInterval 100
 FileEncoding UTF-8
 
-#Include %A_ScriptDir% ;ここから下の#includeの基準パスを現在のディレクトリに変更
+;ここから下の#includeの基準パスを現在のディレクトリに変更
+#Include %A_ScriptDir%
 
 #Include lib\IME.ahk
 
@@ -23,8 +24,8 @@ FileEncoding UTF-8
 
 #Include keymap\single.ahk
 #Include keymap\shift.ahk
-#Include keymap\ctrl.ahk
-#Include keymap\esc.ahk
+#Include keymap\lalt.ahk
+#Include keymap\rctrl.ahk
 #Include keymap\windows.ahk
 #Include keymap\numpad.ahk
 #Include keymap\mouse.ahk

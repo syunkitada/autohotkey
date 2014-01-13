@@ -1,0 +1,132 @@
+﻿[Settings]
+8Dir=1
+ActiveAsTarget=0
+Interval=30
+Threshold=60
+LongThresholdX=800
+LongThresholdY=600
+LongThreshold=700
+TimeoutThreshold=12
+Timeout=400
+DGInterval=0
+ORangeDefault=3
+ORangeA=3
+ORangeB=3
+EdgeInterval=20
+EdgeIndiv=0
+CornerX=1
+CornerY=1
+DisableDefMB=0
+DisableDefX1B=0
+DisableDefX2B=0
+UseNavi=1
+UseExNavi=3
+NaviInterval=10
+NaviPersist=0
+ExNaviTransBG=1
+ExNaviFG=000000
+ExNaviBG=FFFFFF
+ExNaviTranspcy=255
+ExNaviSize=24
+ExNaviSpacing=2
+ExNaviPadding=4
+ExNaviMargin=8
+AdNaviFG=FFFFFF
+AdNaviNI=7F7F7F
+AdNaviBG=000000
+AdNaviTranspcy=220
+AdNaviSize=12
+AdNaviFont=Meiryo
+AdNaviPosition=0
+AdNaviPaddingL=6
+AdNaviPaddingR=6
+AdNaviPaddingT=3
+AdNaviPaddingB=4
+AdNaviRound=1
+AdNaviMargin=14
+AdNaviSpaceX=2
+AdNaviSpaceY=2
+AdNaviOnClick=0
+ShowTrail=1
+DrawTrailWnd=1
+TrailColor=0000FF
+TrailTranspcy=155
+TrailWidth=10
+TrailStartMove=3
+TrailInterval=10
+HotkeyEnable=
+HotkeyNavi=
+ScriptEditor=
+UserName=
+Password=
+TraySubmenu=0
+AdjustDlg=0
+DlgHeightLimit=800
+EditCommand=
+
+[Disable]
+
+[Menu]
+WClass=#32768
+
+[DialogBox]
+WClass=#32770
+
+[Explorer]
+WClass=CabinetWClass
+WClass=ExploreWClass
+
+[Caption]
+Custom=MG_HitTest()=="Caption"
+
+[RB_]
+G=RB_
+Default=PostMessage, 0x001F, 0, 0	PostMessage, 0x001F, 0, 0, , ahk_id %MG_HCTL%	IfWinNotActive	{		WinActivate	}
+
+[RB_LB__]
+G=RB_LB__
+Default=;Close Window	close_window()
+
+[RB_U]
+G=RB_8
+Default=;Jump to Top	Send,^{Home}
+
+[RB_D]
+G=RB_2
+Default=;Jump to Bottom	Send,^{End}
+
+[RB_L]
+G=RB_4
+Default=;Back	backward_history()
+
+[RB_R]
+G=RB_6
+Default=;Forward	forward_history()
+
+[RB_RU]
+G=RB_9
+Default=;Maximize Window	WinMaximize
+
+[RB_RB]
+G=RB_3
+Default=;Minimize Window	WinMinimize
+
+[RB_LU]
+G=RB_7
+Default=;New Tab	new_tab()
+
+[RB_LD]
+G=RB_1
+Default=;Close Tab	close_tab()
+
+[RB_WD_]
+G=RB_WD_
+Default=;Next Tab	next_tab()
+
+[RB_WU_]
+G=RB_WU_
+Default=;Previous Tab	previous_tab()
+
+[X1B_4]
+G=X1B_4
+Default=;ウィンドウの位置とサイズを変更	MG_WinMove(0, 0, 1/2, 1/2, 0)
