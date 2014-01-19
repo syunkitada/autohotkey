@@ -1,5 +1,5 @@
 ﻿MG_8Dir=1
-MG_ActiveAsTarget=0
+MG_ActiveAsTarget=1
 MG_Interval=30
 MG_Threshold=60
 MG_LongThresholdX=800
@@ -63,7 +63,7 @@ MG_AdjustDlg=0
 MG_DlgHeightLimit=800
 MG_EditCommand=
 MG_MaxLength=7
-MG_Triggers=RB
+MG_Triggers=RB_X1B
 MG_SubTriggers=LB_WU_WD
 
 
@@ -104,6 +104,50 @@ MG_RB_Check:
 return
 
 MG_RB_End:
+
+
+Goto,MG_X1B_End
+
+MG_X1B_Enable:
+	Hotkey,*XButton1,MG_X1B_DownHotkey,On
+	Hotkey,*XButton1 up,MG_X1B_UpHotkey,On
+return
+
+MG_X1B_Disable:
+	Hotkey,*XButton1,MG_X1B_DownHotkey,Off
+	Hotkey,*XButton1 up,MG_X1B_UpHotkey,Off
+return
+
+MG_X1B_DownHotkey:
+	MG_TriggerDown("X1B")
+return
+
+MG_X1B_UpHotkey:
+	MG_TriggerUp("X1B")
+return
+
+MG_X1B_Down:
+	if (!MG_DisableDefX1B) {
+		SetMouseDelay,-1
+		Send,{Blind}{XButton1 Down}
+	}
+return
+
+MG_X1B_Up:
+	if (!MG_DisableDefX1B) {
+		SetMouseDelay,-1
+		Send,{Blind}{XButton1 Up}
+	}
+return
+
+MG_X1B_Check:
+	if (!GetKeyState("XButton1", "P")) {
+		MG_Aborted := 1
+		MG_TriggerUp("X1B")
+	}
+return
+
+MG_X1B_End:
 
 
 Goto,MG_LB_End
@@ -276,39 +320,37 @@ MG_GetAction_RB_6:
 return
 
 MG_Gesture_RB_9:
-	;Maximize Window
-		WinMaximize
-return
-
-MG_GetAction_RB_9:
-	MG_ActionStr := "Maximize Window"
-return
-
-MG_Gesture_RB_3:
-	;Minimize Window
-		WinMinimize
-return
-
-MG_GetAction_RB_3:
-	MG_ActionStr := "Minimize Window"
-return
-
-MG_Gesture_RB_7:
 	;New Tab
 		new_tab()
 return
 
-MG_GetAction_RB_7:
+MG_GetAction_RB_9:
 	MG_ActionStr := "New Tab"
 return
 
-MG_Gesture_RB_1:
+MG_Gesture_RB_3:
+	
+return
+
+MG_GetAction_RB_3:
+	MG_ActionStr := ""
+return
+
+MG_Gesture_RB_7:
 	;Close Tab
 		close_tab()
 return
 
-MG_GetAction_RB_1:
+MG_GetAction_RB_7:
 	MG_ActionStr := "Close Tab"
+return
+
+MG_Gesture_RB_1:
+	
+return
+
+MG_GetAction_RB_1:
+	MG_ActionStr := ""
 return
 
 MG_Gesture_RB_WD_:
@@ -327,6 +369,94 @@ return
 
 MG_GetAction_RB_WU_:
 	MG_ActionStr := "Previous Tab"
+return
+
+MG_Gesture_X1B_:
+	
+return
+
+MG_GetAction_X1B_:
+	
+return
+
+MG_Gesture_X1B_4:
+	window_minimize()
+return
+
+MG_GetAction_X1B_4:
+	MG_ActionStr := "window_minimize()"
+return
+
+MG_Gesture_X1B_7:
+	window_move(0, "left")
+return
+
+MG_GetAction_X1B_7:
+	MG_ActionStr := "window_move(0, ""left"")"
+return
+
+MG_Gesture_X1B_1:
+	window_move(-1, "left")
+return
+
+MG_GetAction_X1B_1:
+	MG_ActionStr := "window_move(-1, ""left"")"
+return
+
+MG_Gesture_X1B_6:
+	window_restore()
+return
+
+MG_GetAction_X1B_6:
+	MG_ActionStr := "window_restore()"
+return
+
+MG_Gesture_X1B_9:
+	window_move(0, "right")
+return
+
+MG_GetAction_X1B_9:
+	MG_ActionStr := "window_move(0, ""right"")"
+return
+
+MG_Gesture_X1B_3:
+	window_move(-1, "right")
+return
+
+MG_GetAction_X1B_3:
+	MG_ActionStr := "window_move(-1, ""right"")"
+return
+
+MG_Gesture_X1B_8:
+	window_maximize(0)
+return
+
+MG_GetAction_X1B_8:
+	MG_ActionStr := "window_maximize(0)"
+return
+
+MG_Gesture_X1B_2:
+	window_maximize(-1)
+return
+
+MG_GetAction_X1B_2:
+	MG_ActionStr := "window_maximize(-1)"
+return
+
+MG_Gesture_X1B_WD_:
+	Send !{Esc}
+return
+
+MG_GetAction_X1B_WD_:
+	MG_ActionStr := "Send !{Esc}"
+return
+
+MG_Gesture_X1B_WU_:
+	Send !+{Esc}
+return
+
+MG_GetAction_X1B_WU_:
+	MG_ActionStr := "Send !+{Esc}"
 return
 
 

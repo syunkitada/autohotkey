@@ -13,24 +13,15 @@ MButton::
     }
     Return
 
-XButton1 & WheelDown::AltTab
+
+XButton2 & WheelDown::AltTab
 
 XButton2 & WheelUp::ShiftAltTab
 
-/*
-XButton1::
-    backward_history()
-    Return
+XButton2::copy()
 
-XButton2::
-    forward_history()
-    Return
+XButton2 & LButton::paste()
 
-XButton1 & LButton::
-    Send ^w
-    Return
-    
-XButton1 & RButton::
-    Send ^t
-    Return
-*/
+XButton2 & RButton::cut()
+
+

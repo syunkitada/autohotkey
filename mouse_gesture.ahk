@@ -11,6 +11,7 @@ FileEncoding UTF-8
 #Include %A_ScriptDir%\..\functions\move.ahk
 #Include %A_ScriptDir%\..\functions\edit.ahk
 #Include %A_ScriptDir%\..\functions\copypaste.ahk
+#Include %A_ScriptDir%\..\functions\window.ahk
 
 #Include %A_ScriptDir%\..\command\command.ahk
 

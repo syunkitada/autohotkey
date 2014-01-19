@@ -186,7 +186,7 @@ new_tab() {
 		Return 0
     } else if is_vim() {
 		Send {Esc}
-		Send :tabe{Space}
+		Send :tabe{Enter}
     } else {
         Send ^t
 	}

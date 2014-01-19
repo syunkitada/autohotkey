@@ -1,43 +1,6 @@
 ;; ------------------------------
 ;; alt keys
 ;; ------------------------------
-/*
->^a::
-	if !content_assist()
-		Send !a
-	Return
-
-^,::
-    if !backward_history()
-        Send ^{,}
-    Return
-
-^.::
-    if !forward_history()
-        Send ^.
-    Return
-
->^g::
-	if !filer()
-		Send ^g
-	Return
-
->^p::
-	if !reload_previous_task()
-		Send ^p
-	Return
-
->^q::
-	if !quick_fix()
-		Send ^q
-	Return
-
-
->^r::
-    if !rename()
-        Send ^r
-    Return
-*/
 
 RCtrl::
 	reset_all()
@@ -54,6 +17,16 @@ RCtrl::
 	if !focus_addressbar()
 		Send ^{sc073}
 	Return
+
+^,::
+    if !backward_history()
+        Send ^{,}
+    Return
+
+^.::
+    if !forward_history()
+        Send ^.
+    Return
 
 >^;::
     if !move_home()
@@ -81,10 +54,25 @@ RCtrl::
 	}
     Return
 
+>^Space::
+	if !content_assist()
+		Send !a
+	Return
+
 >^a::
 	if !delete_backward_word()
 		Send ^a
 	Return
+
+>^b::
+    if !rename()
+        Send ^r
+    Return
+
+>^c::
+    if !select_all()
+        Send ^a
+    Return
 
 >^d::
     if !delete_right_char()
@@ -126,11 +114,31 @@ RCtrl::
     if !move_right()
         Send ^l
     Return
+ 
+>^m::
+	if !move_half_pageup()
+		Send ^m
+	Return
+
+>^n::
+	if !move_half_pagedown()
+		Send ^n
+	Return
 
 >^o::
 	if !move_newline()
         Send ^o
     Return
+
+>^p::
+	if !paste()
+		Send ^p
+	Return
+
+>^q::
+	if !quick_fix()
+		Send ^q
+	Return
 
 >^r::
     if !delete_current_line()
@@ -142,6 +150,11 @@ RCtrl::
 		Send ^s
 	Return
 
+>^t::
+	if !cut()
+		Send ^t
+	Return
+
 >^u::
 	if !move_backward_word()
 		Send ^u
@@ -151,5 +164,11 @@ RCtrl::
 	if !delete_backward_line()
 		Send ^w
 	Return
+
+>^y::
+	if !copy()
+		Send ^y
+	Return
+
 
 >^z::Reload

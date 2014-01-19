@@ -1,6 +1,6 @@
 ﻿[Settings]
 8Dir=1
-ActiveAsTarget=0
+ActiveAsTarget=1
 Interval=30
 Threshold=60
 LongThresholdX=800
@@ -127,6 +127,45 @@ Default=;Next Tab	next_tab()
 G=RB_WU_
 Default=;Previous Tab	previous_tab()
 
-[X1B_4]
+[X1B_]
+G=X1B_
+
+[X1B_L]
 G=X1B_4
-Default=;ウィンドウの位置とサイズを変更	MG_WinMove(0, 0, 1/2, 1/2, 0)
+Default=window_minimize()
+
+[X1B_LU]
+G=X1B_7
+Default=window_move(0, "left")
+
+[X1B_LD]
+G=X1B_1
+Default=window_move(-1, "left")
+
+[X1B_R]
+G=X1B_6
+Default=window_restore()
+
+[X1B_RU]
+G=X1B_9
+Default=window_move(0, "right")
+
+[X1B_RD]
+G=X1B_3
+Default=window_move(-1, "right")
+
+[X1B_U]
+G=X1B_8
+Default=window_maximize(0)
+
+[X1B_D]
+G=X1B_2
+Default=window_maximize(-1)
+
+[X1B_WD_]
+G=X1B_WD_
+Default=Send !{Esc}
+
+[X1B_WU]
+G=X1B_WU_
+Default=Send !+{Esc}
