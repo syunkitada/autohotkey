@@ -9,14 +9,9 @@ RCtrl::
 
 
 >^/::
-    if !search()
+    if !comment_out()
         Send ^/
     Return
-
->^sc073:: ; \
-	if !focus_addressbar()
-		Send ^{sc073}
-	Return
 
 ^,::
     if !backward_history()

@@ -105,19 +105,19 @@ Default=;Forward	forward_history()
 
 [RB_RU]
 G=RB_9
-Default=;Maximize Window	WinMaximize
+Default=;New Tab	new_tab()
 
-[RB_RB]
+[RB_RD]
 G=RB_3
-Default=;Minimize Window	WinMinimize
+Default=
 
 [RB_LU]
 G=RB_7
-Default=;New Tab	new_tab()
+Default=;Close Tab	close_tab()
 
 [RB_LD]
 G=RB_1
-Default=;Close Tab	close_tab()
+Default=
 
 [RB_WD_]
 G=RB_WD_

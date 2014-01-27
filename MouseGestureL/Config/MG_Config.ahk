@@ -444,19 +444,21 @@ MG_GetAction_X1B_2:
 return
 
 MG_Gesture_X1B_WD_:
-	Send !{Esc}
+	;スクロール
+		MG_Scroll2("H", 1, 1)
 return
 
 MG_GetAction_X1B_WD_:
-	MG_ActionStr := "Send !{Esc}"
+	MG_ActionStr := "スクロール"
 return
 
 MG_Gesture_X1B_WU_:
-	Send !+{Esc}
+	;スクロール
+		MG_Scroll2("H", -1, 1)
 return
 
 MG_GetAction_X1B_WU_:
-	MG_ActionStr := "Send !+{Esc}"
+	MG_ActionStr := "スクロール"
 return
 
 

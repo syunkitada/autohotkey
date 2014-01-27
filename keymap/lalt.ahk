@@ -12,10 +12,20 @@ LAlt::
 		Send !{Space}
 	Return
 
+<!/::
+    if !search()
+        Send ^/
+    Return
+
 <!sc028:: ;colon
     if !set_colon()
         Send !{sc028}
     Return
+
+<!sc073:: ; \
+	if !focus_addressbar()
+		Send ^{sc073}
+	Return
 
 <!a::
 	if !window_move(0, "left")
@@ -101,6 +111,5 @@ LAlt::
 	if !window_maximize(1)
 		Send !w
 	Return
-
 
 

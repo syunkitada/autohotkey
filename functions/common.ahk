@@ -119,7 +119,7 @@ content_assist() {
 	} else if is_vim() {
 		Send ^n
 	} else if is_terminal() {
-		Send ^n
+		Send ^r
 	} else {
 		Return 0
 	}
@@ -229,3 +229,10 @@ focus_addressbar()  {
 	Return 1
 }
 
+comment_out() {
+	if is_eclipse() {
+		Send ^/
+		Return 1
+	}
+	Return 0
+}
