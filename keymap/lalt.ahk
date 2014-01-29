@@ -43,7 +43,7 @@ LAlt::
 	Return
 
 <!e::
-	if !window_maximize(2)
+	if !window_maximize(-1)
 		Send !e
 	Return
 
@@ -87,6 +87,11 @@ LAlt::
 		Send !p
 	Return
 
+<!q::
+	if !close_tab()
+		Send !q
+	Return
+
 <!r::
     if !window_minimize()
         Send !t
@@ -108,7 +113,7 @@ LAlt::
 	Return
 
 <!w::
-	if !window_maximize(1)
+	if !window_maximize(0)
 		Send !w
 	Return
 

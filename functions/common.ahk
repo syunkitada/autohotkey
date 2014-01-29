@@ -187,6 +187,10 @@ new_tab() {
     } else if is_vim() {
 		Send {Esc}
 		Send :tabe{Enter}
+	} else if is_teraterm() {
+		Send !n
+	} else if is_mintty() {
+		Send !{F2}
     } else {
         Send ^t
 	}
@@ -199,6 +203,8 @@ close_tab() {
     } else if is_vim() {
 		Send {Esc}
 		Send :q{Enter}
+    } else if is_terminal() {
+		Send !{F4}
     } else {
         Send ^w
 	}

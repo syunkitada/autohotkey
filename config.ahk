@@ -49,6 +49,18 @@ is_terminal() {
 	Return 0
 }
 
+is_teraterm() {
+	ifWinActive,ahk_class VTWin32
+		Return 1
+	Return 0
+}
+
+is_mintty() {
+	ifWinActive,ahk_class mintty
+		Return 1
+	Return 0
+}
+
 is_browser() {
     ifWinActive,ahk_class Chrome_WidgetWin_1
         Return 1
