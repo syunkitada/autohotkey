@@ -14,6 +14,21 @@ ESC::
 		Send {Esc}
     Return
 
+Space::
+    if !operate("Space")
+        Send {Space}
+    Return
+
+Tab::
+	if !operate("Tab")
+		Send {Tab}
+	Return
+
+Shift::
+    if !operate("Shift")
+		Send {Shift}
+    Return
+
 Insert::
     Return
 
