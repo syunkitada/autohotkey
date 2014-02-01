@@ -82,14 +82,15 @@ is_explorer() {
 }
 
 is_sendplay() {
+	; onenoteは、up downがsendplayじゃないと動作しない
+	ifWinActive,ahk_class Sticky_Notes_Note_Window
+		Return 1
 	ifWinActive,ahk_class Framework::CFrame
 		Return 1
 	Return 0
 }
 
 is_sendinput() {
-	ifWinActive,ahk_class Sticky_Notes_Note_Window
-		Return 1
 	Return 0
 }
 
