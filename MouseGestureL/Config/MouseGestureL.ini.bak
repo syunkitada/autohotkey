@@ -1,8 +1,8 @@
 ﻿[Settings]
 8Dir=1
 ActiveAsTarget=1
-Interval=30
-Threshold=60
+Interval=20
+Threshold=80
 LongThresholdX=800
 LongThresholdY=600
 LongThreshold=700
@@ -10,8 +10,8 @@ TimeoutThreshold=12
 Timeout=400
 DGInterval=0
 ORangeDefault=3
-ORangeA=3
-ORangeB=3
+ORangeA=1
+ORangeB=1
 EdgeInterval=20
 EdgeIndiv=0
 CornerX=1
@@ -22,7 +22,7 @@ DisableDefX2B=0
 UseNavi=1
 UseExNavi=3
 NaviInterval=10
-NaviPersist=0
+NaviPersist=20
 ExNaviTransBG=1
 ExNaviFG=000000
 ExNaviBG=FFFFFF
@@ -164,8 +164,8 @@ Default=window_maximize(-1)
 
 [X1B_WD_]
 G=X1B_WD_
-Default=Send !{Esc}
+Default=;スクロール	MG_Scroll2("H", 1, 1)
 
 [X1B_WU]
 G=X1B_WU_
-Default=Send !+{Esc}
+Default=;スクロール	MG_Scroll2("H", -1, 1)

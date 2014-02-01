@@ -1,6 +1,6 @@
-+ESC::
-    if !set_browsing()
-        send +{ESC}
++Tab::
+    if !set_mouse()
+        send +{Tab}
     Return
 
 +;::
