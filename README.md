@@ -10,7 +10,8 @@ main.ahkが本体です。
 		"C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk
 
 ## 推奨キーバインド
-以下のキーバインドを想定に作成しています
+以下のキーバインドを想定に作成しています。
+
 		Spaceの左1: RCtrl
 		Spaceの左2: LAlt
 		Spaceの右1: LShift
