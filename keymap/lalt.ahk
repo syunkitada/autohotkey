@@ -12,6 +12,11 @@ LAlt::
 		Send !{Space}
 	Return
 
+<!Tab::
+	if !emmet_wrap()
+		Send ^{Tab}
+	Return
+
 <!/::
     if !search()
         Send ^/

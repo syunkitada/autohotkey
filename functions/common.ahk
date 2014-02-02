@@ -242,3 +242,25 @@ comment_out() {
 	}
 	Return 0
 }
+
+emmet() {
+	if is_eclipse() {
+		Send !+e
+		Return 1
+	} else if is_vim() {
+		Send ^y,
+		Return 1
+	}
+	Return 0
+}
+
+emmet_wrap() {
+	if is_eclipse() {
+		Send !+a
+		Return 1
+	} else if is_vim() {
+		Send ^y,
+		Return 1
+	}
+	Return 0
+}
