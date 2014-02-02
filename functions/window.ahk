@@ -1,6 +1,16 @@
 /*
 ウィンドウ制御系の関数群です。
 関数名はすべてwindow_で始まります。
+
+TODO アクティブウィンドウの細かい移動など
+WinMoveStep(-1,0)
+WinMoveStep(1,0)
+WinMoveStep(0,-1)
+WinMoveStep(0,1)
+
+TODO WinMoveで移動すると描画がズレたりするので、なんとかしたい
+
+#{Home} アクティブウィンドウ以外最小化
 */
 
 window_move(num, direction) {

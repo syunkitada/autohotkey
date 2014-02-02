@@ -1,65 +1,29 @@
 ;; ------------------------------
 ;;  windows key
 ;; ------------------------------
-;#Left::WinMoveStep(-1,0)
-;#Right::WinMoveStep(1,0)
-;#Up::WinMoveStep(0,-1)
-;#Down::WinMoveStep(0,1)
 
-#a::
-    run C:\Users\owner\Desktop\eclipse\eclipse-android
-    Return
+#a::run_eclipse_android()
 
-#b::
-    run C:\Users\owner\Desktop\gnupack\mintty.exe
-    Return
+#b::run_mintty()
 
-#c::
-    run chrome.exe
-    Return
+#c::run_crome()
 
-#f::
-    run firefox.exe
-    Return
+#f::run_firefox()
 
-#h::
-	switch_taskbar_display()
-	Return
+#h::switch_taskbar_display()
 		
-#i::
-    run iexplore.exe
-    Return
+#i::run_iexplore()
 
-#j::
-    run C:\Users\owner\Desktop\eclipse\eclipse-java
-    Return
+#p::run_paint()
 
-#o::
-    run explorer.exe C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office
-    Return
+#s::get_color_on_mouseposition()
 
-#p::
-    run %windir%\system32\mspaint.exe
-    Return
+#t::run_teraterm()
 
-#s::
-	get_color_on_mouseposition()
-    Return
+#v::run_vim()
 
-#t::
-    run C:\Program Files\TrueCrypt\TrueCrypt.exe
-    Return
+#w::run_eclipse_web()
 
-#v::
-    run C:\Users\owner\Desktop\gnupack\gvim.exe
-    Return
-
-#w::
-    run C:\Users\owner\Desktop\eclipse\eclipse-web
-    Return
-
-#z::
-	Reload
-    Return
+#z::Reload
 
 

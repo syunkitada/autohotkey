@@ -17,6 +17,7 @@ FileEncoding UTF-8
 #Include functions\copypaste.ahk
 #Include functions\window.ahk
 #Include functions\mouse.ahk
+#Include functions\run.ahk
 
 #Include command\command.ahk
 
