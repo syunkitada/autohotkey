@@ -41,4 +41,7 @@ main.ahkが本体です。
 		マウス操作に特化したモードです。
 		operator/mouse.ahk を参照
 
+### Windows+キー
+		基本的にプログラムランチャです。
+		keymap/windows.ahk を参照
 
