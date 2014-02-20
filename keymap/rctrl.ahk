@@ -94,6 +94,10 @@ RCtrl::
         Send ^f
     Return
 
+>^g::
+    if !move_mode()
+        Send ^f
+    Return
 
 >^h::
     if !move_left()                 

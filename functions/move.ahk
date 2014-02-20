@@ -220,3 +220,11 @@ move_newline() {
 	}
 	Return 1
 }
+
+move_mode() {
+	if is_vim() {
+		Send {Esc}^w
+		Return 1
+	}
+	Return 0
+}
