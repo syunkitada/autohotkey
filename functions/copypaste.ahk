@@ -16,12 +16,15 @@ copy(id=0) {
 		Return 0
 	}
 
-    if (id)
+    if (id) {
         clipsaved = %clipboard%
+	}
 
     if is_terminal() {
         Send ^{Ins}
-    } else {
+    } else if is_vim() {
+		Send ^{Ins}	
+	} else {
         Send ^c
     }
 

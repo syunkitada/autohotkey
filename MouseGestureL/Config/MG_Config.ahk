@@ -16,7 +16,7 @@ MG_EdgeIndiv=0
 MG_CornerX=1
 MG_CornerY=1
 MG_DisableDefMB=0
-MG_DisableDefX1B=0
+MG_DisableDefX1B=1
 MG_DisableDefX2B=0
 MG_UseNavi=1
 MG_UseExNavi=3
@@ -376,7 +376,7 @@ MG_Gesture_X1B_:
 return
 
 MG_GetAction_X1B_:
-	
+	MG_ActionStr := ""
 return
 
 MG_Gesture_X1B_4:
@@ -445,7 +445,7 @@ return
 
 MG_Gesture_X1B_WD_:
 	;スクロール
-		MG_Scroll2("H", 1, 1)
+		MG_Scroll2("H", 1, 0.5)
 return
 
 MG_GetAction_X1B_WD_:
@@ -454,7 +454,7 @@ return
 
 MG_Gesture_X1B_WU_:
 	;スクロール
-		MG_Scroll2("H", -1, 1)
+		MG_Scroll2("H", -1, 0.5)
 return
 
 MG_GetAction_X1B_WU_:

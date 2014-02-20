@@ -54,6 +54,11 @@ RCtrl::
 		Send ^Space
 	Return
 
+>^+Space::
+	if !content_assist(0)
+		Send ^+Space
+	Return
+
 >^Tab::
 	if !emmet()
 		Send ^Tab

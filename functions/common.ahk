@@ -75,7 +75,7 @@ filer() {
 		Return 0
 	} else if is_terminal() or is_vim() {
 		; use unite
-		Send {Esc},u
+		Send {Esc},uf
 	} else if is_eclipse() {
 		; open resource
 		Send ^+r
@@ -111,13 +111,19 @@ select_all() {
 	Return 1
 }
 
-content_assist() {
+content_assist(asc=1) {
 	if bypass() {
 		Return 0
 	} else if is_eclipse() {
-		Send ^{Space}
+		if asc
+			Send ^{Space}
+		else
+			Send ^+{Space}
 	} else if is_vim() {
-		Send ^n
+		if asc
+			Send ^n
+		else
+			Send ^p
 	} else if is_terminal() {
 		Send ^r
 	} else {

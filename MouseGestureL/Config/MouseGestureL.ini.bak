@@ -2,7 +2,7 @@
 8Dir=1
 ActiveAsTarget=1
 Interval=20
-Threshold=80
+Threshold=60
 LongThresholdX=800
 LongThresholdY=600
 LongThreshold=700
@@ -17,7 +17,7 @@ EdgeIndiv=0
 CornerX=1
 CornerY=1
 DisableDefMB=0
-DisableDefX1B=0
+DisableDefX1B=1
 DisableDefX2B=0
 UseNavi=1
 UseExNavi=3
@@ -129,6 +129,7 @@ Default=;Previous Tab	previous_tab()
 
 [X1B_]
 G=X1B_
+Default=
 
 [X1B_L]
 G=X1B_4
