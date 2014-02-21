@@ -1,5 +1,5 @@
 ;; ------------------------------
-;; alt keys
+;; ctrl keys
 ;; ------------------------------
 
 RCtrl::
@@ -165,7 +165,7 @@ RCtrl::
 	Return
 
 >^u::
-	if !move_backward_word()
+	if !unit_history()
 		Send ^u
 	Return
 

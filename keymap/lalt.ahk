@@ -1,5 +1,5 @@
 ;; ------------------------------
-;; ctrl - key mapping
+;; alt - key mapping
 ;; ------------------------------
 
 LAlt::
@@ -113,7 +113,7 @@ LAlt::
     Return
 
 <!u::
-	if !filer()
+	if !unit_filer()
 		Send !u
 	Return
 
