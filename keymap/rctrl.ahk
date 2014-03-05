@@ -1,5 +1,5 @@
 ;; ------------------------------
-;; ctrl keys
+;; rctrl keys
 ;; ------------------------------
 
 RCtrl::
@@ -7,18 +7,17 @@ RCtrl::
 	escape()
 	Return
 
-
 >^/::
     if !comment_out()
         Send ^/
     Return
 
-^,::
+>^,::
     if !backward_history()
         Send ^{,}
     Return
 
-^.::
+>^.::
     if !forward_history()
         Send ^.
     Return
