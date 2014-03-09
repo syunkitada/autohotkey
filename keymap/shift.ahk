@@ -3,20 +3,6 @@
         send +{Tab}
     Return
 
-+;::
-	if bypass()
-		Send +`;
-	else
-		Send '
-	Return
-
-+sc028:: ;コロン
-    if bypass()
-        Send +:
-    else
-        Send "
-    Return
-
 +a::
     if !operate("+a")
         Send +a

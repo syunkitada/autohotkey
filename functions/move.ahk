@@ -110,7 +110,7 @@ move_end() {
 move_half_pageup() {
 	if bypass() {
 		Return 0
-	} else if is_eclipse() or is_vim() {
+	} else if is_eclipse() or is_vim() or is_terminal() {
 		Send ^u
 	} else {
         move_pageup()
@@ -143,7 +143,7 @@ move_pagedown() {
 move_half_pagedown() {
 	if bypass() {
 		Return 0
-	} else if is_eclipse() or is_vim() {
+	} else if is_eclipse() or is_vim() or is_terminal() {
 		Send ^d
 	} else {
         move_pagedown()
