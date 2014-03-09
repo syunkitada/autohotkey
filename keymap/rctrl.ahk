@@ -22,19 +22,19 @@ RCtrl:: reset_all() escape()
 >^r:: delete_current_line()
 >^t:: cut()
 >^y:: copy()
->^u:: unit_history()
->^i:: Send ^a
+>^u:: bash_vim_unit_history()
+>^i:: Return
 >^o:: move_newline()
 >^p:: paste()
->^[:: Return
->^]:: Return
+>^[:: move_pageup()
+>^]:: move_pagedown()
 
 ; row 2
 >^a:: delete_backward_word()
 >^s:: delete_left_char()
 >^d:: delete_right_char()
 >^f:: delete_forward_word()
->^g:: move_mode()
+>^g:: Return
 >^h:: move_left()                 
 >^j:: move_down()
 >^k:: move_up()

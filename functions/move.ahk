@@ -121,6 +121,8 @@ move_half_pageup() {
 move_pageup() {
 	if bypass() {
 		Return 0
+	} else if is_vim() or is_terminal() {
+		Send ^f
 	} else if is_visual() {
         Send +{PgUp}       
     } else {
@@ -132,6 +134,8 @@ move_pageup() {
 move_pagedown() {
 	if bypass() {
 		Return 0
+	} else if is_vim() or is_terminal() {
+		Send ^b
     } else if is_visual() {
         Send +{PgDn} 
     } else {
@@ -221,10 +225,3 @@ move_newline() {
 	Return 1
 }
 
-move_mode() {
-	if is_vim() {
-		Send {Esc}^w
-		Return 1
-	}
-	Return 0
-}

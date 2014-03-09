@@ -14,9 +14,9 @@ LAlt:: set_browsing()
 <!r:: window_minimize()
 <!t:: new_tab()
 <!y:: Return
-<!u:: unit_filer()
-<!i:: Return
-<!o:: Return
+<!u:: bash_vim_unite()
+<!i:: bash_vim_operate_internal_window()
+<!o:: bash_screen_operate()
 <!p:: reload_previous_task()
 <![:: Return
 <!]:: Return

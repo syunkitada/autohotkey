@@ -257,29 +257,6 @@ emmet_wrap() {
 	Return 0
 }
 
-unit_filer() {
-	if bypass() {
-		Return 0
-	} else if is_terminal() or is_vim() {
-		; use unite
-		Send {Esc},uf
-	} else if is_eclipse() {
-		; open resource
-		Send ^+r
-	} else {
-		Return 0
-	}
-	Return 1
-}
-
-unit_history() {
-	if is_vim() or is_terminal() {
-		Send ^l
-		Return 1
-	}
-	Return 0
-}
-
 run_program() {
 	if bypass() {
 		Return 0
