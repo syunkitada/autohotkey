@@ -113,7 +113,7 @@ copy(id=0) {
     Return 1
 }
 
-paste(id=0, filename=0, is_create=0, is_append=0) {
+paste(id=0) {
 	if bypass() {
 		Return 0
 	}
@@ -201,26 +201,7 @@ paste(id=0, filename=0, is_create=0, is_append=0) {
 	} else if (id) {
 		FileRead,template,%A_ScriptDir%\templates\%id%
 		clipboard = %template%
-
-		if (is_terminal() and is_create) {
-			if is_append {
-				SendPlay vim %filename%
-				SendPlay {Enter}
-				SendPlay +g
-				SendPlay o
-			} else {
-				SendPlay /dev/null > %filename%
-				SendPlay {Enter}
-				SendPlay vim %filename%
-				SendPlay {Enter}
-				SendPlay i
-			}
-			SendPlay +{Insert}
-			Sleep 500 ; 貼り付け処理の間、待機させる
-			SendPlay {Esc}
-			SendPlay :wq
-			SendPlay {Enter}
-		}
+		SendPlay +{Insert}
 	}
 	if (is_terminal() and !is_create) {
 		Send +{Insert}

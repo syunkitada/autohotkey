@@ -211,15 +211,21 @@ move_forward_word() {
     Return 1
 }
 
-move_newline() {
+move_newline(num=1) {
 	if bypass() {
 		Return 0
-	} else if is_vim() {
-		Send {Esc}o
-	} else if is_terminal() {
-		Send ^c
+	} else if is_terminal() or is_vim() {
+		if (num = "1") {
+			Send {Esc}o
+		} else {
+			Send {Esc}+o
+		}
 	} else {
-		Send {End}{Enter}
+		if (num = "1") {
+			Send {End}{Enter}
+		} else {
+			Send {Home}{Enter}{Up}
+		}
 		reset_all()
 	}
 	Return 1

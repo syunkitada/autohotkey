@@ -102,7 +102,7 @@ Right::
         Send /
     Return
 
-sc028:: ;colon
+sc028:: ; sc028=:
     if !operate(":")
         Send :
     Return
@@ -115,6 +115,11 @@ sc028:: ;colon
 $::
     if !operate("$")
         Send $
+    Return
+
+sc073:: ; sc073=\
+    if !operate("\")
+        Send \
     Return
 
 0::

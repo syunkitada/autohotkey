@@ -113,13 +113,21 @@ operate(command, is_check_browsing=1) {
                     paste()
                     reset_visual()  
                 }
-            } else if (command = "r") {
+            } else if (command = "q") {
+				close_tab()
+			} else if (command = "+q") {
+				close_window()
+			} else if (command = "r") {
                 set_operator("r")
+			} else if (command = "R") {
+				resume()
             } else if (command = "s") {
                 Send {RButton}
                 Send v
+			} else if (command = "t") {
+				new_tab()
             } else if (command = "u") {
-                move_pageup()
+                undo()
             } else if (command = "v") {
                 switch_visual()
             } else if (command = "w") {
@@ -140,8 +148,8 @@ operate(command, is_check_browsing=1) {
 				Sleep, 5
 				Send ^c
 				reset_visual()
-			}
-        }  
+            } 
+		}
     }
     reset_operator_count()
 

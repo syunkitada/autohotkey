@@ -26,7 +26,7 @@ LAlt:: set_browsing()
 <!s:: window_move(0, "right")
 <!d:: window_move(-1, "left")
 <!f:: window_move(-1, "right")
-<!g:: window_move_center()
+<!g:: Return
 <!h:: previous_tab()
 <!j:: AltTab
 <!k:: ShiftAltTab

@@ -11,29 +11,29 @@ RCtrl:: reset_all() escape()
 >^+sc028:: Send *
 
 >^Space:: content_assist()
->^+Space:: content_assist(0)
 
 >^Tab:: emmet()
 
 ; row 1
 >^q:: quick_fix()
->^w:: delete_backward_line()
->^e:: delete_forward_line()
->^r:: delete_current_line()
->^t:: cut()
->^y:: copy()
+>^w:: cut()
+>^e:: copy()
+>^r:: paste()
+>^t:: Return
+>^y:: Return
 >^u:: bash_vim_unit_history()
 >^i:: Return
->^o:: move_newline()
->^p:: paste()
+>^o:: move_newline(1)
+>^+o:: move_newline(-1)
+>^p:: Return
 >^[:: move_pageup()
 >^]:: move_pagedown()
 
 ; row 2
->^a:: delete_backward_word()
->^s:: delete_left_char()
->^d:: delete_right_char()
->^f:: delete_forward_word()
+>^a:: select_all()
+>^s:: save()
+>^d:: delete_left_char()
+>^f:: delete_right_char()
 >^g:: Return
 >^h:: move_left()                 
 >^j:: move_down()
@@ -45,10 +45,10 @@ RCtrl:: reset_all() escape()
  
 ; row 3
 >^z:: Reload
->^x:: cut()
->^c:: copy()
->^v:: paste()
->^b:: Return
+>^x:: Return
+>^c:: change_name()
+>^v:: Return
+>^b:: content_assist(0)
 >^n:: move_half_pagedown()
 >^m:: move_half_pageup()
 >^,:: backward_history()

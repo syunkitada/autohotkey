@@ -9,9 +9,7 @@ run_command() {
     ClipSaved := ClipboardAll ;クリップボードの全内容を保存
     StringSplit, c, command, ";"
 
-    if (c1 = h or c1 = "help")
-        help(c2)
-	else if (c1 = "y")
+	if (c1 = "y")
 		copy(c2)
 	else if (c1 = "p")
 		paste(c2)
@@ -30,7 +28,7 @@ run_command() {
 	else if (c1 = "esch")
 		html_escape(c2)
 	else if (c1 = "bash")
-		bash(c2)
+		bash()
 	else if (c1 = "ahk") {
 		ahk(c2)
 	}
@@ -54,23 +52,6 @@ ahk(command) {
 		Edit
 	}
 	Return
-}
-
-help(command) {
-    if (command = "grad")
-        msg := ":grad;[color];[-1]"
-    else if (command = "line")
-        msg := ":line;[direction][boxshadow op1];[bordershadow op]"
-    else if (command = "tshadow")
-        msg := ":tshadow;[op];[is_darkbackground]"
-    else if (command = "button")
-        msg := ":button;[tag_name];[color];[-1]"
-    else
-        msg := "h,q,s,w,t,grad,line,tshadow,button"
-    
-    MsgBox, %msg%
-    
-    Return
 }
 
 css_line(direction, op1, op2) {
@@ -260,14 +241,8 @@ html_escape(code) {
 	Return
 }
 
-
-bash(option) {
-	paste(".bashrc", "~/.bashrc", 1, 0)
-	paste(".vimrc", "~/.vimrc", 1, 0)
-	if (option = "ex") {
-		paste(".bashrcex", "~/.bashrc", 1, 1)
-		paste(".vimrcex", "~/.vimrc", 1, 1)
-	}
+bash() {
+	paste("bash_profile.sh")
 	Return
 }
 

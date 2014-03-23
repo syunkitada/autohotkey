@@ -13,17 +13,8 @@ bypass() {
 ;; setting determinig active window
 ;; ------------------------------
 is_vim() {
-	; ターミナル上のVIMを判定するため、titleからVIMかどうかを判定します。
-	; .vimrcに以下を追記し、タイトルを変更できるようにします。
-	; let &t_ti .= "\e[22;0t"
-	; let &t_te .= "\e[23;0t"
-	; set title
-	WinGetTitle, title, A
-	StringGetPos, pos, title, VIM
-	if pos != -1
-		Return 1
-;    ifWinActive,ahk_class Vim
-;        Return 1
+    ifWinActive,ahk_class Vim
+        Return 1
     Return 0
 }
 

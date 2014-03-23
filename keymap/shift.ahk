@@ -3,6 +3,11 @@
         send +{Tab}
     Return
 
++sc073:: ; sc073=\
+    if !operate("_")
+        Send _
+    Return
+
 +a::
     if !operate("+a")
         Send +a

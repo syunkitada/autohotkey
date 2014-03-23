@@ -28,7 +28,7 @@ get_color_on_mouseposition() {
     Return 1
 }
 
-rename() {
+change_name() {
 	if bypass() or is_terminal() {
 		Return 0
     } else if is_eclipse() {
@@ -86,7 +86,7 @@ bookmark() {
 select_all() {
 	if bypass() {
 		Return 0
-	} else if is_vim() {
+	} else if is_terminal() or is_vim() {
 		Send {Esc}
 		Send +g
 		Send +v
@@ -105,13 +105,11 @@ content_assist(asc=1) {
 			Send ^{Space}
 		else
 			Send ^+{Space}
-	} else if is_vim() {
+	} else if is_terminal() or is_vim() {
 		if asc
 			Send ^n
 		else
 			Send ^p
-	} else if is_terminal() {
-		Send ^r
 	} else {
 		Return 0
 	}
@@ -147,12 +145,21 @@ forward_history() {
 	Return 1
 }
 
+save() {
+	if bypass() {
+		Return 0
+	} else if is_terminal() or is_vim() {
+		Send {Esc}:w{Enter}
+    } else {
+        Send ^s
+    }
+    Return 1
+}
+
 next_tab() {
 	if bypass() {
 		Return 0
-    } else if is_vim() {
-        Send {Esc}:tabn{Enter}
-	} else if is_terminal() {
+	} else if is_terminal() or is_vim() {
 		Send {Esc}:tabn{Enter}
     } else {
         Send ^{Tab}
@@ -269,3 +276,30 @@ run_program() {
 	}
 	Return 1
 }
+
+undo() {
+	if bypass() {
+		Return 0
+	} else if is_terminal() or is_vim() {
+		Send {Esc}u
+	} else if is_eclipse() {
+		Send ^z
+	} else {
+		Return 0
+	}
+	Return 1
+}
+
+resume() {
+	if bypass() {
+		Return 0
+	} else if is_terminal() or is_vim() {
+		Send {Esc}^r
+	} else if is_eclipse() {
+		Send ^y
+	} else {
+		Return 0
+	}
+	Return 1
+}
+

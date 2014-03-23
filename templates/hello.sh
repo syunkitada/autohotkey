@@ -1,4 +1,0 @@
-ls
-
-echo hello world
-
