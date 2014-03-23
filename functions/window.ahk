@@ -44,7 +44,7 @@ window_move_center() {
 	x := (A_ScreenWidth - width)//2
 	y := (A_ScreenHeight - height)//2
 	;MsgBox, %x%:%y%:%width%:%height%
-	
+
 	WinMove, A,, x, y, width, height
 
 	Return 1

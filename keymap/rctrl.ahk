@@ -3,7 +3,7 @@
 ;; ------------------------------
 RCtrl:: reset_all() escape()
 
-; +,* -> '," 
+; +,* -> ',"
 ; shift+, shift* -> +, *
 +;:: Send '
 +sc028:: Send "
@@ -35,14 +35,14 @@ RCtrl:: reset_all() escape()
 >^d:: delete_left_char()
 >^f:: delete_right_char()
 >^g:: Return
->^h:: move_left()                 
+>^h:: move_left()
 >^j:: move_down()
 >^k:: move_up()
 >^l:: move_right()
 >^;:: move_home()
 >^sc028:: move_end() ; sc028 = コロン
 >^@:: run_program()
- 
+
 ; row 3
 >^z:: Reload
 >^x:: Return

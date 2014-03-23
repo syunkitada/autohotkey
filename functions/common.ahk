@@ -6,35 +6,35 @@ switch_taskbar_display() {
 	if bypass() {
 		Return 0
 	}
-    Send {LWin} 
-    Send {Esc}
-    Send !{Enter}
-    Sleep 400
-    Send u
-    Send {Enter}
+	Send {LWin}
+	Send {Esc}
+	Send !{Enter}
+	Sleep 400
+	Send u
+	Send {Enter}
 
-    Return 1
+	Return 1
 }
 
 get_color_on_mouseposition() {
 	if bypass() {
 		Return 0
 	}
-    MouseGetPos, x, y
-    PixelGetColor, hexRGB, %x%, %y%, RGB    ;hexRGB = 0xFFFFFF
-    StringTrimLeft, RGB, hexRGB, 2    ;RGB = FFFFFF
-    StringLower, rgb, RGB    ;rgb = ffffff
-    clipboard = %rgb%
-    Return 1
+	MouseGetPos, x, y
+	PixelGetColor, hexRGB, %x%, %y%, RGB	;hexRGB = 0xFFFFFF
+	StringTrimLeft, RGB, hexRGB, 2	;RGB = FFFFFF
+	StringLower, rgb, RGB	;rgb = ffffff
+	clipboard = %rgb%
+	Return 1
 }
 
 change_name() {
 	if bypass() or is_terminal() {
 		Return 0
-    } else if is_eclipse() {
-        Send !+r
-    } else {
-        Send {F2}
+	} else if is_eclipse() {
+		Send !+r
+	} else {
+		Send {F2}
 	}
 	Return 1
 }
@@ -121,9 +121,9 @@ search() {
 		Return 0
 	} else if is_vim() {
 		Send {Esc}/
-    } else {
-        send ^f
-    }
+	} else {
+		send ^f
+	}
 	Return 1
 }
 
@@ -131,8 +131,8 @@ backward_history() {
 	if bypass() or is_terminal() {
 		Return 0
 	}
-    Send !{Left}
-    reset_visual()
+	Send !{Left}
+	reset_visual()
 	Return 1
 }
 
@@ -140,8 +140,8 @@ forward_history() {
 	if bypass() or is_terminal() {
 		Return 0
 	}
-    Send !{Right}
-    reset_visual()
+	Send !{Right}
+	reset_visual()
 	Return 1
 }
 
@@ -150,10 +150,10 @@ save() {
 		Return 0
 	} else if is_terminal() or is_vim() {
 		Send {Esc}:w{Enter}
-    } else {
-        Send ^s
-    }
-    Return 1
+	} else {
+		Send ^s
+	}
+	Return 1
 }
 
 next_tab() {
@@ -161,37 +161,37 @@ next_tab() {
 		Return 0
 	} else if is_terminal() or is_vim() {
 		Send {Esc}:tabn{Enter}
-    } else {
-        Send ^{Tab}
-    }
-    Return 1
+	} else {
+		Send ^{Tab}
+	}
+	Return 1
 }
 
 previous_tab() {
 	if bypass() {
 		Return 0
 	} else if is_vim() {
-        Send {Esc}:tabp{Enter}
+		Send {Esc}:tabp{Enter}
 	} else if is_terminal() {
 		Send {Esc}:tabp{Enter}
-    } else {
-        Send ^+{Tab}
-    }
-    Return 1
+	} else {
+		Send ^+{Tab}
+	}
+	Return 1
 }
 
 new_tab() {
 	if bypass() {
 		Return 0
-    } else if is_vim() {
+	} else if is_vim() {
 		Send {Esc}
 		Send :tabe{Enter}
 	} else if is_teraterm() {
 		Send !n
 	} else if is_mintty() {
 		Send !{F2}
-    } else {
-        Send ^t
+	} else {
+		Send ^t
 	}
 	Return 1
 }
@@ -199,13 +199,13 @@ new_tab() {
 close_tab() {
 	if bypass() {
 		Return 0
-    } else if is_vim() {
+	} else if is_vim() {
 		Send {Esc}
 		Send :q{Enter}
-    } else if is_terminal() {
+	} else if is_terminal() {
 		Send !{F4}
-    } else {
-        Send ^w
+	} else {
+		Send ^w
 	}
 	Return 1
 }
@@ -222,13 +222,13 @@ close_window() {
 focus_addressbar()  {
 	if bypass() {
 		Return 0
-    } else if is_browser() {
-        Send {F6}
-    } else if is_explorer() {
-        Send !d
-    } else if is_eclipse() {
-        Send !+b
-    } else {
+	} else if is_browser() {
+		Send {F6}
+	} else if is_explorer() {
+		Send !d
+	} else if is_eclipse() {
+		Send !+b
+	} else {
 		Return 0
 	}
 	Return 1

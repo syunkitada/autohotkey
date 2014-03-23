@@ -11,7 +11,7 @@
 #f::run_firefox()
 
 #h::switch_taskbar_display()
-		
+
 #i::run_iexplore()
 
 #p::run_paint()

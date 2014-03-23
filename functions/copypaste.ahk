@@ -23,7 +23,7 @@ copy(id=0) {
 	if is_terminal() {
 		Send ^{Ins}
 	} else if is_vim() {
-		Send ^{Ins}	
+		Send ^{Ins}
 	} else {
 		Send ^c
 	}
@@ -106,11 +106,11 @@ copy(id=0) {
 	} else if (id = "z") {
 		global z
 		z = %clipboard%
-	} 
-    if (id)
-        clipboard = %clipsaved%
+	}
+	if (id)
+		clipboard = %clipsaved%
 
-    Return 1
+	Return 1
 }
 
 paste(id=0) {
@@ -119,7 +119,7 @@ paste(id=0) {
 	}
 
 	clipsaved = %clipboard%
-	
+
 	if (id = "a") {
 		global a
 		clipboard = %a%

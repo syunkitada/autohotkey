@@ -26,7 +26,7 @@ operate_mouse(command) {
 	} else if (command = "b") {
 		MouseClick, Left,,,,, U
 	}
-	
+
 	else if (command = "1") {
 		mouse_move_to_monitor(1)
 	} else if (command = "2") {
@@ -58,7 +58,7 @@ operate_mouse(command) {
 	} else if (command = "o") {
 		mouse_move_right(50)
 	}
-	
+
 	else if (command = "a") {
 		mouse_move_left(100)
 	} else if (command = "s") {
@@ -70,7 +70,7 @@ operate_mouse(command) {
 	} else if (command = "g") {
 		mouse_move_to_monitor(0)
 	}
-	
+
 	else if (command = "h") {
 		mouse_move_left(300)
 	} else if (command = "j") {

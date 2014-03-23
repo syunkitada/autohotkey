@@ -4,14 +4,14 @@
 ;; そちらでカバーできない部分をこちらで設定する
 ;; ------------------------------
 MButton::
-    if bypass()
-        Send {MButton}
-    else if is_eclipse() {
-        Send ^!h
-    } else {
-        Send {MButton}
-    }
-    Return
+	if bypass()
+		Send {MButton}
+	else if is_eclipse() {
+		Send ^!h
+	} else {
+		Send {MButton}
+	}
+	Return
 
 
 XButton2 & WheelDown::AltTab
