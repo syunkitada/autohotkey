@@ -242,7 +242,7 @@ html_escape(code) {
 }
 
 bash() {
-	paste("bash_profile.sh")
+	paste("setup_bash.sh")
 	Return
 }
 

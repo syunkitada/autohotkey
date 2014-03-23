@@ -226,7 +226,7 @@ reset_visual() {
 switch_visual() {
     if is_visual()
         reset_visual()
-    else 
+    else
         set_visual()
     Return
 }
