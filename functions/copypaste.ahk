@@ -16,17 +16,17 @@ copy(id=0) {
 		Return 0
 	}
 
-    if (id) {
-        clipsaved = %clipboard%
+	if (id) {
+		clipsaved = %clipboard%
 	}
 
-    if is_terminal() {
-        Send ^{Ins}
-    } else if is_vim() {
+	if is_terminal() {
+		Send ^{Ins}
+	} else if is_vim() {
 		Send ^{Ins}	
 	} else {
-        Send ^c
-    }
+		Send ^c
+	}
 
 	if (id = "a") {
 		global a
@@ -203,13 +203,13 @@ paste(id=0) {
 		clipboard = %template%
 		SendPlay +{Insert}
 	}
-	if (is_terminal() and !is_create) {
+	if is_terminal() {
 		Send +{Insert}
 	} else if is_vim() {
-		Send +{Insert}
+		Send {Esc}"*p
 	} else if !is_terminal() {
 		Send ^v
-    }
+	}
 
 	clipboard = %clipsaved%
 
