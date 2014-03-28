@@ -36,8 +36,8 @@ LAlt:: set_browsing()
 <!@:: Return
 
 ; row 3
-<!z:: Return
-<!x:: Return
+<!z:: switch_transparent(220)
+<!x:: switch_transparent(170)
 <!c:: Return
 <!v:: Return
 <!b:: bookmark()

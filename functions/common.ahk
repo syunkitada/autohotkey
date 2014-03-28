@@ -303,3 +303,11 @@ resume() {
 	Return 1
 }
 
+switch_transparent(alpha=200) {
+	WinGet, tp, Transparent, A
+	If tp =
+		Winset, Transparent, %alpha%, A
+	else
+		Winset, Transparent, OFF, A
+	return
+}
