@@ -29,7 +29,8 @@ bash_vim_operate_internal_window() {
 
 bash_screen_operate() {
 	if is_terminal() {
-		Send ^a
+		; Send ^a ; screen
+		Send ^b ; tmux
 		Return 1
 	}
 	Return 0
