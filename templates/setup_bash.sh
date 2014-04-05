@@ -43,6 +43,14 @@ alias ls="ls -hF --color=always --show-control-chars"
 alias ll="ls -l"
 alias la="ls -A"
 alias l="ls -CF"
+
+# arias for screen and tmux
+alias s="screen"
+alias sa="screen -r"
+alias sl="screen -ls"
+alias t="tmux"
+alias ta="tmux a"
+alias tl="tmux ls"
 ' > ~/.bash_profile && source ~/.bash_profile \
 && \
 echo '
@@ -113,3 +121,55 @@ set backspace=start,eol,indent
 " inoremap <special> <Esc>O[ <Esc>
 set timeoutlen=1000 ttimeoutlen=0
 ' > ~/.vimrc
+&& \
+echo '
+# --------------------------------------------------
+# basic settings
+# --------------------------------------------------
+defbce "on"
+term xterm-256color
+defscrollback 10000
+altscreen on
+vbell off
+autodetach on
+startup_message off
+logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
+deflog on
+shelltitle '\''$ |bash'\''
+msgwait 5
+msgminwait 1
+hardstatus on
+caption always "%{= wb} %-w%{=bu dr}%n %t%{-}%+w %= %{=b wk} [%l] %{=b wb}%y/%m/%d(%D) %{=b wm}%c"
+sorendition '\''+r .b'\''
+termcapinfo xterm* '\''is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'\''
+
+
+# --------------------------------------------------
+# key map
+# --------------------------------------------------
+escape ^bB
+
+# bind d : detach
+# エンコード
+defkanji utf-8
+defencoding utf-8
+encoding utf-8 utf-8
+
+shell -$SHELL
+
+bind t title
+bind '\'' '\'' screen
+bind q kill
+bind w windowlist
+bind p prev
+bind n next
+
+# window
+bind s split
+bind h focus
+bind j focus
+bind k focus
+bind l focus
+bind x remove
+
+' > ~/.screenrc
