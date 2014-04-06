@@ -262,16 +262,11 @@ MG_IsCaption(){
 }
 
 MG_Gesture_RB_:
-	PostMessage, 0x001F, 0, 0
-		PostMessage, 0x001F, 0, 0, , ahk_id %MG_HCTL%
-		IfWinNotActive
-		{
-			WinActivate
-		}
+	
 return
 
 MG_GetAction_RB_:
-	MG_ActionStr := "PostMessage, 0x001F, 0, 0"
+	
 return
 
 MG_Gesture_RB_LB__:

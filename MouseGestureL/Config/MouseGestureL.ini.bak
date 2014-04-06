@@ -165,8 +165,8 @@ Default=window_maximize(-1)
 
 [X1B_WD_]
 G=X1B_WD_
-Default=;スクロール	MG_Scroll2("H", 1, 1)
+Default=;スクロール	MG_Scroll2("H", 1, 0.5)
 
 [X1B_WU]
 G=X1B_WU_
-Default=;スクロール	MG_Scroll2("H", -1, 1)
+Default=;スクロール	MG_Scroll2("H", -1, 0.5)
