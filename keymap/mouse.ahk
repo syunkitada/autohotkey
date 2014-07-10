@@ -1,7 +1,5 @@
 ;; ------------------------------
 ;; mouse mapping
-;; 基本的にマウスの設定は、MouseGestureLで行います
-;; そちらでカバーできない部分をこちらで設定する
 ;; ------------------------------
 MButton::
 	if bypass()
@@ -13,15 +11,22 @@ MButton::
 	}
 	Return
 
+XButton1::backward_history()
+
+XButton1 & WheelDown::next_tab()
+
+XButton1 & WheelUp::previous_tab()
+
+XButton1 & LButton::copy()
+
+XButton1 & RButton::paste()
+
+XButton2::forward_history()
 
 XButton2 & WheelDown::AltTab
 
 XButton2 & WheelUp::ShiftAltTab
 
-XButton2::copy()
-
-XButton2 & LButton::paste()
+XButton2 & LButton::select_all()
 
 XButton2 & RButton::cut()
-
-
