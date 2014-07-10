@@ -1,18 +1,18 @@
 
 
 run_command() {
-	if bypass() or !is_colon() {
-		Return 0
-	}
+    if bypass() or !is_colon() {
+        Return 0
+    }
 
     global command
     ClipSaved := ClipboardAll ;クリップボードの全内容を保存
     StringSplit, c, command, ";"
 
-	if (c1 = "y")
-		copy(c2)
-	else if (c1 = "p")
-		paste(c2)
+    if (c1 = "y")
+        copy(c2)
+    else if (c1 = "p")
+        paste(c2)
     else if (c1 = "grad")
         css_gradation(c2, c3)
     else if (c1 ="line")
@@ -23,35 +23,35 @@ run_command() {
         css_boxshadow(c2, c3)
     else if (c1 = "button")
         css_button(c2, c3, c4)
-	else if (c1 = "html")
-		html(c2) 
-	else if (c1 = "esch")
-		html_escape(c2)
-	else if (c1 = "bash")
-		bash()
-	else if (c1 = "ahk") {
-		ahk(c2)
-	}
+    else if (c1 = "html")
+        html(c2)
+    else if (c1 = "esch")
+        html_escape(c2)
+    else if (c1 = "bash")
+        bash()
+    else if (c1 = "ahk") {
+        ahk(c2)
+    }
     reset_colon()
 
     Return 1
 }
 
 ahk(command) {
-	if (command = "" or command = "reload" or command = "r") {
-		Reload
-	} else if (command = "history" or command = "h") {
-		KeyHistory
-	} else if (command = "listhotkeys" or command = "lh") {
-		ListHotkeys
-	} else if (command = "listlines" or command = "ll") {
-		ListLines
-	} else if (command = "listvars" or command = "lv") {
-		ListVars
-	} else if (command = "edit" or command = "e") {
-		Edit
-	}
-	Return
+    if (command = "" or command = "reload" or command = "r") {
+        Reload
+    } else if (command = "history" or command = "h") {
+        KeyHistory
+    } else if (command = "listhotkeys" or command = "lh") {
+        ListHotkeys
+    } else if (command = "listlines" or command = "ll") {
+        ListLines
+    } else if (command = "listvars" or command = "lv") {
+        ListVars
+    } else if (command = "edit" or command = "e") {
+        Edit
+    }
+    Return
 }
 
 css_line(direction, op1, op2) {
@@ -60,7 +60,7 @@ css_line(direction, op1, op2) {
         op1 := "0.2"    ;default
     if op2 =
         op2 := "0.3"    ;default
-    
+
     css := "border-top: 1px solid rgba(0, 0, 0, " op1 ")`;`nbox-shadow: "
     if (direction = "top") {
         css := "border-top: 1px solid rgba(0, 0, 0, " op1 ")`;`nbox-shadow: 0px 1px 0px rgba(255, 255, 255, " op2 ") inset`;`n"
@@ -113,7 +113,7 @@ css_gradation(color, sign) {
         percentage = 2
     color1 = %color%
     color2 = %color%
-    
+
     if (sign = "-") {
         sign = -1
     } else {
@@ -147,8 +147,8 @@ css_button(selector, color, sign) {
     hover_color1 =% color_inc(color1, 1)
     hover_color2 =% color_inc(color2, 1)
 
-	FileRead,template,%A_ScriptDir%\templates\cssbutton.txt
-	Transform,clipboard,Deref,%template%
+    FileRead,template,%A_ScriptDir%\templates\cssbutton.txt
+    Transform,clipboard,Deref,%template%
     Send ^v
 
     clipboard = clipsaved
@@ -208,42 +208,41 @@ hex_to_dec(hex) {
 }
 
 html(content) {
-	if (content = "c")
-		FileRead,content,%A_ScriptDir%\templates\htmlcontent.txt
-	clipsaved = %clipboard%
-	FileRead,template,%A_ScriptDir%\templates\html5.txt
-	Transform,inifile,Deref,%template%
-	clipboard = %inifile%
-	Send ^v
-	clipboard = %clipsaved%
-	Return
+    if (content = "c")
+        FileRead,content,%A_ScriptDir%\templates\htmlcontent.txt
+    clipsaved = %clipboard%
+    FileRead,template,%A_ScriptDir%\templates\html5.txt
+    Transform,inifile,Deref,%template%
+    clipboard = %inifile%
+    Send ^v
+    clipboard = %clipsaved%
+    Return
 }
 
-html_escape(code) {
-	clipsaved = %clipboard%
-	Send, ^x
-	clip = %clipboard%
+html_escape(option) {
+    clipsaved = %clipboard%
+    cut()
+    clip = %clipboard%
+    if (option = "b") {
+        ; 改行を<br>にする
+        Transform,clip,HTML,%clip%
+    } else {
+        StringReplace, clip, clip, &, &amp`;, A
+        StringReplace, clip, clip, >, &gt`;, A
+        StringReplace, clip, clip, <, &lt`;, A
+        StringReplace, clip, clip, ", &quot`;, A
+    }
+    clipboard = %clip%
+    paste()
+    escape()
+    clipboard = %clipsaved%
 
-	; for syntax highlighter
-	if (code = "c") {
-		StringReplace, clip, clip, &, &amp`;, A
-		StringReplace, clip, clip, >, &gt`;, A
-		StringReplace, clip, clip, <, &lt`;, A
-		StringReplace, clip, clip, ", &quot`;, A
-	} else {
-		Transform,clip,HTML,%clip%
-	}
-	clipboard = %clip%
-	Send, ^v
-	Send, {Esc}
-	clipboard = %clipsaved%
-
-	Return
+    Return
 }
 
 bash() {
-	paste("setup_bash.sh")
-	Return
+    paste("setup_bash.sh")
+    Return
 }
 
 

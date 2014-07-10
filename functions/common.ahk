@@ -246,7 +246,7 @@ emmet() {
 	if is_eclipse() {
 		Send !+e
 		Return 1
-	} else if is_vim() {
+	} else if is_terminal() or is_vim() {
 		Send ^y,
 		Return 1
 	}
@@ -257,7 +257,7 @@ emmet_wrap() {
 	if is_eclipse() {
 		Send !+a
 		Return 1
-	} else if is_vim() {
+	} else if is_terminal() or is_vim() {
 		Send ^y,
 		Return 1
 	}

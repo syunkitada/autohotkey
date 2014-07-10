@@ -16,10 +16,10 @@ RCtrl:: reset_all() escape()
 
 ; row 1
 >^q:: quick_fix()
->^w:: cut()
+>^w:: delete_backward_word()
 >^e:: copy()
 >^r:: paste()
->^t:: Return
+>^t:: cut()
 >^y:: Return
 >^u:: bash_vim_unit_history()
 >^i:: Return

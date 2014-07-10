@@ -1,8 +1,3 @@
-+Tab::
-	if !set_mouse()
-		send +{Tab}
-	Return
-
 +sc073:: ; sc073=\
 	if !operate("_")
 		Send _
