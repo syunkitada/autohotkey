@@ -1,16 +1,6 @@
 ;; ------------------------------
 ;; mouse mapping
 ;; ------------------------------
-MButton::
-	if bypass()
-		Send {MButton}
-	else if is_eclipse() {
-		Send ^!h
-	} else {
-		Send {MButton}
-	}
-	Return
-
 XButton1::backward_history()
 
 XButton1 & WheelDown::next_tab()
