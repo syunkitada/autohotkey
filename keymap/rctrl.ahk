@@ -25,7 +25,7 @@ RCtrl:: reset_all() escape()
 >^i:: Return
 >^o:: move_newline(1)
 >^+o:: move_newline(-1)
->^p:: Return
+>^p:: content_assist(0)
 >^[:: move_pageup()
 >^]:: move_pagedown()
 
