@@ -45,10 +45,10 @@ RCtrl:: reset_all() escape()
 
 ; row 3
 >^z:: Reload
->^x:: Return
+>^x:: set_mouse()
 >^c:: change_name()
 >^v:: Return
->^b:: content_assist(0)
+>^b:: Return
 >^n:: move_half_pagedown()
 >^m:: move_half_pageup()
 >^,:: backward_history()

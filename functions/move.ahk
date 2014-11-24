@@ -90,6 +90,8 @@ move_home() {
 		Return 0
 	} else if is_visual() {
 		Send +{Home}
+    } else if is_terminal() {
+        Send {Esc}I
 	} else {
 		Send {Home}
 	}
@@ -101,6 +103,8 @@ move_end() {
 		Return 0
 	} else if is_visual() {
 		Send +{End}
+    } else if is_terminal() {
+        Send {Esc}A
 	} else {
 		Send {End}
 	}

@@ -235,10 +235,10 @@ focus_addressbar()  {
 }
 
 comment_out() {
-	if is_eclipse() {
+	if is_eclipse() or is_terminal() or is_vim() {
 		Send ^/
 		Return 1
-	}
+    }
 	Return 0
 }
 
