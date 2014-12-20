@@ -37,7 +37,7 @@ LAlt:: set_browsing()
 
 ; row 3
 <!z:: switch_transparent(220)
-<!x:: switch_transparent(170)
+<!x:: switch_transparent(150)
 <!c:: Return
 <!v:: Return
 <!b:: bookmark()
