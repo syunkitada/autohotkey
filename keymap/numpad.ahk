@@ -1,41 +1,41 @@
-NumpadLeft::
+NumpadHome::
 	MouseGetPos, x0, y0
-	MouseMove, x0 - 100, y0
-	Return
-
-NumpadIns & NumpadLeft::
-	MouseGetPos, x0, y0
-	MouseMove, x0 - 10, y0
-	Return
-
-NumpadRight::
-	MouseGetPos, x0, y0
-	MouseMove, x0 + 100, y0
-	Return
-
-NumpadIns & NumpadRight::
-	MouseGetPos, x0, y0
-	MouseMove, x0 + 10, y0
+	MouseMove, x0 - 150, y0 - 150
 	Return
 
 NumpadUp::
 	MouseGetPos, x0, y0
-	MouseMove, x0, y0 - 100
+	MouseMove, x0, y0 - 250
 	Return
 
-NumpadIns & NumpadUp::
+NumpadPgUp::
 	MouseGetPos, x0, y0
-	MouseMove, x0, y0 - 10
+	MouseMove, x0 + 150, y0 - 150
+	Return
+
+NumpadLeft::
+	MouseGetPos, x0, y0
+	MouseMove, x0 - 250, y0
+	Return
+
+NumpadRight::
+	MouseGetPos, x0, y0
+	MouseMove, x0 + 250, y0
+	Return
+
+NumpadEnd::
+	MouseGetPos, x0, y0
+	MouseMove, x0 - 150, y0 + 150
 	Return
 
 NumpadDown::
 	MouseGetPos, x0, y0
-	MouseMove, x0, y0 + 100
+	MouseMove, x0, y0 + 250
 	Return
 
-NumpadIns & NumpadDown::
+NumpadPgDn::
 	MouseGetPos, x0, y0
-	MouseMove, x0, y0 + 10
+	MouseMove, x0 + 150, y0 + 150
 	Return
 
 NumpadClear::
@@ -44,4 +44,3 @@ NumpadClear::
 
 NumpadIns::
 	Return
-
