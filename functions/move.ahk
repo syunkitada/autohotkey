@@ -91,7 +91,7 @@ move_home() {
     } else if is_visual() {
         Send +{Home}
     } else if is_terminal() {
-        Send {Home}
+        Send ^a
     } else {
         Send {Home}
     }
@@ -104,7 +104,7 @@ move_end() {
     } else if is_visual() {
         Send +{End}
     } else if is_terminal() {
-        Send {End}
+        Send ^e
     } else {
         Send {End}
     }
