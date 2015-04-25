@@ -13,6 +13,7 @@ LAlt:: set_browsing()
 <!e:: window_maximize(-1)
 <!r:: window_minimize()
 <!t:: new_tab()
+<!+t:: close_tab()
 <!y:: Return
 <!u:: bash_vim_unite()
 <!i:: bash_vim_operate_internal_window()

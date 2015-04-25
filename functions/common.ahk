@@ -199,11 +199,10 @@ new_tab() {
 close_tab() {
 	if bypass() {
 		Return 0
-	} else if is_vim() {
+	} else if is_vim() or is_terminal() {
 		Send {Esc}
-		Send :q{Enter}
-	} else if is_terminal() {
-		Send !{F4}
+		Send :tabc{Enter}
+        Send :tabp{Enter}
 	} else {
 		Send ^w
 	}
