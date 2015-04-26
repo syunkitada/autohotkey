@@ -21,7 +21,7 @@ bash_vim_unit_history() {
 
 bash_vim_operate_internal_window() {
 	if is_vim() or is_terminal() {
-		Send {Esc}^w
+		Send ^w
 		Return 1
 	}
 	Return 0

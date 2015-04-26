@@ -128,20 +128,26 @@ search() {
 }
 
 backward_history() {
-	if bypass() or is_terminal() {
+	if bypass() {
 		Return 0
-	}
-	Send !{Left}
-	reset_visual()
+	} else if is_terminal() or is_vim() {
+        Send ^t
+    } else {
+        Send !{Left}
+        reset_visual()
+    }
 	Return 1
 }
 
 forward_history() {
-	if bypass() or is_terminal() {
+	if bypass() {
 		Return 0
-	}
-	Send !{Right}
-	reset_visual()
+	} else if is_terminal() or is_vim() {
+        Send ^]
+    } else {
+        Send !{Right}
+        reset_visual()
+    }
 	Return 1
 }
 
