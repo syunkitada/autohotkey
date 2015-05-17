@@ -16,13 +16,13 @@ RCtrl:: reset_all() escape()
 
 ; row 1
 >^q:: quick_fix()
->^w:: delete_backward_word()
+>^w:: Return
 >^e:: copy()
 >^r:: paste()
 >^t:: cut()
 >^y:: Return
->^u:: bash_vim_unit_history()
->^i:: Return
+>^u:: move_backward_word()
+>^i:: move_forward_word()
 >^o:: move_newline(1)
 >^+o:: move_newline(-1)
 >^p:: content_assist(0)
@@ -47,8 +47,8 @@ RCtrl:: reset_all() escape()
 >^z:: Reload
 >^x:: set_mouse()
 >^c:: change_name()
->^v:: Return
->^b:: Return
+>^v:: delete_backward_word()
+>^b:: delete_forward_word()
 >^n:: move_half_pagedown()
 >^m:: move_half_pageup()
 >^,:: backward_history()
