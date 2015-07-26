@@ -143,7 +143,7 @@ forward_history() {
 	if bypass() {
 		Return 0
 	} else if is_terminal() or is_vim() {
-        Send ^]
+        Send g^]
     } else {
         Send !{Right}
         reset_visual()
