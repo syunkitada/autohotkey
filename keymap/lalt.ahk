@@ -2,7 +2,7 @@
 ;; alt - key mapping
 ;; ------------------------------
 
-LAlt:: set_browsing()
+LAlt:: Send {Enter}
 
 <!Space:: set_mouse()
 <!Tab:: emmet_wrap()
