@@ -34,7 +34,7 @@ RCtrl:: reset_all() escape()
 >^s:: save()
 >^d:: delete_left_char()
 >^f:: delete_right_char()
->^g:: Return
+>^g:: set_mouse()
 >^h:: move_left()
 >^j:: move_down()
 >^k:: move_up()

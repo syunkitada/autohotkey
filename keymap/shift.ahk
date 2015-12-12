@@ -1,3 +1,5 @@
+LShift:: Send {Enter}
+
 +sc073:: ; sc073=\
 	if !operate("_")
 		Send _
