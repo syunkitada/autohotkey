@@ -18,6 +18,9 @@ main.ahkが本体です。
 		Spaceの右1: LShift
 		Spaceの右2: 半角・全角
 		CapsLock  : Tab
+		Enterの上左2: [
+		Enterの上左1: ]
+		Enterの下左1: @
 
 ## 使い方
 ### RCtrl+キー
