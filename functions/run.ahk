@@ -39,11 +39,11 @@ run_paint() {
 }
 
 run_teraterm() {
-	run C:\Users\owner\Desktop\cygwin64\teraterm\ttermpro.exe
+	run C:\Users\owner\Desktop\cygwin\teraterm\ttermpro.exe
 	Return
 }
 
 run_vim() {
-	run C:\Users\owner\Desktop\cygwin64\vim\gvim.exe
+	run C:\Users\owner\Desktop\cygwin\vim\gvim.exe
 	Return
 }

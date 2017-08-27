@@ -45,7 +45,7 @@ RCtrl:: reset_all() escape()
 
 ; row 3
 >^z:: Reload
->^x:: set_mouse()
+>^x:: set_browsing()
 >^c:: change_name()
 >^v:: delete_backward_word()
 >^b:: delete_forward_word()

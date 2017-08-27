@@ -56,8 +56,12 @@ change_same_task() {
 }
 
 reload_previous_task() {
-	if bypass() or is_terminal() {
+	if bypass() {
 		Return 0
+    } if is_terminal() {
+		Send !{Tab}
+		Sleep, 200
+		Send {F5}
 	} else {
 		Send ^s
 		Sleep, 50

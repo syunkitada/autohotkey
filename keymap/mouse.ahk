@@ -1,25 +1,29 @@
 ;; ------------------------------
 ;; mouse mapping
 ;; ------------------------------
-XButton1::backward_history()
+;XButton1::backward_history()
 
-XButton1 & WheelDown::next_tab()
+RButton::RButton
 
-XButton1 & WheelUp::previous_tab()
+RButton & LButton::backward_history()
 
-XButton1 & LButton::copy()
+RButton & WheelDown::next_tab()
 
-XButton1 & RButton::paste()
-
-XButton2::forward_history()
-
-XButton2 & WheelDown::AltTab
-
-XButton2 & WheelUp::ShiftAltTab
-
-XButton2 & LButton::select_all()
-
-XButton2 & RButton::cut()
+RButton & WheelUp::previous_tab()
+;
+;XButton1 & LButton::copy()
+;
+;XButton1 & RButton::paste()
+;
+;XButton2::forward_history()
+;
+;XButton2 & WheelDown::AltTab
+;
+;XButton2 & WheelUp::ShiftAltTab
+;
+;XButton2 & LButton::select_all()
+;
+;XButton2 & RButton::cut()
 
 
 #WinActivateForce
