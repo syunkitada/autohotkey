@@ -13,6 +13,10 @@ run_command() {
         copy(c2)
     else if (c1 = "p")
         paste(c2)
+    else if (c1 = "g")
+        search_google(c2)
+    else if (c1 = "eng")
+        search_eng(c2)
     else if (c1 = "grad")
         css_gradation(c2, c3)
     else if (c1 ="line")
@@ -35,6 +39,22 @@ run_command() {
     reset_colon()
 
     Return 1
+}
+
+search_google(word) {
+    if (word = "") {
+        Run https://www.google.com/search?q=%clipboard%
+    } else {
+        Run https://www.google.com/search?q=%word%
+    }
+}
+
+search_eng(word) {
+    if (word = "") {
+        Run http://ejje.weblio.jp/content/%clipboard%
+    } else {
+        Run http://ejje.weblio.jp/content/%word%
+    }
 }
 
 ahk(command) {
