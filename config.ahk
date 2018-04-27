@@ -31,11 +31,19 @@ is_xmind() {
 }
 
 is_terminal() {
+    ifWinActive,ahk_exe RLogin.exe
+        Return 1
     ifWinActive,ahk_class PuTTY
         Return 1
     ifWinActive,ahk_class VTWin32
         Return 1
     ifWinActive,ahk_class mintty
+        Return 1
+    Return 0
+}
+
+is_rlogin() {
+    ifWinActive,ahk_exe RLogin.exe
         Return 1
     Return 0
 }
