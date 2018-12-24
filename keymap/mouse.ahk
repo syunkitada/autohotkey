@@ -10,6 +10,7 @@ RButton & LButton::backward_history()
 RButton & WheelDown::next_tab()
 
 RButton & WheelUp::previous_tab()
+
 ;
 ;XButton1 & LButton::copy()
 ;
@@ -24,7 +25,7 @@ RButton & WheelUp::previous_tab()
 ;XButton2 & LButton::select_all()
 ;
 ;XButton2 & RButton::cut()
-
+ 
 
 #WinActivateForce
 ~WheelDown::

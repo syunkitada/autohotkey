@@ -27,12 +27,14 @@ LAlt:: Send {Enter}
 <!s:: window_move(0, "right")
 <!d:: window_move(-1, "left")
 <!f:: window_move(-1, "right")
-<!g:: Return
+<!g::
+    copy()
+    search_google("")
 <!h:: previous_tab()
 <!j:: AltTab
 <!k:: ShiftAltTab
 <!l:: next_tab()
-<!;:: Return
+<!;:: Send #{Tab}
 <!sc028:: set_colon() ; sc028 = :
 <!@:: Return
 
