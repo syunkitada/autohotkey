@@ -10,9 +10,9 @@ RCtrl:: reset_all() escape()
 >^+;:: Send +`;
 >^+sc028:: Send *
 
->^Space:: content_assist()
+>^Space:: Send {Enter}
 
->^Tab:: emmet()
+>^Tab:: content_assist()
 
 ; row 1
 >^q:: quick_fix()
