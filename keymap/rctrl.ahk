@@ -25,7 +25,7 @@ RCtrl:: reset_all() escape()
 >^i:: move_forward_word()
 >^o:: move_newline(1)
 >^+o:: move_newline(-1)
->^p:: content_assist(0)
+>^p:: Return
 >^[:: move_pageup()
 >^]:: move_pagedown()
 
@@ -46,7 +46,7 @@ RCtrl:: reset_all() escape()
 ; row 3
 >^z:: Reload
 >^x:: set_browsing()
->^c:: change_name()
+>^c:: Return
 >^v:: delete_backward_word()
 >^b:: delete_forward_word()
 >^n:: move_half_pagedown()
