@@ -27,7 +27,8 @@ FileEncoding UTF-8
 #Include operator\mouse.ahk
 
 #Include keymap\single.ahk
-#Include keymap\shift.ahk
+#Include keymap\lshift.ahk
+#Include keymap\rshift.ahk
 #Include keymap\lalt.ahk
 #Include keymap\rctrl.ahk
 #Include keymap\windows.ahk
