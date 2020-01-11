@@ -171,6 +171,8 @@ next_tab() {
 		Return 0
 	} else if is_terminal() or is_vim() {
 		Send {Esc}:tabn{Enter}
+	} else if is_vscode() {
+		Send ^{PgDn}
 	} else {
 		Send ^{Tab}
 	}
@@ -184,6 +186,8 @@ previous_tab() {
 		Send {Esc}:tabp{Enter}
 	} else if is_terminal() {
 		Send {Esc}:tabp{Enter}
+	} else if is_vscode() {
+		Send ^{PgUp}
 	} else {
 		Send ^+{Tab}
 	}

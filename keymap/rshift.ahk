@@ -1,7 +1,11 @@
-RShift:: Send {sc029}
-
 >+Space::
-	Send {F10}
+	IME_SET(0)
+	Return
+
+>+RCtrl::
+	IME_SET(0)
+	Send {vkF3sc029}
+	Return
 
 ; row 1
 >+q::
@@ -15,18 +19,21 @@ RShift:: Send {sc029}
 	Return
 
 >+e::
+	; Open exproler
 	if !operate("+e")
-		Return
+		Send ^+e 
 	Return
 
 >+r::
+	; Open editor
 	if !operate("+r")
-		Return
+		Send ^+f
 	Return
 
 >+t::
+	; Open terminal
 	if !operate("+t")
-		Return
+		Send ^@
 	Return
 
 >+y::
@@ -46,8 +53,9 @@ RShift:: Send {sc029}
 	Return
 
 >+o::
+	; Open outline
 	if !operate("+o")
-		Return
+		Send ^+{f8}
 	Return
 
 >+p::
@@ -59,57 +67,62 @@ RShift:: Send {sc029}
 ; row 2
 >+a::
 	if !operate("+a")
-		Send 1
+		Return
 	Return
 
 >+s::
 	if !operate("+s")
-		Send 2
+		Send ^p
 	Return
 
 >+d::
 	if !operate("+d")
-		Send 3
+		Return
 	Return
 
 >+f::
+	; Focus panel(Toggle maximized panel)
 	if !operate("+f")
-		Send 4
+		Send ^+{f10}
 	Return
 
 >+g::
+	; Go editor(focus editor group0)
 	if !operate("+g")
-		Send 5
+		Send ^1
 	Return
 
 >+h::
+	; Go editor(focus editor group1)
 	if !operate("+h")
-		Send 6
+		Send ^2
 	Return
 
 >+j::
+	; Go to definition
 	if !operate("+j")
-		Send 7
+		Send {f12}
 	Return
 
 >+k::
+	; tag jump(pevious)
 	if !operate("+k")
-		Send 8
+		Return
 	Return
 
 >+l::
 	if !operate("+l")
-		Send 9
+		Return
 	Return
 
 >+;::
 	if !operate("+;")
-		Send 0
+		Return
 	Return
 
 >+sc028::
 	if !operate("+:")
-		Send 0
+		Return
 	Return
 
 ; row 3

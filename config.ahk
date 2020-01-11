@@ -42,6 +42,12 @@ is_terminal() {
     Return 0
 }
 
+is_vscode() {
+    ifWinActive,ahk_exe Code.exe
+        Return 1 
+    Return 0
+}
+
 is_rlogin() {
     ifWinActive,ahk_exe RLogin.exe
         Return 1
