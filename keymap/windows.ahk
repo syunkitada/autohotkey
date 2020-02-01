@@ -20,8 +20,6 @@
 
 #t::run_teraterm()
 
-#v::run_vim()
-
 #w::run_eclipse_web()
 
 #z::Reload

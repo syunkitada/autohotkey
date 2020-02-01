@@ -205,11 +205,14 @@ paste(id=0) {
         clipboard = %template%
         SendPlay +{Insert}
     }
-    if is_terminal() {
+
+    if is_ubuntu_terminal() {
+        Send ^+v
+    } else if is_terminal() {
         Send +{Insert}
     } else if is_vim() {
         Send {Esc}"*P
-    } else if !is_terminal() {
+    } else {
         Send ^v
     }
 

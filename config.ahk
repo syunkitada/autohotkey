@@ -30,8 +30,16 @@ is_xmind() {
     Return 0
 }
 
+is_ubuntu_terminal() {
+    ifWinActive,ahk_class ConsoleWindowClass
+        Return 1
+    Return 0
+}
+
 is_terminal() {
     ifWinActive,ahk_exe RLogin.exe
+        Return 1
+    ifWinActive,ahk_class ConsoleWindowClass
         Return 1
     ifWinActive,ahk_class PuTTY
         Return 1

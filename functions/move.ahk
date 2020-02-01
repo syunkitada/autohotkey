@@ -114,7 +114,7 @@ move_end() {
 move_half_pageup() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() or is_terminal() {
+    } else if is_eclipse() or is_vim() or is_terminal() or is_vscode() {
         Send ^u
     } else {
         move_pageup()
@@ -125,7 +125,7 @@ move_half_pageup() {
 move_pageup() {
     if bypass() {
         Return 0
-    } else if is_vim() or is_terminal() {
+    } else if is_vim() or is_terminal() or is_vscode() {
         Send ^b
     } else if is_visual() {
         Send +{PgUp}
@@ -138,7 +138,7 @@ move_pageup() {
 move_pagedown() {
     if bypass() {
         Return 0
-    } else if is_vim() or is_terminal() {
+    } else if is_vim() or is_terminal() or is_vscode() {
         Send ^f
     } else if is_visual() {
         Send +{PgDn}
@@ -151,7 +151,7 @@ move_pagedown() {
 move_half_pagedown() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() or is_terminal() {
+    } else if is_eclipse() or is_vim() or is_terminal() or is_vscode() {
         Send ^d
     } else {
         move_pagedown()
