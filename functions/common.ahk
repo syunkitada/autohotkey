@@ -134,6 +134,8 @@ search() {
 backward_history() {
 	if bypass() {
 		Return 0
+	} if is_vscode() {
+		Send !{Left}
 	} else if is_terminal() or is_vim() {
         Send ^t
     } else {
@@ -146,6 +148,8 @@ backward_history() {
 forward_history() {
 	if bypass() {
 		Return 0
+	} if is_vscode() {
+		Send !{Right}
 	} else if is_terminal() or is_vim() {
         Send g^]
     } else {
@@ -318,9 +322,72 @@ resume() {
 
 switch_transparent(alpha=200) {
 	WinGet, tp, Transparent, A
-	If tp =
+	if tp =
 		Winset, Transparent, %alpha%, A
 	else
 		Winset, Transparent, OFF, A
 	return
+}
+
+open_exproler() {
+	if is_vscode() {
+		Send ^+e
+	}
+	Return
+}
+
+focus_grep_text_finder() {
+	if is_vscode() {
+		Send ^+f
+	}
+	Return
+}
+
+focus_terminal() {
+	if is_vscode() {
+		Send ^@
+	}
+	Return
+}
+
+focus_outline() {
+	if is_vscode() {
+		Send ^+{f8}
+	}
+	Return
+}
+
+focus_search_file_finder() {
+	if is_vscode() {
+		Send ^p
+	}
+	Return
+}
+
+focus_panel_and_maximize_panel() {
+	if is_vscode() {
+		Send ^+{f10}
+	}
+	Return
+}
+
+focus_editor1() {
+	if is_vscode() {
+		Send ^1
+	}
+	Return
+}
+
+focus_editor2() {
+	if is_vscode() {
+		Send ^2
+	}
+	Return
+}
+
+jump_to_definition() {
+	if is_vscode() {
+		Send {f12}
+	}
+	Return
 }
