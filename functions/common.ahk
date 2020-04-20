@@ -218,9 +218,7 @@ close_tab() {
 	if bypass() {
 		Return 0
 	} else if is_vim() or is_terminal() {
-		Send {Esc}
-		Send :tabc{Enter}
-        Send :tabp{Enter}
+		Send {Esc}:tabc{Enter}:tabp{Enter}
 	} else {
 		Send ^w
 	}
@@ -336,13 +334,6 @@ open_exproler() {
 	Return
 }
 
-focus_grep_text_finder() {
-	if is_vscode() {
-		Send ^+f
-	}
-	Return
-}
-
 focus_terminal() {
 	if is_vscode() {
 		Send ^@
@@ -357,12 +348,53 @@ focus_outline() {
 	Return
 }
 
-focus_search_file_finder() {
-	if is_vscode() {
+focus_search_file_finder(is_new_tab=true) {
+	if is_terminal() {
+		if is_new_tab {
+			Send {Esc}:tabe{Enter}:Ag{Enter}
+		} else {
+			Send {Esc}:Ag{Enter}
+		}
+	} else if is_vscode() {
 		Send ^p
 	}
 	Return
 }
+
+focus_search_text_finder(is_new_tab=true) {
+	if is_terminal() {
+		if is_new_tab {
+			Send {Esc}:tabe{Enter}:FZF{Enter}
+		} else {
+			Send {Esc}:FZF{Enter}
+		}
+	} else if is_vscode() {
+		Send ^+f
+	}
+	Return
+}
+
+focus_buffer_file_finder() {
+	if is_terminal() {
+		Send {Esc}:tabe{Enter}{Esc}:Buffers{Enter}
+	}
+	Return
+}
+
+focus_buffer_text_finder() {
+	if is_terminal() {
+		Send {Esc}:tabe{Enter}{Esc}:BLines{Enter}
+	}
+	Return
+}
+
+focus_history_finder() {
+	if is_terminal() {
+		Send {Esc}:tabe{Enter}{Esc}:Hostory{Enter}
+	}
+	Return
+}
+
 
 focus_panel_and_maximize_panel() {
 	if is_vscode() {

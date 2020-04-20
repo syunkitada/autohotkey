@@ -2,11 +2,6 @@
 	IME_SET(0)
 	Return
 
-<+RCtrl::
-	IME_SET(0)
-	Send {vkF3sc029}
-	Return
-
 ; row 1
 <+q::
 	if !operate("+q")

@@ -11,8 +11,8 @@
 >+q:: Return
 >+w:: Return
 >+e:: open_exproler()
->+r:: focus_grep_text_finder()
->+t:: focus_terminal()
+>+r:: close_tab()
+>+t:: new_tab()
 >+y:: Return
 >+u:: Return
 >+i:: Return
@@ -20,12 +20,12 @@
 >+p:: Return
 
 ; row 2
->+a:: Return
->+s:: focus_search_file_finder()
->+d:: Return
->+f:: focus_panel_and_maximize_panel()
->+g:: focus_editor1()
->+h:: focus_editor2()
+>+a:: focus_search_file_finder()
+>+s:: focus_search_text_finder()
+>+d:: close_tab()
+>+f:: focus_buffer_file_finder()
+>+g:: focus_buffer_text_finder()
+>+h:: focus_history_finder()
 >+j:: jump_to_definition()
 >+k:: backward_history()
 >+l:: forward_history()
