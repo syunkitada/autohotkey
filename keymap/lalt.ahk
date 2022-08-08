@@ -15,10 +15,10 @@ LAlt:: Return
 <!t:: new_tab()
 <!+t:: close_tab()
 <!y:: Return
-<!u:: bash_vim_unite()
+<!u:: bash_tmuxt_operate()
 <!i:: bash_vim_operate_internal_window()
-<!o:: bash_screen_operate()
-<!p:: reload_previous_task()
+<!o:: bash_tmux_operate()
+<!p:: bash_tmuxt_operate()
 <![:: Return
 <!]:: Return
 

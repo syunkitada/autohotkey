@@ -27,10 +27,17 @@ bash_vim_operate_internal_window() {
 	Return 0
 }
 
-bash_screen_operate() {
+bash_tmux_operate() {
 	if is_terminal() or is_vscode() {
-		; Send ^a ; screen
 		Send ^b ; tmux
+		Return 1
+	}
+	Return 0
+}
+
+bash_tmuxt_operate() {
+	if is_terminal() or is_vscode() {
+		Send ^t ; tmuxt
 		Return 1
 	}
 	Return 0
