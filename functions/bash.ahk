@@ -27,7 +27,7 @@ bash_vim_operate_internal_window() {
 	Return 0
 }
 
-bash_tmux_operate() {
+bash_tmux_operate_over_winder() {
 	if is_terminal() or is_vscode() {
 		Send ^b ; tmux
 		Return 1
@@ -35,7 +35,7 @@ bash_tmux_operate() {
 	Return 0
 }
 
-bash_tmuxt_operate() {
+bash_tmux_operate_under_window() {
 	if is_terminal() or is_vscode() {
 		Send ^t ; tmuxt
 		Return 1
