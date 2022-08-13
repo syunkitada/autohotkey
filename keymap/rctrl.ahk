@@ -1,57 +1,87 @@
 ;; ------------------------------
 ;; rctrl keys
 ;; ------------------------------
+; [KEYBIND] key=<RCtrl>; tags=keybind; action=<ESC>キーを送信します;
 RCtrl:: reset_all() escape()
 
 ; +,* -> ',"
 ; shift+, shift* -> +, *
+; [KEYBIND] key=!\;; tags=keybind; action=<'>キーを送信します;
 +;:: Send '
+; [KEYBIND] key=!:; tags=keybind; action=<">キーを送信します;
 +sc028:: Send "
+; [KEYBIND] key=>^!\;; tags=keybind; action=<+>キーを送信します;
 >^+;:: Send +`;
+; [KEYBIND] key=>^!:; tags=keybind; action=<*>キーを送信します;
 >^+sc028:: Send *
 
+; [KEYBIND] key=>^<Space>; tags=keybind; action=<Enter>キーを送信します;
 >^Space:: Send {Enter}
 
+; [KEYBIND] key=>^<Tab>; tags=programming; action=TODO 補完モードに移行します;
 >^Tab:: content_assist()
 
 ; row 1
->^q:: quick_fix()
+>^q:: Return
 >^w:: Return
+; [KEYBIND] key=>^e; tags=clipboard; action=コピーします(rEplicate text);
 >^e:: copy()
+; [KEYBIND] key=>^r; tags=clipboard; action=ペーストします(paste Replicated text);
 >^r:: paste()
+; [KEYBIND] key=>^t; tags=clipboard; action=切り取ります(cuT text);
 >^t:: cut()
 >^y:: Return
+; [KEYBIND] key=>^u; tags=move; action=前のワードへ移動します(previoUs text) FIXME;
 >^u:: move_backward_word()
+; [KEYBIND] key=>^i; tags=move; action=次のワードへ移動します(cuT text) FIXME;
 >^i:: move_forward_word()
+; [KEYBIND] key=>^o; tags=edit; action=下へ新規の行追加して移動します(new Oneline);
 >^o:: move_newline(1)
+; [KEYBIND] key=>^O; tags=edit; action=上へ新規の行追加して移動します(new Oneline);
 >^+o:: move_newline(-1)
 >^p:: Return
->^[:: move_pageup()
->^]:: move_pagedown()
+>^[:: Return
+>^]:: Return
 
 ; row 2
+; [KEYBIND] key=>^a; tags=select; action=全選択します;
 >^a:: select_all()
->^s:: save()
+>^s:: Return
+; [KEYBIND] key=>^d; tags=edit; action=前の一文字を削除します FIXME;
 >^d:: delete_left_char()
+; [KEYBIND] key=>^f; tags=edit; action=後ろの一文字を削除します FIXME;
 >^f:: delete_right_char()
->^g:: set_mouse()
+>^g:: Return
+; [KEYBIND] key=>^h; tags=move; action=左へ移動します;
 >^h:: move_left()
+; [KEYBIND] key=>^j; tags=move; action=下へ移動します;
 >^j:: move_down()
+; [KEYBIND] key=>^k; tags=move; action=上へ移動します;
 >^k:: move_up()
+; [KEYBIND] key=>^l; tags=move; action=右へ移動します;
 >^l:: move_right()
+; [KEYBIND] key=>^\;; tags=move; action=一番左へ移動します;
 >^;:: move_home()
+; [KEYBIND] key=>^:; tags=move; action=一番右へ移動します;
 >^sc028:: move_end() ; sc028 = コロン
->^@:: run_program()
 
 ; row 3
 >^z:: Reload
->^x:: set_browsing()
+>^x:: Return
 >^c:: Return
+; [KEYBIND] key=>^v; tags=page; action=前の文字列を削除します FIXME;
 >^v:: delete_backward_word()
+; [KEYBIND] key=>^b; tags=page; action=後ろの文字列を削除します FIXME;
 >^b:: delete_forward_word()
+; [KEYBIND] key=>^n; tags=page; action=ページを下へスクロールします;
 >^n:: move_half_pagedown()
+; [KEYBIND] key=>^m; tags=page; action=ページを上へスクロールします;
 >^m:: move_half_pageup()
+; [KEYBIND] key=>^,; tags=page; action=ヒストリを前へ戻ります FIXME;
 >^,:: backward_history()
+; [KEYBIND] key=>^.; tags=page; action=ヒストリを先へ進みます FIXME;
+; [KEYBIND] key=<TODO>; tags=page; action=定義元へ飛びます FIXME;
 >^.:: forward_history()
+; [KEYBIND] key=>^/; tags=page; action=コメントアウトします FIXME;
 >^/:: comment_out()
 >^sc073:: Return ; sc073 = \

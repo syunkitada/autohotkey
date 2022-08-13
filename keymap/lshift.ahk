@@ -1,7 +1,3 @@
-<+Space::
-	IME_SET(0)
-	Return
-
 ; row 1
 <+q::
 	if !operate("+q")

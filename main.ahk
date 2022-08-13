@@ -23,8 +23,6 @@ FileEncoding UTF-8
 #Include command\command.ahk
 
 #Include operator\operator.ahk
-#Include operator\operators.ahk
-#Include operator\mouse.ahk
 
 #Include keymap\single.ahk
 #Include keymap\lshift.ahk
@@ -32,6 +30,4 @@ FileEncoding UTF-8
 #Include keymap\lalt.ahk
 #Include keymap\rctrl.ahk
 #Include keymap\windows.ahk
-#Include keymap\numpad.ahk
 #Include keymap\mouse.ahk
-

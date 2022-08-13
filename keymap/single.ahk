@@ -8,9 +8,7 @@ Enter::
 	Return
 
 ESC::
-	if is_browsing() or is_mouse()
-		reset_all()
-	else if !escape()
+	if !escape()
 		Send {Esc}
 	Return
 
@@ -108,47 +106,47 @@ sc073:: ; sc073=\
 	Return
 
 1::
-	if !set_operator_count(1)
+	if !operate("1")
 		Send 1
 	Return
 
 2::
-	if !set_operator_count(2)
+	if !operate("2")
 		Send 2
 	Return
 
 3::
-	if !set_operator_count(3)
+	if !operate("3")
 		Send 3
 	Return
 
 4::
-	if !set_operator_count(4)
+	if !operate("4")
 		Send 4
 	Return
 
 5::
-	if !set_operator_count(5)
+	if !operate("5")
 		Send 5
 	Return
 
 6::
-	if !set_operator_count(6)
+	if !operate("6")
 		Send 6
 	Return
 
 7::
-	if !set_operator_count(7)
+	if !operate("7")
 		Send 7
 	Return
 
 8::
-	if !set_operator_count(8)
+	if !operate("8")
 		Send 8
 	Return
 
 9::
-	if !set_operator_count(9)
+	if !operate("9")
 		Send 9
 	Return
 

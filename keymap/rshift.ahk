@@ -1,7 +1,9 @@
+; [KEYBIND] key=>+<Space>; tags=language; action=英数字入力に切り替えます;
 >+Space::
 	IME_SET(0)
 	Return
 
+; [KEYBIND] key=>+<RCtrl>; tags=language; action=ローマ字入力に切り替えます;
 >+RCtrl::
 	IME_SET(0)
 	Send {vkF3sc029}
@@ -10,25 +12,25 @@
 ; row 1
 >+q:: Return
 >+w:: Return
->+e:: open_exproler()
->+r:: close_tab()
->+t:: new_tab()
+>+e:: Return
+>+r:: Return
+>+t:: Return
 >+y:: Return
 >+u:: Return
 >+i:: Return
->+o:: focus_outline()
+>+o:: Return
 >+p:: Return
 
 ; row 2
->+a:: focus_search_file_finder()
->+s:: focus_search_text_finder()
->+d:: close_tab()
->+f:: focus_buffer_file_finder()
->+g:: focus_buffer_text_finder()
->+h:: focus_history_finder()
->+j:: jump_to_definition()
->+k:: backward_history()
->+l:: forward_history()
+>+a:: Return
+>+s:: Return
+>+d:: Return
+>+f:: Return
+>+g:: Return
+>+h:: Return
+>+j:: Return
+>+k:: Return
+>+l:: Return
 >+;:: Return
 >+sc028:: Return
 

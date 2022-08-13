@@ -39,17 +39,6 @@ change_name() {
 	Return 1
 }
 
-quick_fix() {
-	if bypass() or is_terminal() {
-		Return 0
-	} else if is_eclipse() {
-		Send ^1
-	} else {
-		Return 0
-	}
-	Return 1
-}
-
 change_same_task() {
 	WinGetClass, className, A
 	WinActivateBottom, ahk_class %className%
@@ -58,7 +47,7 @@ change_same_task() {
 reload_previous_task() {
 	if bypass() {
 		Return 0
-    } if is_terminal() {
+	} if is_terminal() {
 		Send !{Tab}
 		Sleep, 200
 		Send {F5}
@@ -71,19 +60,6 @@ reload_previous_task() {
 		Sleep, 200
 		Send !{Tab}
 	}
-	Return 1
-}
-
-
-bookmark() {
-	if bypass()
-		Return 0
-	else if is_browser()
-		Send ^d
-	else if is_explorer()
-		Send ^d
-	else
-		Send ^b
 	Return 1
 }
 
@@ -137,11 +113,10 @@ backward_history() {
 	} if is_vscode() {
 		Send !{Left}
 	} else if is_terminal() or is_vim() {
-        Send ^t
-    } else {
-        Send !{Left}
-        reset_visual()
-    }
+		Send ^t
+	} else {
+		Send !{Left}
+	}
 	Return 1
 }
 
@@ -151,21 +126,9 @@ forward_history() {
 	} if is_vscode() {
 		Send !{Right}
 	} else if is_terminal() or is_vim() {
-        Send g^]
-    } else {
-        Send !{Right}
-        reset_visual()
-    }
-	Return 1
-}
-
-save() {
-	if bypass() {
-		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc}:w{Enter}
+		Send g^]
 	} else {
-		Send ^s
+		Send !{Right}
 	}
 	Return 1
 }
@@ -238,13 +201,13 @@ focus_addressbar()  {
 	if bypass() {
 		Return 0
 	} else if is_browser() {
-		Send {F6}
+		Send !d
 	} else if is_explorer() {
 		Send !d
-	} else if is_eclipse() {
-		Send !+b
 	} else {
-		Return 0
+		Run "https://www.google.co.jp/"
+		Send !d
+		IME_SET(0)
 	}
 	Return 1
 }
@@ -253,7 +216,7 @@ comment_out() {
 	if is_eclipse() or is_terminal() or is_vim() {
 		Send ^/
 		Return 1
-    }
+	}
 	Return 0
 }
 
@@ -327,13 +290,6 @@ switch_transparent(alpha=200) {
 	return
 }
 
-open_exproler() {
-	if is_vscode() {
-		Send ^+e
-	}
-	Return
-}
-
 focus_terminal() {
 	if is_vscode() {
 		Send ^@
@@ -347,54 +303,6 @@ focus_outline() {
 	}
 	Return
 }
-
-focus_search_file_finder(is_new_tab=true) {
-	if is_terminal() {
-		if is_new_tab {
-			Send {Esc}:tabe{Enter}:Ag{Enter}
-		} else {
-			Send {Esc}:Ag{Enter}
-		}
-	} else if is_vscode() {
-		Send ^p
-	}
-	Return
-}
-
-focus_search_text_finder(is_new_tab=true) {
-	if is_terminal() {
-		if is_new_tab {
-			Send {Esc}:tabe{Enter}:FZF{Enter}
-		} else {
-			Send {Esc}:FZF{Enter}
-		}
-	} else if is_vscode() {
-		Send ^+f
-	}
-	Return
-}
-
-focus_buffer_file_finder() {
-	if is_terminal() {
-		Send {Esc}:tabe{Enter}{Esc}:Buffers{Enter}
-	}
-	Return
-}
-
-focus_buffer_text_finder() {
-	if is_terminal() {
-		Send {Esc}:tabe{Enter}{Esc}:BLines{Enter}
-	}
-	Return
-}
-
-focus_history_finder() {
-	if is_terminal() {
-		Send {Esc}:tabe{Enter}{Esc}:Hostory{Enter}
-	}
-	Return
-}
-
 
 focus_panel_and_maximize_panel() {
 	if is_vscode() {
@@ -417,6 +325,7 @@ focus_editor2() {
 	Return
 }
 
+; FIXME
 jump_to_definition() {
 	if is_vscode() {
 		Send {f12}

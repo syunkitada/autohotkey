@@ -7,11 +7,7 @@ move_left(count=1) {
     }
 
     Loop, %count% {
-        if is_visual() {
-            Send +{Left}
-        } else {
-            Send {Left}
-        }
+        Send {Left}
     }
     Return 1
 }
@@ -22,11 +18,7 @@ move_right(count=1) {
     }
 
     Loop, %count% {
-        if is_visual() {
-            Send +{Right}
-        } else {
-            Send {Right}
-        }
+        Send {Right}
     }
     Return 1
 }
@@ -37,22 +29,12 @@ move_up(count=1) {
     }
 
     Loop, %count% {
-        if is_visual() {
-            if is_sendinput() {
-                SendInput +{Up}
-            } else if is_sendplay() {
-                SendPlay +{Up}
-            } else {
-                Send +{Up}
-            }
+        if is_sendinput() {
+            SendInput {Up}
+        } else if is_sendplay() {
+            SendPlay {Up}
         } else {
-            if is_sendinput() {
-                SendInput {Up}
-            } else if is_sendplay() {
-                SendPlay {Up}
-            } else {
-                Send {Up}
-            }
+            Send {Up}
         }
     }
     Return 1
@@ -64,22 +46,12 @@ move_down(count=1) {
     }
 
     Loop, %count% {
-        if is_visual() {
-            if is_sendinput() {
-                SendInput +{Down}
-            } else if is_sendplay() {
-                SendPlay +{Down}
-            } else {
-                Send +{Down}
-            }
+        if is_sendinput() {
+            SendInput {Down}
+        } else if is_sendplay {
+            SendPlay {Down}
         } else {
-            if is_sendinput() {
-                SendInput {Down}
-            } else if is_sendplay {
-                SendPlay {Down}
-            } else {
-                Send {Down}
-            }
+            Send {Down}
         }
     }
     Return 1
@@ -88,8 +60,6 @@ move_down(count=1) {
 move_home() {
     if bypass() {
         Return 0
-    } else if is_visual() {
-        Send +{Home}
     } else if is_terminal() {
         Send ^a
     } else {
@@ -101,8 +71,6 @@ move_home() {
 move_end() {
     if bypass() {
         Return 0
-    } else if is_visual() {
-        Send +{End}
     } else if is_terminal() {
         Send ^e
     } else {
@@ -127,8 +95,6 @@ move_pageup() {
         Return 0
     } else if is_vim() or is_terminal() or is_vscode() {
         Send ^b
-    } else if is_visual() {
-        Send +{PgUp}
     } else {
         Send {PgUp}
     }
@@ -140,8 +106,6 @@ move_pagedown() {
         Return 0
     } else if is_vim() or is_terminal() or is_vscode() {
         Send ^f
-    } else if is_visual() {
-        Send +{PgDn}
     } else {
         Send {PgDn}
     }
@@ -184,8 +148,6 @@ move_bottom() {
 move_backward_word() {
     if bypass() {
         Return 0
-    } else if is_visual() {
-        Send +^{Left}
     } else if is_vim() {
         escape()
             Send bi
@@ -201,8 +163,6 @@ move_backward_word() {
 move_forward_word() {
     if bypass() {
         Return 0
-    } else if is_visual() {
-        Send +^{Right}
     } else if is_vim() {
         escape()
             Send lwi

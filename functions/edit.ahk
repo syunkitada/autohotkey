@@ -27,7 +27,6 @@ delete_left_char() {
 		Send ^h
 	} else {
 		Send {BS}
-		reset_visual()
 	}
 	Return 1
 }
