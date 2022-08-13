@@ -1,32 +1,44 @@
 ; 削除などの編集関数郡です。
 ; 削除関連の関数群は、delete_で始まります。
 
-delete_right_char() {
+delete_right_char(count=1) {
 	if bypass() {
 		Return 0
-	} else if is_colon() {
-		bs_colon()
-	} else if is_vim() {
-		Send {Del}
-	} else if is_terminal() {
-		Send ^d
-	} else {
-		Send {Del}
 	}
+    if is_colon() {
+		bs_colon()
+        Return 1
+    }
+
+    Loop, %count% {
+        if is_vim() {
+            Send {Del}
+        } else if is_terminal() {
+            Send ^d
+        } else {
+            Send {Del}
+        }
+    }
 	Return 1
 }
 
-delete_left_char() {
+delete_left_char(count=1) {
 	if bypass() {
 		Return 0
-	} else if is_colon() {
+	}
+    if is_colon() {
 		bs_colon()
-	} else if is_vim() {
-		Send {BS}
-	} else if is_terminal() {
-		Send ^h
-	} else {
-		Send {BS}
+        Return 1
+    }
+
+    Loop, %count% {
+        if is_vim() {
+            Send {BS}
+        } else if is_terminal() {
+            Send ^h
+        } else {
+            Send {BS}
+        }
 	}
 	Return 1
 }
@@ -61,52 +73,6 @@ delete_forward_word() {
 	} else {
 		Send +^{Right}
 		Send {Del}
-	}
-	Return 1
-}
-
-delete_forward_line() {
-	if bypass() {
-		Return 0
-	} else if is_vim() {
-		Send {Esc}
-		Send c$
-	} else if is_terminal() {
-		Send ^k
-	} else {
-		Send +{End}
-		Send {Del}
-	}
-	Return 1
-}
-
-delete_backward_line() {
-	if bypass() {
-		Return 0
-	} else if is_vim() {
-		Send {Esc}
-		Send c0
-	} else if is_terminal() {
-		Send ^u
-	} else {
-		Send +{Home}
-		Send {Del}
-	}
-	Return 1
-}
-
-delete_current_line() {
-	if bypass() {
-		Return 0
-	} else if is_vim() {
-		Send {Esc}ddi
-	} else if is_terminal() {
-		Send {Home}
-		Send ^k
-	} else {
-		Send {Home}
-		Send +{End}
-		Send {DeL}
 	}
 	Return 1
 }
