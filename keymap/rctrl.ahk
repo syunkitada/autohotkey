@@ -82,15 +82,15 @@ RCtrl:: reset_all() escape()
 ; ----------------------------------------------------------------------------------------------------
 >^z:: Reload
 >^x:: Return
-; [KEYBIND] key=>^c; tags=edit; action=前の一単語を削除します(delete baCkward word);
->^c:: delete_backward_word()
-; [KEYBIND] key=>^v; tags=edit; action=次の一単語を削除します(remoVe forward word);
->^v:: delete_forward_word()
->^b:: Return
-; [KEYBIND] key=>^n; tags=page; action=ページを下へスクロールします;
+>^c:: Return
+; [KEYBIND] key=>^v; tags=edit; action=前の一単語を削除します(remoVe backward word);
+>^v:: delete_backward_word()
+; [KEYBIND] key=>^b; tags=edit; action=次の一単語を削除します(remove suBsequent word);
+>^b:: delete_forward_word()
 ; ----------------------------------------------------------------------------------------------------
 ; row 3 right
 ; ----------------------------------------------------------------------------------------------------
+; [KEYBIND] key=>^n; tags=page; action=ページを下へスクロールします;
 >^n:: move_half_pagedown()
 ; [KEYBIND] key=>^m; tags=page; action=ページを上へスクロールします;
 >^m:: move_half_pageup()
