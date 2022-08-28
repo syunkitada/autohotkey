@@ -44,7 +44,7 @@ change_same_task() {
 	WinActivateBottom, ahk_class %className%
 }
 
-reload_previous_task() {
+reload() {
 	if bypass() {
 		Return 0
 	} if is_terminal() {
@@ -52,13 +52,7 @@ reload_previous_task() {
 		Sleep, 200
 		Send {F5}
 	} else {
-		Send ^s
-		Sleep, 50
-		Send !{Tab}
-		Sleep, 200
-		Send {F5}
-		Sleep, 200
-		Send !{Tab}
+        Send {F5}
 	}
 	Return 1
 }

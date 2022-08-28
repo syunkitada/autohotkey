@@ -20,7 +20,8 @@ LAlt:: Return
 <!t:: new_tab()
 ; [KEYBIND] key=<!+t; tags=window; action=タブを閉じる;
 <!+t:: close_tab()
-<!y:: Return
+; [KEYBIND] key=<!y; tags=window; action=ブラウザをリロードします（ターミナルで実行した場合はウィンドウを切り替えてからリロードします）;
+<!y:: reload()
 ; [KEYBIND] key=<!u; tags=window; action=under tmux を操作するためのプレフィックスを入力します;
 <!u:: bash_tmux_operate_under_window()
 ; [KEYBIND] key=<!i; tags=window; action=internal vim のウィンドウを操作するためのプレフィックスを入力します;
