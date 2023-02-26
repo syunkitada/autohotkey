@@ -3,13 +3,13 @@
 ;; ------------------------------
 ;XButton1::backward_history()
 
-RButton::RButton
-
-RButton & LButton::backward_history()
-
-RButton & WheelDown::next_tab()
-
-RButton & WheelUp::previous_tab()
+;RButton::RButton
+;
+;RButton & LButton::backward_history()
+;
+;RButton & WheelDown::next_tab()
+;
+;RButton & WheelUp::previous_tab()
 
 ;
 ;XButton1 & LButton::copy()
