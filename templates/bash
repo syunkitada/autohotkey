@@ -1,0 +1,137 @@
+rm -f ~/.bash_profile && \
+echo '
+# -------------------------------------------------------------
+# environment
+
+# basic
+export TZ=Asia/Tokyo
+export LANG=C.UTF-8
+
+# history
+export HISTCONTROL="ignoreboth"
+export HISTFILESIZE="4096"
+export HISTSIZE="4096"
+
+# -------------------------------------------------------------
+# terminal
+
+# prompt
+PS1="
+\[\e[0;37m\]\t [\$?,\\j] \u@\e[1;31m\]\[\H\[\e[00m\]:\w
+$ "
+export PS1=$PS1
+
+# -------------------------------------------------------------
+# alias
+
+# for interactive operation
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+# alias for misc
+alias grep="grep --color"
+
+# alias for some shortcuts for different directory listings
+alias ls="ls -hF --color=always --show-control-chars"
+
+# arias for screen and tmux
+alias t="tmux"
+alias ta="tmux a"
+alias tl="tmux ls"
+
+command -v zsh && exec zsh || echo "zsh is not installed"
+' > ~/.bash_profile \
+&& \
+rm -f ~/.zshrc && \
+echo '
+bindkey -e # Set keybind to emacs
+
+# Set Color
+autoload -U colors; colors
+
+### Ls Color ###
+export LSCOLORS=ExFxCxdxBxegedabagacad
+export CLICOLOR=true
+
+tmp_prompt="
+%D{%H:%M:%S} [%?,%j] %n@%{${fg[red]}%}%M%{${reset_color}%}:%~
+\$ "
+tmp_prompt2="%{${fg[cyan]}%}%_> %{${reset_color}%}"
+tmp_sprompt="%{${fg[yellow]}%}%r is correct? [Yes, No, Abort, Edit]:%{${reset_color}%}"
+
+PROMPT=$tmp_prompt
+PROMPT2=$tmp_prompt2
+SPROMPT=$tmp_sprompt
+
+function mssh() {
+    if [ $# != 1 ]; then
+        echo "Usage: mssh [file]"
+        return 1
+    fi
+    _mssh `cat $1`
+}
+
+function _mssh() {
+    tmux new-window "ssh $1"
+    shift
+    for host in "$@";
+    do
+        tmux split-window "ssh -A $host"
+        tmux select-layout even-horizontal > /dev/null
+    done
+    tmux set-window-option synchronize-panes on
+    tmux select-layout tiled
+}
+' > ~/.zshrc \
+&& \
+rm -f ~/.tmux.conf && \
+echo '
+# pane
+bind s split-window -v -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
+bind Space new-window -c "#{pane_current_path}"
+bind q kill-pane
+bind Q kill-window
+
+# resize pane
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# switch window
+bind p previous-window
+bind n next-window
+
+# switch pane
+bind h select-pane -L #left
+bind j select-pane -D #down
+bind k select-pane -U #up
+bind l select-pane -R #right
+
+bind e setw synchronize-panes on
+bind E setw synchronize-panes off
+
+# use vim key bind on copy mode
+set-window-option -g mode-keys vi
+
+set -g status-interval 10
+set-option -g history-limit 100000
+set -s escape-time 0
+
+set-option -ga terminal-overrides ",$TERM:Tc"
+
+# default statusbar colors
+set-option -g status-bg black
+set-option -g status-fg red
+
+# message text
+# set-option -g message-bg black #base02 # invalid option by tmux-3.0
+# set-option -g message-fg brightred #orange # invalid option by tmux-3.0
+
+# pane number display
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+' > ~/.tmux.conf && \
+source ~/.bash_profile

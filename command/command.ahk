@@ -108,6 +108,6 @@ hex_to_dec(hex) {
 }
 
 bash() {
-    paste("setup_bash.sh")
+    paste("bash")
     Return
 }
