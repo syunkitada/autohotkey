@@ -1,8 +1,10 @@
-#InstallKeybdHook
-#InstallMouseHook
-#UseHook
-#MaxHotkeysPerInterval 100
-FileEncoding UTF-8
+InstallKeybdHook
+InstallMouseHook
+
+
+; UseHook
+
+A_MaxHotkeysPerInterval := 100
 
 ;ここから下の#includeの基準パスを現在のディレクトリに変更
 #Include %A_ScriptDir%
@@ -19,11 +21,11 @@ FileEncoding UTF-8
 #Include functions\mouse.ahk
 #Include functions\run.ahk
 #Include functions\bash.ahk
-
+; 
 #Include command\command.ahk
-
+; 
 #Include operator\operator.ahk
-
+; 
 #Include keymap\single.ahk
 #Include keymap\lshift.ahk
 #Include keymap\rshift.ahk

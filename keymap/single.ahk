@@ -2,281 +2,335 @@
 ;; single key mapping
 ;; ------------------------------
 
-Enter::
+$Enter:: {
 	if !run_command()
-		Send {Enter}
+		Send "{Enter}"
 	Return
+}
 
-ESC::
+$ESC:: {
 	if !escape()
-		Send {Esc}
+		Send "{Esc}"
 	Return
+}
 
-Space::
+$Space:: {
 	if !operate("Space")
-		Send {Space}
+		Send "{Space}"
 	Return
+}
 
-Tab::
+$Tab:: {
 	if !operate("Tab")
-		Send {Tab}
+		Send "{Tab}"
 	Return
+}
 
-Shift::
+$Shift:: {
 	if !operate("Shift")
-		Send {Shift}
+		Send "{Shift}"
 	Return
+}
 
-Insert::
-	Return
+$Insert:: Return
 
-BS::
+$BS:: {
 	if !delete_left_char()
-		Send {BS}
+		Send "{BS}"
 	Return
+}
 
-Del::
+$Del:: {
 	if !delete_right_char()
-		Send {Del}
+		Send "{Del}"
 	Return
+}
 
-#::
+$#:: {
 	if !append_colon("#")
-		Send {#}
+		Send "{#}"
 	Return
+}
 
-,::
+$,:: {
 	if !append_colon(",")
-		Send `,
+		Send "`,"
 	Return
+}
 
-.::
+$.:: {
 	if !operate(".")
-		Send .
+		Send "."
 	Return
+}
 
-*::
+$*:: {
 	if !append_colon("*")
-		Send *
+		Send "*"
 	Return
+}
 
--::
+$-:: {
 	if !append_colon("-")
-		Send -
+		Send "-"
 	Return
+}
 
->::
+$>:: {
 	if !append_colon(">")
-		Send >
+		Send ">"
 	Return
+}
 
-<::
+$<:: {
 	if !append_colon("<")
-		Send <
+		Send "<"
 	Return
+}
 
-/::
+$/:: {
 	if !operate("/")
-		Send /
+		Send "/"
 	Return
+}
 
-sc028:: ; sc028=:
+$sc028:: {
 	if !operate(":")
-		Send :
+		Send ":"
 	Return
+}
 
-`;::
+$`;:: {
 	if !operate(";")
-		Send `;
+		Send "`;"
 	Return
+}
 
-$::
+$$:: {
 	if !operate("$")
-		Send $
+		Send "$"
 	Return
+}
 
-sc073:: ; sc073=\
+$sc073:: {
 	if !operate("\")
-		Send \
+		Send "\"
 	Return
+}
 
-0::
+$0:: {
 	if !operate("0")
-		Send 0
+		Send "0"
 	Return
+}
 
-1::
+$1:: {
 	if !operate("1")
-		Send 1
+		Send "1"
 	Return
+}
 
-2::
+$2:: {
 	if !operate("2")
-		Send 2
+		Send "2"
 	Return
+}
 
-3::
+$3:: {
 	if !operate("3")
-		Send 3
+		Send "3"
 	Return
+}
 
-4::
+$4:: {
 	if !operate("4")
-		Send 4
+		Send "4"
 	Return
+}
 
-5::
+$5:: {
 	if !operate("5")
-		Send 5
+		Send "5"
 	Return
+}
 
-6::
+$6:: {
 	if !operate("6")
-		Send 6
+		Send "6"
 	Return
+}
 
-7::
+$7:: {
 	if !operate("7")
-		Send 7
+		Send "7"
 	Return
+}
 
-8::
+$8:: {
 	if !operate("8")
-		Send 8
+		Send "8"
 	Return
+}
 
-9::
+$9:: {
 	if !operate("9")
-		Send 9
+		Send "9"
 	Return
+}
 
-a::
+$a:: {
 	if !operate("a")
-		Send a
+		Send "a"
 	Return
+}
 
-b::
+$b:: {
 	if !operate("b")
-		Send b
+		Send "b"
 	Return
+}
 
-c::
+$c:: {
 	if !operate("c")
-		Send c
+		Send "c"
 	Return
+}
 
-d::
+$d:: {
 	if !operate("d")
-		Send d
+		Send "d"
 	Return
+}
 
-e::
+$e:: {
 	if !operate("e")
-		Send e
+		Send "e"
 	Return
+}
 
-f::
+$f:: {
 	if !operate("f")
-		Send f
+		Send "f"
 	Return
+}
 
-g::
+$g:: {
 	if !operate("g")
-		Send g
+		Send "g"
 	Return
+}
 
-h::
+$h:: {
 	if !operate("h")
-		Send h
+		Send "h"
 	Return
+}
 
-i::
+$i:: {
 	if !operate("i")
-		Send i
+		Send "i"
 	Return
+}
 
-j::
+$j:: {
 	if !operate("j")
-		Send j
+		Send "j"
 	Return
+}
 
-k::
+$k:: {
 	if !operate("k")
-		Send k
+		Send "k"
 	Return
+}
 
-l::
+$l:: {
 	if !operate("l")
-		Send l
+		Send "l"
 	Return
+}
 
-m::
+$m:: {
 	if !operate("m")
-		Send m
+		Send "m"
 	Return
+}
 
-n::
+$n:: {
 	if !operate("n")
-		Send n
+		Send "n"
 	Return
+}
 
-o::
+$o:: {
 	if !operate("o")
-		Send o
+		Send "o"
 	Return
+}
 
-p::
+$p:: {
 	if !operate("p")
-		Send p
+		Send "p"
 	Return
+}
 
-q::
+$q:: {
 	if !operate("q")
-		Send q
+		Send "q"
 	Return
+}
 
-r::
+$r:: {
 	if !operate("r")
-		Send r
+		Send "r"
 	Return
+}
 
-s::
+$s:: {
 	if !operate("s")
-		Send s
+		Send "s"
 	Return
+}
 
-t::
+$t:: {
 	if !operate("t")
-		Send t
+		Send "t"
 	Return
+}
 
-u::
+$u:: {
 	if !operate("u")
-		Send u
+		Send "u"
 	Return
+}
 
-v::
+$v:: {
 	if !operate("v")
-		Send v
+		Send "v"
 	Return
+}
 
-w::
+$w:: {
 	if !operate("w")
-		Send w
+		Send "w"
 	Return
+}
 
-x::
+$x:: {
 	if !operate("x")
-		Send x
+		Send "x"
 	Return
+}
 
-y::
+$y:: {
 	if !operate("y")
-		Send y
+		Send "y"
 	Return
+}
 
-z::
+$z:: {
 	if !operate("z")
-		Send z
+		Send "z"
 	Return
+}
 

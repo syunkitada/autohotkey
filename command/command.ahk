@@ -4,21 +4,20 @@ run_command() {
     }
 
     global command
-    ClipSaved := ClipboardAll ;クリップボードの全内容を保存
-    StringSplit, c, command, ";"
+    cmds := StrSplit(command, ";")
 
-    if (c1 = "y")
-        copy(c2)
-    else if (c1 = "p")
-        paste(c2)
-    else if (c1 = "g")
-        search_google(c2)
-    else if (c1 = "eng")
-        search_eng(c2)
-    else if (c1 = "bash")
+    if (cmds[1] = "y")
+        copy(cmds[2])
+    else if (cmds[1] = "p")
+        paste(cmds[2])
+    else if (cmds[1] = "g")
+        search_google(cmds[2])
+    else if (cmds[1] = "eng")
+        search_eng(cmds[2])
+    else if (cmds[1] = "bash")
         bash()
-    else if (c1 = "ahk") {
-        ahk(c2)
+    else if (cmds[1] = "ahk") {
+        ahk(cmds[2])
     }
     reset_colon()
 
@@ -27,17 +26,17 @@ run_command() {
 
 search_google(word) {
     if (word = "") {
-        Run https://www.google.com/search?q=%clipboard%
+        Run "https://www.google.com/search?q=" . A_Clipboard
     } else {
-        Run https://www.google.com/search?q=%word%
+        Run "https://www.google.com/search?q=" . word
     }
 }
 
 search_eng(word) {
     if (word = "") {
-        Run http://ejje.weblio.jp/content/%clipboard%
+        Run "http://ejje.weblio.jp/content/" . A_Clipboard
     } else {
-        Run http://ejje.weblio.jp/content/%word%
+        Run "http://ejje.weblio.jp/content/" . word
     }
 }
 
@@ -56,55 +55,6 @@ ahk(command) {
         Edit
     }
     Return
-}
-
-color_inc(color, sign) {
-    i = 1
-    len =% StrLen(color)
-    Loop %len% {
-        StringMid, out, color, i, 1
-        dec =% hex_to_dec(out)
-        EnvAdd, dec, sign
-        hex =% dec_to_hex(dec)
-        result .= hex
-    }
-    Return result
-}
-
-dec_to_hex(dec) {
-    if (dec = "10")
-        hex = a
-    else if (dec = "11")
-        hex = b
-    else if (dec = "12")
-        hex = c
-    else if (dec = "13")
-        hex = d
-    else if (dec = "14")
-        hex = e
-    else if (dec = "15")
-        hex = f
-    else
-        hex = %dec%
-    Return hex
-}
-
-hex_to_dec(hex) {
-    if hex = a
-        dec = 10
-    else if hex = b
-        dec = 11
-    else if hex = c
-        dec = 12
-    else if hex = d
-        dec = 13
-    else if hex = e
-        dec = 14
-    else if hex = f
-        dec = 15
-    else
-        dec = %hex%
-    Return dec
 }
 
 bash() {

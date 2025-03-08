@@ -3,87 +3,78 @@
 ; サポートしない場合は、0を返す
 
 switch_taskbar_display() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	}
-	Send {LWin}
-	Send {Esc}
-	Send !{Enter}
+	Send "{LWin}"
+	Send "{Esc}"
+	Send "!{Enter}"
 	Sleep 400
-	Send u
-	Send {Enter}
+	Send "u"
+	Send "{Enter}"
 
 	Return 1
 }
 
 get_color_on_mouseposition() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	}
-	MouseGetPos, x, y
-	PixelGetColor, hexRGB, %x%, %y%, RGB	;hexRGB = 0xFFFFFF
-	StringTrimLeft, RGB, hexRGB, 2	;RGB = FFFFFF
-	StringLower, rgb, RGB	;rgb = ffffff
-	clipboard = %rgb%
+	; TODO FIXME
+	; MouseGetPos x, y
+	; PixelGetColor hexRGB, %x%, %y%, RGB	;hexRGB = 0xFFFFFF
+	; StringTrimLeft RGB, hexRGB, 2	;RGB = FFFFFF
+	; StringLower rgb, RGB	;rgb = ffffff
+	; clipboard := %rgb%
 	Return 1
 }
 
 change_name() {
-	if bypass() or is_terminal() {
+	if is_terminal() {
 		Return 0
-	} else if is_eclipse() {
-		Send !+r
 	} else {
-		Send {F2}
+		Send "{F2}"
 	}
 	Return 1
 }
 
 change_same_task() {
-	WinGetClass, className, A
-	WinActivateBottom, ahk_class %className%
+	; FIXME
+	; WinGetClass className, A
+	; WinActivateBottom ahk_class %className%
 }
 
-reload() {
-	if bypass() {
-		Return 0
-	} if is_terminal() {
-		Send !{Tab}
-		Sleep, 200
-		Send {F5}
+reload_web() {
+	if is_terminal() {
+		Send "!{Tab}"
+		Sleep 200
+		Send "{F5}"
 	} else {
-        Send {F5}
+        Send "{F5}"
 	}
 	Return 1
 }
 
 select_all() {
-	if bypass() {
-		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc}
-		Send +g
-		Send +v
-		Send gg
+	if is_terminal() or is_gvim() {
+		Send "{Esc}"
+		Send "+g"
+		Send "+v"
+		Send "gg"
 	} else {
-		Send ^a
+		Send "^a"
 	}
 	Return 1
 }
 
-content_assist(asc=1) {
-	if bypass() {
+content_assist(asc:=1) {
+	if is_bypass() {
 		Return 0
-	} else if is_eclipse() {
+	} else if is_terminal() or is_gvim() {
 		if asc
-			Send ^{Space}
+			Send "^n"
 		else
-			Send ^+{Space}
-	} else if is_terminal() or is_vim() {
-		if asc
-			Send ^n
-		else
-			Send ^p
+			Send "^p"
 	} else {
 		Return 0
 	}
@@ -91,158 +82,118 @@ content_assist(asc=1) {
 }
 
 search() {
-	if bypass() or is_terminal() {
+	if is_bypass() or is_terminal() {
 		Return 0
-	} else if is_vim() {
-		Send {Esc}/
+	} else if is_gvim() {
+		Send "{Esc}/"
 	} else {
-		send ^f
+		send "^f"
 	}
 	Return 1
 }
 
 backward_history() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	} if is_vscode() {
-		Send !{Left}
-	} else if is_terminal() or is_vim() {
-		Send ^t
+		Send "!{Left}"
+	} else if is_terminal() or is_gvim() {
+		Send "^t"
 	} else {
-		Send !{Left}
+		Send "!{Left}"
 	}
 	Return 1
 }
 
 forward_history() {
-	if bypass() {
-		Return 0
-	} if is_vscode() {
-		Send !{Right}
-	} else if is_terminal() or is_vim() {
-		Send g^]
+	if is_vscode() {
+		Send "!{Right}"
+	} else if is_terminal() or is_gvim() {
+		Send "g^]"
 	} else {
-		Send !{Right}
+		Send "!{Right}"
 	}
 	Return 1
 }
 
 next_tab() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc}:tabn{Enter}
+	} else if is_terminal() or is_gvim() {
+		Send "{Esc}:tabn{Enter}"
 	} else if is_vscode() {
-		Send ^{PgDn}
+		Send "^{PgDn}"
 	} else {
-		Send ^{Tab}
+		Send "^{Tab}"
 	}
 	Return 1
 }
 
 previous_tab() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_vim() {
-		Send {Esc}:tabp{Enter}
+	} else if is_gvim() {
+		Send "{Esc}:tabp{Enter}"
 	} else if is_terminal() {
-		Send {Esc}:tabp{Enter}
+		Send "{Esc}:tabp{Enter}"
 	} else if is_vscode() {
-		Send ^{PgUp}
+		Send "^{PgUp}"
 	} else {
-		Send ^+{Tab}
+		Send "^+{Tab}"
 	}
 	Return 1
 }
 
 new_tab() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_vim() {
-		Send {Esc}
-		Send :tabe{Enter}
-	} else if is_teraterm() {
-		Send !n
-	} else if is_mintty() {
-		Send !{F2}
+	} else if is_gvim() {
+		Send "{Esc}"
+		Send ":tabe{Enter}"
 	} else {
-		Send ^t
+		Send "^t"
 	}
 	Return 1
 }
 
 close_tab() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_vim() or is_terminal() {
-		Send {Esc}:tabc{Enter}:tabp{Enter}
+	} else if is_gvim() or is_terminal() {
+		Send "{Esc}:tabc{Enter}:tabp{Enter}"
 	} else {
-		Send ^w
+		Send "^w"
 	}
 	Return 1
 }
 
 close_window() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	} else {
-		Send !{F4}
+		Send "!{F4}"
 	}
 	Return 1
 }
 
 focus_addressbar()  {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	} else if is_browser() {
-		Send !d
-	} else if is_explorer() {
-		Send !d
+		Send "!d"
 	} else {
 		Run "https://www.google.co.jp/"
-		Send !d
+		Send "!d"
 		IME_SET(0)
 	}
 	Return 1
 }
 
-comment_out() {
-	if is_eclipse() or is_terminal() or is_vim() {
-		Send ^/
-		Return 1
-	}
-	Return 0
-}
-
-emmet() {
-	if is_eclipse() {
-		Send !+e
-		Return 1
-	} else if is_terminal() or is_vim() {
-		Send ^y,
-		Return 1
-	}
-	Return 0
-}
-
-emmet_wrap() {
-	if is_eclipse() {
-		Send !+a
-		Return 1
-	} else if is_terminal() or is_vim() {
-		Send ^y,
-		Return 1
-	}
-	Return 0
-}
-
 run_program() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc},r
-	} else if is_eclipse() {
-		Send ^s^{F11}
+	} else if is_terminal() or is_gvim() {
+		Send "{Esc},r"
 	} else {
 		Return 0
 	}
@@ -250,12 +201,10 @@ run_program() {
 }
 
 undo() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc}u
-	} else if is_eclipse() {
-		Send ^z
+	} else if is_terminal() or is_gvim() {
+		Send "{Esc}u"
 	} else {
 		Return 0
 	}
@@ -263,58 +212,57 @@ undo() {
 }
 
 resume() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
-	} else if is_terminal() or is_vim() {
-		Send {Esc}^r
-	} else if is_eclipse() {
-		Send ^y
+	} else if is_terminal() or is_gvim() {
+		Send "{Esc}^r"
 	} else {
 		Return 0
 	}
 	Return 1
 }
 
-switch_transparent(alpha=200) {
-	WinGet, tp, Transparent, A
-	if tp =
-		Winset, Transparent, %alpha%, A
-	else
-		Winset, Transparent, OFF, A
-	return
+switch_transparent(alpha:=200) {
+	; FIXME TODO
+	; WinGet tp, Transparent, A
+	; if tp =
+	; 	Winset Transparent, %alpha%, A
+	; else
+	; 	Winset Transparent, OFF, A
+	; return
 }
 
 focus_terminal() {
 	if is_vscode() {
-		Send ^@
+		Send "^@"
 	}
 	Return
 }
 
 focus_outline() {
 	if is_vscode() {
-		Send ^+{f8}
+		Send "^+{f8}"
 	}
 	Return
 }
 
 focus_panel_and_maximize_panel() {
 	if is_vscode() {
-		Send ^+{f10}
+		Send "^+{f10}"
 	}
 	Return
 }
 
 focus_editor1() {
 	if is_vscode() {
-		Send ^1
+		Send "^1"
 	}
 	Return
 }
 
 focus_editor2() {
 	if is_vscode() {
-		Send ^2
+		Send "^2"
 	}
 	Return
 }
@@ -322,7 +270,7 @@ focus_editor2() {
 ; FIXME
 jump_to_definition() {
 	if is_vscode() {
-		Send {f12}
+		Send "{f12}"
 	}
 	Return
 }

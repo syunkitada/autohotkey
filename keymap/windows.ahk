@@ -2,26 +2,26 @@
 ;;  windows key
 ;; ------------------------------
 
-#a::run_eclipse_android()
+; #a::run_eclipse_android()
 
-#b::run_mintty()
+; #b::run_mintty()
 
-#c::run_crome()
+; #c::run_crome()
 
-#f::run_firefox()
+; #f::run_firefox()
 
-#h::switch_taskbar_display()
+; #h::switch_taskbar_display()
 
-#i::run_iexplore()
+; #i::run_iexplore()
 
-#p::run_paint()
+; #p::run_paint()
 
-#s::get_color_on_mouseposition()
+; #s::get_color_on_mouseposition()
 
-#t::run_teraterm()
+; #t::run_teraterm()
 
-#w::run_eclipse_web()
+; #w::run_eclipse_web()
 
-#z::Reload
+; #z::Reload
 
 

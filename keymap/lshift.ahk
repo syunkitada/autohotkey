@@ -1,135 +1,160 @@
 ; row 1
-<+q::
+<+q:: {
 	if !operate("+q")
-		Send +q
+		Send "+q"
 	Return
+}
 
-<+w::
+<+w:: {
 	if !operate("+w")
-		Send +w
+		Send "+w"
 	Return
+}
 
-<+e::
+<+e:: {
 	if !operate("+e")
-		Send +e
+		Send "+e"
 	Return
+}
 
-<+r::
+<+r:: {
 	if !operate("+r")
-		Send +r
+		Send "+r"
 	Return
+}
 
-<+t::
+<+t:: {
 	if !operate("+t")
-		Send +t
+		Send "+t"
 	Return
+}
 
-<+y::
+<+y:: {
 	if !operate("+y")
-		Send +y
+		Send "+y"
 	Return
+}
 
-<+u::
+<+u:: {
 	if !operate("+u")
-		Send +u
+		Send "+u"
 	Return
+}
 
-
-<+i::
+<+i:: {
 	if !operate("+i")
-		Send +i
+		Send "+i"
 	Return
+}
 
-<+o::
+<+o:: {
 	if !operate("+o")
-		Send +o
+		Send "+o"
 	Return
+}
 
-<+p::
+<+p:: {
 	if !operate("+p")
-		Send +p
+		Send "+p"
 	Return
+}
 
 
 ; row 2
-<+a::
+<+a:: {
 	if !operate("+a")
-		Send +a
+		Send "+a"
 	Return
+}
 
-<+s::
+<+s:: {
 	if !operate("+s")
-		Send +s
+		Send "+s"
 	Return
+}
 
-<+d::
+<+d:: {
 	if !operate("+d")
-		Send +d
+		Send "+d"
 	Return
+}
 
-<+f::
+<+f:: {
 	if !operate("+f")
-		Send +f
+		Send "+f"
 	Return
+}
 
-<+g::
+<+g:: {
 	if !operate("+g")
-		Send +g
+		Send "+g"
 	Return
+}	
 
-<+h::
+<+h:: {
 	if !operate("+h")
-		Send +h
+		Send "+h"
 	Return
+}
 
-<+j::
+<+j:: {
 	if !operate("+j")
-		Send +j
+		Send "+j"
 	Return
+}
 
-<+k::
+<+k:: {
 	if !operate("+k")
-		Send +k
+		Send "+k"
 	Return
+}
 
-<+l::
+<+l:: {
 	if !operate("+l")
-		Send +l
+		Send "+l"
 	Return
+}
 
 
 ; row 3
-<+z::
+<+z:: {
 	if !operate("+z")
-		Send +z
+		Send "+z"
 	Return
+}
 
-<+x::
+<+x:: {
 	if !operate("+x")
-		Send +x
+		Send "+x"
 	Return
+}
 
-<+c::
+<+c:: {
 	if !operate("+c")
-		Send +c
+		Send "+c"
 	Return
+}
 
-<+v::
+<+v:: {
 	if !operate("+v")
-		Send +v
+		Send "+v"
 	Return
+}
 
-<+b::
+<+b:: {
 	if !operate("+b")
-		Send +b
+		Send "+b"
 	Return
+}
 
-<+n::
+<+n:: {
 	if !operate("+n")
-		Send +n
+		Send "+n"
 	Return
+}
 
-<+m::
+<+m:: {
 	if !operate("+m")
-		Send +m
+		Send "+m"
 	Return
+}

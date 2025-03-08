@@ -42,9 +42,11 @@ LAlt:: Return
 ; [KEYBIND] key=<!f; tags=window; action=カレントウィンドウをサブモニタの右に寄せます;
 <!f:: window_move(-1, "right")
 ; [KEYBIND] key=<!g; tags=search; action=コピーして、グーグルで検索します;
-<!g::
+<!g:: {
     copy()
-    search_google("")
+    ; TODO FIXME
+    ; search_google("")
+}
 ; [KEYBIND] key=<!h; tags=window; action=前のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!h:: previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
@@ -54,7 +56,7 @@ LAlt:: Return
 ; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!l:: next_tab()
 ; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
-<!;:: Send #{Tab}
+<!;:: Send "#{Tab}"
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
 <!sc028:: set_colon() ; sc028 = :
 <!@:: Return

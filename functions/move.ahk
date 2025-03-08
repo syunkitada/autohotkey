@@ -1,58 +1,46 @@
 ; 移動関連の関数群です。
 ; 関数名はすべてmove_で始まります。
 
-move_left(count=1) {
+move_left(count:=1) {
     if bypass() {
         Return 0
     }
 
-    Loop, %count% {
-        Send {Left}
+    Loop count {
+        Send "{Left}"
     }
     Return 1
 }
 
-move_right(count=1) {
+move_right(count:=1) {
     if bypass() {
         Return 0
     }
 
-    Loop, %count% {
-        Send {Right}
+    Loop count {
+        Send "{Right}"
     }
     Return 1
 }
 
-move_up(count=1) {
+move_up(count:=1) {
     if bypass() {
         Return 0
     }
 
-    Loop, %count% {
-        if is_sendinput() {
-            SendInput {Up}
-        } else if is_sendplay() {
-            SendPlay {Up}
-        } else {
-            Send {Up}
-        }
+    Loop count {
+        Send "{Up}"
     }
     Return 1
 }
 
-move_down(count=1) {
+move_down(count:=1) {
     if bypass() {
         Return 0
     }
 
-    Loop, %count% {
-        if is_sendinput() {
-            SendInput {Down}
-        } else if is_sendplay {
-            SendPlay {Down}
-        } else {
-            Send {Down}
-        }
+    Loop count {
+        Send "{Down}"
     }
     Return 1
 }
@@ -61,9 +49,9 @@ move_home() {
     if bypass() {
         Return 0
     } else if is_terminal() {
-        Send ^a
+        Send "^a"
     } else {
-        Send {Home}
+        Send "{Home}"
     }
     Return 1
 }
@@ -72,9 +60,9 @@ move_end() {
     if bypass() {
         Return 0
     } else if is_terminal() {
-        Send ^e
+        Send "^e"
     } else {
-        Send {End}
+        Send "{End}"
     }
     Return 1
 }
@@ -82,8 +70,8 @@ move_end() {
 move_half_pageup() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() or is_terminal() or is_vscode() {
-        Send ^u
+    } else if is_gvim() or is_terminal() or is_vscode() {
+        Send "^u"
     } else {
         move_pageup()
     }
@@ -93,10 +81,10 @@ move_half_pageup() {
 move_pageup() {
     if bypass() {
         Return 0
-    } else if is_vim() or is_terminal() or is_vscode() {
-        Send ^b
+    } else if is_gvim() or is_terminal() or is_vscode() {
+        Send "^b"
     } else {
-        Send {PgUp}
+        Send "{PgUp}"
     }
     Return 1
 }
@@ -104,10 +92,10 @@ move_pageup() {
 move_pagedown() {
     if bypass() {
         Return 0
-    } else if is_vim() or is_terminal() or is_vscode() {
-        Send ^f
+    } else if is_gvim() or is_terminal() or is_vscode() {
+        Send "^f"
     } else {
-        Send {PgDn}
+        Send "{PgDn}"
     }
     Return 1
 }
@@ -115,8 +103,8 @@ move_pagedown() {
 move_half_pagedown() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() or is_terminal() or is_vscode() {
-        Send ^d
+    } else if is_gvim() or is_terminal() or is_vscode() {
+        Send "^d"
     } else {
         move_pagedown()
     }
@@ -126,10 +114,10 @@ move_half_pagedown() {
 move_top() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() {
-        Send {Esc}gg
+    } else if is_gvim() {
+        Send "{Esc}gg"
     } else {
-        Send {Home}
+        Send "{Home}"
     }
     Return 1
 }
@@ -137,10 +125,10 @@ move_top() {
 move_bottom() {
     if bypass() {
         Return 0
-    } else if is_eclipse() or is_vim() {
-        Send {Esc}+g
+    } else if is_gvim() {
+        Send "{Esc}+g"
     } else {
-        Send {End}
+        Send "{End}"
     }
     Return 1
 }
@@ -148,14 +136,14 @@ move_bottom() {
 move_backward_word() {
     if bypass() {
         Return 0
-    } else if is_vim() {
+    } else if is_gvim() {
         escape()
-            Send bi
+            Send "bi"
     } else if is_terminal() {
-        Send {Esc}
-        Send b
+        Send "{Esc}"
+        Send "b"
     } else {
-        Send ^{Left}
+        Send "^{Left}"
     }
     Return 1
 }
@@ -163,32 +151,32 @@ move_backward_word() {
 move_forward_word() {
     if bypass() {
         Return 0
-    } else if is_vim() {
+    } else if is_gvim() {
         escape()
-            Send lwi
+        Send "lwi"
     } else if is_terminal() {
-        Send {Esc}
-        Send f
+        Send "{Esc}"
+        Send "f"
     } else {
-        Send ^{Right}
+        Send "^{Right}"
     }
     Return 1
 }
 
-move_newline(num=1) {
+move_newline(num:=1) {
     if bypass() {
         Return 0
-    } else if is_terminal() or is_vim() {
+    } else if is_terminal() or is_gvim() {
         if (num = "1") {
-            Send {Esc}o
+            Send "{Esc}o"
         } else {
-            Send {Esc}+o
+            Send "{Esc}+o"
         }
     } else {
         if (num = "1") {
-            Send {End}{Enter}
+            Send "{End}{Enter}"
         } else {
-            Send {Home}{Enter}{Up}
+            Send "{Home}{Enter}{Up}"
         }
         reset_all()
     }

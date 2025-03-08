@@ -27,13 +27,13 @@
 ;XButton2 & RButton::cut()
  
 
-#WinActivateForce
-~WheelDown::
-   MouseGetPos,,,win ; Get the window below the mouse
-   WinActivate, ahk_id %win%
-return
-
-~WheelUp::
-   MouseGetPos,,,win ; Get the window below the mouse
-   WinActivate, ahk_id %win%
-return
+; #WinActivateForce
+; ~WheelDown::
+;    MouseGetPos,,,win ; Get the window below the mouse
+;    WinActivate, ahk_id %win%
+; return
+; 
+; ~WheelUp::
+;    MouseGetPos,,,win ; Get the window below the mouse
+;    WinActivate, ahk_id %win%
+; return
