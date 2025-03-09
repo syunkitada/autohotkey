@@ -1,111 +1,105 @@
 /*
 ウィンドウ制御系の関数群です。
 関数名はすべてwindow_で始まります。
-
-TODO アクティブウィンドウの細かい移動など
-WinMoveStep(-1,0)
-WinMoveStep(1,0)
-WinMoveStep(0,-1)
-WinMoveStep(0,1)
-
-TODO WinMoveで移動すると描画がズレたりするので、なんとかしたい
-
-#{Home} アクティブウィンドウ以外最小化
 */
 
-window_move(num, direction) {
-	if bypass()
+window_move(monitor_num, direction) {
+	if is_bypass()
 		Return 0
 
-	num := __get_target_monitor(num)
-	; TODO FIXME
-	; SysGet Monitor, MonitorWorkArea, %num%
+	monitor_num := __get_target_monitor(monitor_num)
+	MonitorGetWorkArea(monitor_num, &work_area_left, &work_area_top, &work_area_right, &work_area_bottom)
 
-	; y := MonitorTop
-	; height := Abs(MonitorTop - MonitorBottom)
-	; width := Abs(MonitorLeft - MonitorRight) / 2
-	; if (direction == "left") {
-	; 	x := MonitorLeft
-	; } else if (direction == "right") {
-	; 	x := MonitorRight - width
-	; }
+	; For DEBUG
+    ; MonitorGet(monitor_num, &left, &top, &right, &bottom)
+	; MsgBox
+	; (
+	;     "Name:`t" MonitorGetName(monitor_num) "
+	;     Left:`t" left " (" work_area_left " work)
+	;     Top:`t" top " (" work_area_top " work)
+	;     Right:`t" right " (" work_area_right " work)
+	;     Bottom:`t" bottom " (" work_area_bottom " work)"
+	; )
 
-	; WinMove A,, x, y, width, height
+	y := work_area_top
+	height := Abs(work_area_top - work_area_bottom)
+	width := Abs(work_area_left - work_area_right) / 2
+	x := work_area_left
+	if (direction == "right") {
+		x := work_area_right - width
+	}
+	WinMove x, y, width, height, "A"
 
 	Return 1
 }
 
 window_move_center() {
-	if bypass()
+	if is_bypass()
 		Return 0
 
-	WinGetPos ,,Width,Height,A
 	width := A_ScreenWidth - 200
 	height := A_ScreenHeight - 200
 	x := (A_ScreenWidth - width)//2
 	y := (A_ScreenHeight - height)//2
 	;MsgBox, %x%:%y%:%width%:%height%
 
-	WinMove A,, x, y, width, height
+	WinMove x, y, width, height, "A"
 
 	Return 1
 }
 
-window_maximize(num) {
-	if bypass()
+window_maximize(monitor_num) {
+	if is_bypass()
 		Return 0
 
-	num := __get_target_monitor(num)
-	; TODO FIXME
-	; SysGet Monitor, MonitorWorkArea, %num%
+	monitor_num := __get_target_monitor(monitor_num)
+	MonitorGetWorkArea(monitor_num, &work_area_left, &work_area_top, &work_area_right, &work_area_bottom)
 
-	; y := MonitorTop
-	; height := Abs(MonitorTop - MonitorBottom)
-	; width := Abs(MonitorLeft - MonitorRight)
-	; x := MonitorLeft
+	y := work_area_top
+	height := Abs(work_area_top - work_area_bottom)
+	width := Abs(work_area_left - work_area_right)
+	x := work_area_left
 
-	; WinMove A,, x, y, width, height
+	WinMove x, y, width, height, "A"
+
 	Return 1
 }
 
-window_minimize() {
-	if bypass()
-		Return 0
-	WinMinimize A
-	Return 1
+window_minimize_all() {
+	Send "#d"
 }
 
-window_restore() {
-	if bypass()
-		Return 0
-	WinRestore A
-	Return 1
+window_minimize_expect_active_window() {
+	Send "#{Home}"
 }
+
 
 /*
-引数のnumからターゲットとするモニタ番号を割り出して返します。
+引数のmonitor_numからターゲットとするモニタ番号を割り出して返します。
 
-numが、
-	正数 : numをそのまま返す
-	0    : 主モニタの番号を返す
-	負数 : 主モニタの番号を飛ばしたモニタ番号をnumの絶対値で返す
+monitor_numが、
+	正数 : モニタ番号が存在すればそのまま返し、無ければ主モニタの番号を返します
+	0    : 主モニタの番号を返します
+	負数 : 主モニタの番号を飛ばしたサブモニタの番号を返し、飛ばした番号のモニターが無ければ主モニターの番号を返します
 */
-__get_target_monitor(num:=0) {
-	; TODO FIXME
-	; if (num <= 0) {
-	; 	SysGet MonitorPrimary, MonitorPrimary
-	; 	if (num == 0) {
-	; 		num := MonitorPrimary
-	; 	} else {
-	; 		SysGet MonitorCount, MonitorCount
-	; 		num := Abs(num)
+__get_target_monitor(monitor_num:=0) {
+	monitor_primary := MonitorGetPrimary()
+	if (monitor_num == 0) {
+		return monitor_primary
+	}
 
-	; 		if (num == MonitorPrimary) {
-	; 			num := num + 1
-	; 		} else if (num > MonitorCount) {
-	; 			num := MonitorPrimary
-	; 		}
-	; 	}
-	; }
-	return num
+	monitor_count := MonitorGetCount()
+	if (monitor_num < 0) {
+		monitor_num := Abs(monitor_num)
+
+		if (monitor_num = monitor_primary) {
+			monitor_num := monitor_num + 1
+		}
+	}
+
+	if (monitor_num > monitor_count) {
+		return monitor_primary
+	}
+
+	return monitor_num
 }

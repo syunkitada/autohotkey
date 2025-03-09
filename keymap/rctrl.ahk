@@ -1,25 +1,6 @@
 ;; ------------------------------
 ;; rctrl keys
 ;; ------------------------------
-; [KEYBIND] key=<RCtrl>; tags=keybind; action=<ESC>キーを送信します;
-RCtrl:: reset_all() escape()
-
-; +,* -> ',"
-; shift+, shift* -> +, *
-; [KEYBIND] key=!\;; tags=keybind; action=<'>キーを送信します;
-+;:: Send "'"
-; [KEYBIND] key=!:; tags=keybind; action=<">キーを送信します;
-+sc028:: Send "`""
-; [KEYBIND] key=>^!\;; tags=keybind; action=<+>キーを送信します;
->^+;:: Send "+`;"
-; [KEYBIND] key=>^!:; tags=keybind; action=<*>キーを送信します;
->^+sc028:: Send "*"
-
-; [KEYBIND] key=>^<Space>; tags=keybind; action=<Enter>キーを送信します;
->^Space:: Send "{Enter}"
-
-; [KEYBIND] key=>^<Tab>; tags=programming; action=TODO 補完モードに移行します;
->^Tab:: content_assist()
 
 ; ----------------------------------------------------------------------------------------------------
 ; row 1 left

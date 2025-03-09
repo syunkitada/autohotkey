@@ -2,7 +2,7 @@
 ; 関数名はすべてmove_で始まります。
 
 move_left(count:=1) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 
@@ -13,7 +13,7 @@ move_left(count:=1) {
 }
 
 move_right(count:=1) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 
@@ -24,7 +24,7 @@ move_right(count:=1) {
 }
 
 move_up(count:=1) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 
@@ -35,7 +35,7 @@ move_up(count:=1) {
 }
 
 move_down(count:=1) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 
@@ -46,7 +46,7 @@ move_down(count:=1) {
 }
 
 move_home() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_terminal() {
         Send "^a"
@@ -57,7 +57,7 @@ move_home() {
 }
 
 move_end() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_terminal() {
         Send "^e"
@@ -68,7 +68,7 @@ move_end() {
 }
 
 move_half_pageup() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() or is_terminal() or is_vscode() {
         Send "^u"
@@ -79,7 +79,7 @@ move_half_pageup() {
 }
 
 move_pageup() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() or is_terminal() or is_vscode() {
         Send "^b"
@@ -90,7 +90,7 @@ move_pageup() {
 }
 
 move_pagedown() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() or is_terminal() or is_vscode() {
         Send "^f"
@@ -101,7 +101,7 @@ move_pagedown() {
 }
 
 move_half_pagedown() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() or is_terminal() or is_vscode() {
         Send "^d"
@@ -112,7 +112,7 @@ move_half_pagedown() {
 }
 
 move_top() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() {
         Send "{Esc}gg"
@@ -123,7 +123,7 @@ move_top() {
 }
 
 move_bottom() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() {
         Send "{Esc}+g"
@@ -134,7 +134,7 @@ move_bottom() {
 }
 
 move_backward_word() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() {
         escape()
@@ -149,7 +149,7 @@ move_backward_word() {
 }
 
 move_forward_word() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() {
         escape()
@@ -164,7 +164,7 @@ move_forward_word() {
 }
 
 move_newline(num:=1) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_terminal() or is_gvim() {
         if (num = "1") {
@@ -181,4 +181,40 @@ move_newline(num:=1) {
         reset_all()
     }
     Return 1
+}
+
+
+find_text() {
+    if is_vscode() {
+        Send "^F"
+    } else {
+        Send "^f"
+    }
+}
+
+find_file() {
+    if is_browser() {
+        Send "!d"
+    } else if is_vscode() {
+        Send "^E"
+        Send "^p"
+    }
+}
+
+find_tab() {
+    if is_browser() {
+        Send "^A"
+    }
+}
+
+find_cache() {
+    if is_browser() {
+        Send "^h"
+    }
+}
+
+find_bookmark() {
+    if is_browser() {
+        Send "^O"
+    }
 }

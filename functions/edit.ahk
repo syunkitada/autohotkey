@@ -2,7 +2,7 @@
 ; 削除関連の関数群は、delete_で始まります。
 
 delete_right_char(count:=1) {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	}
     if is_colon() {
@@ -23,7 +23,7 @@ delete_right_char(count:=1) {
 }
 
 delete_left_char(count:=1) {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	}
     if is_colon() {
@@ -44,7 +44,7 @@ delete_left_char(count:=1) {
 }
 
 delete_backward_word() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	} else if is_gvim() {
 		Send "{Esc}dbcl"
@@ -58,7 +58,7 @@ delete_backward_word() {
 }
 
 delete_forward_word() {
-	if bypass() {
+	if is_bypass() {
 		Return 0
 	} else if is_gvim() {
 		Send "{Esc}"

@@ -1,24 +1,67 @@
-# autohotkey
+# autohotkey v2
 
-autohotkey スクリプトです。
+[autohotkey v2](https://www.autohotkey.com/docs/v2/index.htm) のスクリプトです。
 
 main.ahk が本体です。
 
-以下のようなショートカット作成して、スタートアップに登録しとく。（パスは適宜変更）
+以下のようなショートカットを作成して、スタートアップに登録しておくと便利です。（パスは適宜変更）
 
-    	"C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk
+	"C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk
 
-## 推奨キーバインド
+## キーバインドの考え方
 
-以下のキーバインドを想定に作成しています。  
-「change key」などで設定する。
+キーバインドを4つのレイヤーに分けて考えます。
 
-    	Spaceの左1: RCtrl
-    	Spaceの左2: LAlt
-    	Spaceの右1: LShift
-    	Spaceの右2: RShift
-    	CapsLock  : Tab
-    	Enterの上左2: [
-    	Enterの上左1: ]
-    	Enterの下左1: Enter
-    	Enterの下(Shif): @
+- アプリケーション層
+	- 我々が直接触れるアプリケーションのこと
+	- 例: Webブラウザ、VSCode, RLogin, VIM, TMUX, ZSHなど
+- プレゼンテーション層
+	- キー入力にフックして動作を書き換える層
+	- autohotkeyによって制御します
+- データリンク層
+	- キーボードの配列をレジスタレベルで書き換える層
+	- change keyによって制御します
+- 物理層
+	- キーボードそのもののこと
+
+### 物理層
+
+物理層は、JIS配列の標準的なキーボードを利用しています。
+
+キーボード配列は、代表的なものとしてJIS、USの二種類があります。
+
+JIS、USのどちらがよいかですが、キーの豊富さからJIS配列を選択しています。
+
+また、これらの配列を拡張した、自作キーボードなどもありますが、物理への依存は極力無くしたいのでそれは採用しません。
+
+
+### データリンク層
+
+「change key」を利用して以下のように配列を書き換えます。
+
+	Spaceの左1: RCtrl
+	Spaceの左2: LAlt
+	Spaceの右1: LShift
+	Spaceの右2: RShift
+	CapsLock  : Tab
+	Enterの上左2: [
+	Enterの上左1: ]
+	Enterの下左1: Enter
+	Enterの下(Shif): @
+
+### プレゼンテーション層
+
+「autohotkey」を利用して、キー入力にフックして動作を書き換えます。
+
+方針として、アプリケーション層でのキーバインドの書き換えが不要なようになるべくautohotkey側でキーバインドの実装をしています。
+
+また、autohokeyは、アクティブウインドウ（アプリケーション）が何かを判別できるため、アプリケーションごとのキーバインドの挙動の差異を無くすような実装ができます。
+
+
+### アプリケーション層
+
+我々が直接触れるアプリケーションのことです。
+
+この層では極力キーバインドの設定はせず、デフォルト設定をそのまま利用します。
+
+本稿では、扱いません。

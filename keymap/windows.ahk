@@ -2,26 +2,54 @@
 ;;  windows key
 ;; ------------------------------
 
-; #a::run_eclipse_android()
+; [KEYBIND] key=#Tab; tags=window; action=タスクビューを表示します;
 
-; #b::run_mintty()
+; row 1 left
+; #q:: 
+; #w::
+; #e::
+; #r::
+; #t::
 
-; #c::run_crome()
-
-; #f::run_firefox()
-
-; #h::switch_taskbar_display()
-
-; #i::run_iexplore()
-
-; #p::run_paint()
-
-; #s::get_color_on_mouseposition()
-
-; #t::run_teraterm()
-
-; #w::run_eclipse_web()
-
-; #z::Reload
+; row 1 right
+; [KEYBIND] key=#y; tags=window; action=カレントウィンドウをメインモニタの左に寄せます;
+#y:: window_move(0, "left")
+; [KEYBIND] key=#u; tags=window; action=カレントウィンドウをメインモニタの右に寄せます;
+#u:: window_move(0, "right")
+; [KEYBIND] key=#i; tags=window; action=カレントウィンドウをサブモニタの左に寄せます;
+#i:: window_move(-1, "left")
+; [KEYBIND] key=#o; tags=window; action=カレントウィンドウをサブモニタの右に寄せます;
+#o:: window_move(-1, "right")
+; #p::
 
 
+; row 2 left
+; #a::
+; #s::
+; [KEYBIND] key=#d; tags=window; action=すべてのウィンドウを最小化します;
+#d:: window_minimize_all()
+; [KEYBIND] key=#f; tags=window; action=アクティブなウィンドウ以外を最小化します;
+#f:: window_minimize_expect_active_window()
+; #g::
+
+; row 2 right
+#h:: window_move_center()
+; [KEYBIND] key=<!w; tags=window; action=カレントウインドウをメインモニタで最大化する;
+#j:: window_maximize(0)
+; [KEYBIND] key=<!e; tags=window; action=カレントウインドウをサブモニタで最大化する;
+#k:: window_maximize(-1)
+; [KEYBIND] key=#l; tags=monitor; action=画面をロックします;
+; #l:: Default Action
+
+; row 3 left
+; #z::
+; #x::
+; [KEYBIND] key=#c; tags=clipboard; action=画面の一部をスクリーンショットしてコピーします;
+#c:: Send "#S"
+; [KEYBIND] key=#v; tags=clipboard; action=クリップボードの履歴を開いてペーストをします;
+; #v:: Default Action
+; #b::
+
+; row 3 right
+; #n::
+; #m::

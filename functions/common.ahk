@@ -2,6 +2,12 @@
 ; 検索、履歴、タブ、フォーカスなど
 ; サポートしない場合は、0を返す
 
+escape() {
+    IME_SET(0)
+    Send "{Esc}"
+    Return 1
+}
+
 switch_taskbar_display() {
 	if is_bypass() {
 		Return 0
@@ -13,19 +19,6 @@ switch_taskbar_display() {
 	Send "u"
 	Send "{Enter}"
 
-	Return 1
-}
-
-get_color_on_mouseposition() {
-	if is_bypass() {
-		Return 0
-	}
-	; TODO FIXME
-	; MouseGetPos x, y
-	; PixelGetColor hexRGB, %x%, %y%, RGB	;hexRGB = 0xFFFFFF
-	; StringTrimLeft RGB, hexRGB, 2	;RGB = FFFFFF
-	; StringLower rgb, RGB	;rgb = ffffff
-	; clipboard := %rgb%
 	Return 1
 }
 
@@ -223,13 +216,13 @@ resume() {
 }
 
 switch_transparent(alpha:=200) {
-	; FIXME TODO
-	; WinGet tp, Transparent, A
-	; if tp =
-	; 	Winset Transparent, %alpha%, A
-	; else
-	; 	Winset Transparent, OFF, A
-	; return
+	tp := WinGetTransparent("A")
+
+	if tp
+		WinSetTransparent "Off", "A"
+	else
+		WinSetTransparent alpha, "A"
+	return
 }
 
 focus_terminal() {

@@ -333,4 +333,3 @@ $z:: {
 		Send "z"
 	Return
 }
-

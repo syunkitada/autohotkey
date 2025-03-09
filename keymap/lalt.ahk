@@ -7,19 +7,17 @@ LAlt:: Return
 <!Space:: Return
 <!Tab:: Return
 
-; row 1
+; row 1 left
+<!q:: Return
+<!w:: Return
+<!e:: Return
 ; [KEYBIND] key=<!q; tags=window; action=タブを閉じる;
-<!q:: close_tab()
-; [KEYBIND] key=<!w; tags=window; action=カレントウインドウをメインモニタで最大化する;
-<!w:: window_maximize(0)
-; [KEYBIND] key=<!e; tags=window; action=カレントウインドウをサブモニタで最大化する;
-<!e:: window_maximize(-1)
-; [KEYBIND] key=<!r; tags=window; action=カレントウインドウを最小化する;
-<!r:: window_minimize()
+<!r:: close_tab()
 ; [KEYBIND] key=<!t; tags=window; action=新しいタブを開く;
 <!t:: new_tab()
 ; [KEYBIND] key=<!+t; tags=window; action=タブを閉じる;
-<!+t:: close_tab()
+
+; row 1 right
 ; [KEYBIND] key=<!y; tags=window; action=ブラウザをリロードします（ターミナルで実行した場合はウィンドウを切り替えてからリロードします）;
 <!y:: reload()
 ; [KEYBIND] key=<!u; tags=window; action=under tmux を操作するためのプレフィックスを入力します;
@@ -32,21 +30,19 @@ LAlt:: Return
 <![:: Return
 <!]:: Return
 
-; row 2
-; [KEYBIND] key=<!a; tags=window; action=カレントウィンドウをメインモニタの左に寄せます;
-<!a:: window_move(0, "left")
-; [KEYBIND] key=<!s; tags=window; action=カレントウィンドウをメインモニタの右に寄せます;
-<!s:: window_move(0, "right")
-; [KEYBIND] key=<!d; tags=window; action=カレントウィンドウをサブモニタの左に寄せます;
-<!d:: window_move(-1, "left")
-; [KEYBIND] key=<!f; tags=window; action=カレントウィンドウをサブモニタの右に寄せます;
-<!f:: window_move(-1, "right")
-; [KEYBIND] key=<!g; tags=search; action=コピーして、グーグルで検索します;
-<!g:: {
-    copy()
-    ; TODO FIXME
-    ; search_google("")
-}
+; row 2 left
+; [KEYBIND] key=<!a; tags=move; action=タブを検索して移動します;
+<!a:: find_tab()
+; [KEYBIND] key=<!a; tags=move; action=キャッシュ（ヒストリ）を検索して移動します;
+<!s:: find_cache()
+; [KEYBIND] key=<!d; tags=move; action=ファイル名からファイルを検索して移動します;
+<!d:: find_file()
+; [KEYBIND] key=<!f; tags=move; action=テキストからファイルを検索して移動します;
+<!f:: find_text()
+; [KEYBIND] key=<!g; tags=search; action=クリップボードのテキストをグーグルで検索します;
+<!g:: search_google(A_Clipboard)
+
+; row 2 right
 ; [KEYBIND] key=<!h; tags=window; action=前のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!h:: previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
@@ -61,14 +57,17 @@ LAlt:: Return
 <!sc028:: set_colon() ; sc028 = :
 <!@:: Return
 
-; row 3
+; row 3 left
 ; [KEYBIND] key=<!z; tags=window; action=カレントウィンドウを透明にします（濃い: カレントウィンドウにフォーカス）;
 <!z:: switch_transparent(220)
 ; [KEYBIND] key=<!x; tags=window; action=カレントウィンドウを透明にします（薄め: バックウィンドウにフォーカス）;
 <!x:: switch_transparent(150)
 <!c:: Return
 <!v:: Return
-<!b:: Return
+; [KEYBIND] key=<!x; tags=window; action=カレントウィンドウを透明にします（薄め: バックウィンドウにフォーカス）;
+<!b:: find_bookmark()
+
+; row 3 right
 ; [KEYBIND] key=<!n; tags=window; action=ページを下へスクロールします;
 <!n:: move_pagedown()
 ; [KEYBIND] key=<!m; tags=window; action=ページを上へスクロールします;

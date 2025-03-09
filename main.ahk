@@ -1,17 +1,16 @@
 InstallKeybdHook
 InstallMouseHook
-
-
-; UseHook
+#UseHook
 
 A_MaxHotkeysPerInterval := 100
 
-;ここから下の#includeの基準パスを現在のディレクトリに変更
+;ここから下の#Includeの基準パスを現在のディレクトリに変更
 #Include %A_ScriptDir%
 
-#Include lib\IME.ahk
+#Include vendor\IMEv2.ahk\IMEv2.ahk
 
-#Include config.ahk ;設定ファイルを読み込む
+#Include infra\win_active_utils.ahk
+#Include infra\command.ahk
 
 #Include functions\common.ahk
 #Include functions\move.ahk
@@ -21,15 +20,6 @@ A_MaxHotkeysPerInterval := 100
 #Include functions\mouse.ahk
 #Include functions\run.ahk
 #Include functions\bash.ahk
-; 
-#Include command\command.ahk
-; 
-#Include operator\operator.ahk
-; 
-#Include keymap\single.ahk
-#Include keymap\lshift.ahk
-#Include keymap\rshift.ahk
-#Include keymap\lalt.ahk
-#Include keymap\rctrl.ahk
-#Include keymap\windows.ahk
-#Include keymap\mouse.ahk
+#Include functions\command.ahk
+
+#Include keymap\main.ahk

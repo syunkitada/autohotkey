@@ -1,4 +1,4 @@
-; row 1
+; row 1 left
 <+q:: {
 	if !operate("+q")
 		Send "+q"
@@ -29,6 +29,7 @@
 	Return
 }
 
+; row 1 right
 <+y:: {
 	if !operate("+y")
 		Send "+y"
@@ -60,7 +61,7 @@
 }
 
 
-; row 2
+; row 2 left
 <+a:: {
 	if !operate("+a")
 		Send "+a"
@@ -91,6 +92,7 @@
 	Return
 }	
 
+; row 2 right
 <+h:: {
 	if !operate("+h")
 		Send "+h"
@@ -116,7 +118,7 @@
 }
 
 
-; row 3
+; row 3 left
 <+z:: {
 	if !operate("+z")
 		Send "+z"
@@ -147,6 +149,7 @@
 	Return
 }
 
+; row 3 right
 <+n:: {
 	if !operate("+n")
 		Send "+n"

@@ -1,7 +1,7 @@
 ; コピー、ペースト関連の関数群です。
 
 cut() {
-    if bypass() {
+    if is_bypass() {
         Return 0
     } else if is_gvim() {
         Send "x"
@@ -14,7 +14,7 @@ cut() {
 }
 
 copy(id:=0) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 
@@ -117,7 +117,7 @@ copy(id:=0) {
 }
 
 paste(id:=0) {
-    if bypass() {
+    if is_bypass() {
         Return 0
     }
 

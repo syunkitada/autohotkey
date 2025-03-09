@@ -1,16 +1,3 @@
-; [KEYBIND] key=>+<Space>; tags=language; action=英数字入力に切り替えます;
->+Space:: {
-	IME_SET(0)
-	Return
-}
-
-; [KEYBIND] key=>+<RCtrl>; tags=language; action=ローマ字入力に切り替えます;
->+RCtrl:: {
-	IME_SET(0)
-	Send "{vkF3sc029}"
-	Return
-}
-
 ; row 1
 >+q:: Return
 >+w:: Return

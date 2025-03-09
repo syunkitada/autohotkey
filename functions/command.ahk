@@ -1,5 +1,5 @@
 run_command() {
-    if bypass() or !is_colon() {
+    if is_bypass() or !is_colon() {
         Return 0
     }
 
