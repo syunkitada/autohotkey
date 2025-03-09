@@ -17,8 +17,6 @@ A_MaxHotkeysPerInterval := 100
 #Include functions\edit.ahk
 #Include functions\copypaste.ahk
 #Include functions\window.ahk
-#Include functions\mouse.ahk
-#Include functions\run.ahk
 #Include functions\bash.ahk
 #Include functions\command.ahk
 
