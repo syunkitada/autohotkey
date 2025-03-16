@@ -2,15 +2,16 @@
 
 [autohotkey v2](https://www.autohotkey.com/docs/v2/index.htm) のスクリプトです。
 
-main.ahk が本体です。
+main.ahk が本体で、 以下のようなショートカットを作成して、スタートアップに登録しておくと便利です。（パスは適宜変更）  
 
-以下のようなショートカットを作成して、スタートアップに登録しておくと便利です。（パスは適宜変更）
+`C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk`
 
-	"C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk
+- Windows10のスタートアップディレクトリ
+  - `C:\Users\owner\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 
 ## キーバインドの考え方
 
-キーバインドを4つのレイヤーに分けて考えます。
+キーバインドを（独断と偏見で）4つのレイヤーに分けて考えます。
 
 - アプリケーション層
 	- 我々が直接触れるアプリケーションのこと
@@ -37,17 +38,36 @@ JIS、USのどちらがよいかですが、キーの豊富さからJIS配列を
 
 ### データリンク層
 
+キーボードの配列をOSのレジストリで書き換える層です。
+
 「change key」を利用して以下のように配列を書き換えます。
 
-	Spaceの左1: RCtrl
-	Spaceの左2: LAlt
-	Spaceの右1: LShift
-	Spaceの右2: RShift
-	CapsLock  : Tab
-	Enterの上左2: [
-	Enterの上左1: ]
-	Enterの下左1: Enter
-	Enterの下(Shif): @
+| 変換元                         | 変換先         |
+| ------------------------------ | -------------- |
+| Spaceの左1(無変換キー)         | RCtrl          |
+| Spaceの左2(LAlt)               | LAlt(変化なし) |
+| Spaceの右1(変換キー)           | LShift         |
+| Spaceの右2(カタカナ・ひらがな) | RShift         |
+| CapsLock                       | Tab            |
+| Enterの上左2(@)                | [              |
+| Enterの上左1([)                | ]              |
+| Enterの下左1(])                | @              |
+
+Ctrl, Shift, Altなどの修飾キーは、Left, Rightで区別されることに注意してください。
+
+また、どの修飾キーにどういった役割を持たせるかも重要です。
+
+自分は以下のように各修飾キーの役割を分けています。
+
+| キー    | 役割                                                                                        |
+| ------- | ------------------------------------------------------------------------------------------- |
+| RCtrl   | カーソル移動やテキスト編集のための独自修飾キーとして利用します                              |
+| LCtrl   | 通常のCtrlショートカットキーとして挙動の変更は行いません                                    |
+| LAlt    | アプリケーション画面の操作のための独自修飾キーとして利用します                              |
+| RAlt    | 通常のAltショートカットとして挙動の変更は行いません                                         |
+| Windows | 通常のWindowsショートカットに加え、カスタムのウィンドウ配置のための修飾キーとして利用します |
+| LShift  | 通常のShiftキーとして利用します                                                             |
+| RShift  | その他の独自特殊キーし                                                                      |
 
 ### プレゼンテーション層
 
