@@ -178,7 +178,6 @@ move_newline(num:=1) {
         } else {
             Send "{Home}{Enter}{Up}"
         }
-        reset_all()
     }
     Return 1
 }

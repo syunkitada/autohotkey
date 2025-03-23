@@ -5,10 +5,6 @@ delete_right_char(count:=1) {
 	if is_bypass() {
 		Return 0
 	}
-    if is_colon() {
-		bs_colon()
-        Return 1
-    }
 
     Loop count {
         if is_gvim() {
@@ -26,10 +22,6 @@ delete_left_char(count:=1) {
 	if is_bypass() {
 		Return 0
 	}
-    if is_colon() {
-		bs_colon()
-        Return 1
-    }
 
     Loop count {
         if is_gvim() {

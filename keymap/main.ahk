@@ -1,5 +1,5 @@
 ; [KEYBIND] key=<RCtrl>; tags=keybind; action=<ESC>キーを送信します;
-RCtrl:: reset_all() escape()
+RCtrl:: escape()
 
 ; +,* -> ',"
 ; shift+, shift* -> +, *
@@ -31,8 +31,6 @@ RCtrl:: reset_all() escape()
 	Return
 }
 
-#Include single.ahk
-#Include lshift.ahk
 #Include rshift.ahk
 #Include lalt.ahk
 #Include rctrl.ahk

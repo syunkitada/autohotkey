@@ -54,7 +54,7 @@ LAlt:: Return
 ; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
 <!;:: Send "#{Tab}"
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
-<!sc028:: set_colon() ; sc028 = :
+<!sc028:: mycommand_gui_show() ; sc028 = :
 <!@:: Return
 
 ; row 3 left

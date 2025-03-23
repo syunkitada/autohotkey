@@ -5,6 +5,9 @@
 escape() {
     IME_SET(0)
     Send "{Esc}"
+
+	mycommand_gui_hide()
+	
     Return 1
 }
 
