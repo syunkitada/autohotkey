@@ -36,7 +36,7 @@ search_eng(word) {
 
 command_map := Map(
     "ahk", {
-        help: "ahk;[sub_command]",
+        help: "ahk;[sub_command] `t autohotkey helper command",
         help_long: "
         (
             ahk;[r|reload]       `t Reload Script
@@ -48,17 +48,17 @@ command_map := Map(
         func: (arg) => ahk(arg),
     },
     "bash", {
-        help: "bash",
+        help: "bash              `t Paste bashrc",
         help_long: "",
         func: (this) => bash(),
     },
     "eng", {
-        help: "eng;[word]",
+        help: "eng;[word]        `t Search English word",
         help_long: "",
         func: (this, arg) => search_eng(arg),
     },
     "g", {
-        help: "g;[word]",
+        help: "g;[word]          `t Search word by google",
         help_long: "",
         func: (this, arg) => search_google(arg),
     },
@@ -79,6 +79,8 @@ run_mycommand(command) {
             return 1
         }
     }
+
+    return 0
 }
 
 get_help(command) {
@@ -92,17 +94,17 @@ get_help(command) {
 
     help_msg := ""
     for (key, value in command_map) {
-        help_msg := help_msg . key . "`n"
+        help_msg := help_msg . value.help . "`n"
     }
 
     return help_msg
 }
 
 mycommand_gui := Gui(, "MyCommand")
-mycommand_input := mycommand_gui.Add("Edit", "Y10 X10 w220 r1 WantReturn")
-mycommand_button := mycommand_gui.Add("Button", "Default Y8 X250", "OK")
+mycommand_input := mycommand_gui.Add("Edit", "Y10 X10 w270 r1 WantReturn")
+mycommand_button := mycommand_gui.Add("Button", "Default Y8 X300", "OK")
 mycommand_button.OnEvent("click", onSumitMyCommand)
-mycommand_help_text := mycommand_gui.Add("Text", "X10 w250 r10", "")
+mycommand_help_text := mycommand_gui.Add("Text", "X10 w300 r10", "")
 
 mycommand_input.OnEvent("change", onChangeMyCommand)
 
@@ -111,7 +113,13 @@ onChangeMyCommand(obj, info) {
 }
 
 onSumitMyCommand(obj, info) {
-    run_mycommand(mycommand_input.Text)
+    mycommand_gui.Hide()
+    if run_mycommand(mycommand_input.Text) {
+        mycommand_gui_hide()
+    } else {
+        mycommand_help_text.Text := "'" . mycommand_input.Text . "' command not found`n`n" . get_help("")
+        mycommand_gui.Show()
+    }
 }
 
 mycommand_gui_hide() {
@@ -121,5 +129,6 @@ mycommand_gui_hide() {
 }
 
 mycommand_gui_show() {
+    mycommand_help_text.Text := get_help("")
     mycommand_gui.Show()
 }

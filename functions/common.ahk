@@ -11,35 +11,6 @@ escape() {
     Return 1
 }
 
-switch_taskbar_display() {
-	if is_bypass() {
-		Return 0
-	}
-	Send "{LWin}"
-	Send "{Esc}"
-	Send "!{Enter}"
-	Sleep 400
-	Send "u"
-	Send "{Enter}"
-
-	Return 1
-}
-
-change_name() {
-	if is_terminal() {
-		Return 0
-	} else {
-		Send "{F2}"
-	}
-	Return 1
-}
-
-change_same_task() {
-	; FIXME
-	; WinGetClass className, A
-	; WinActivateBottom ahk_class %className%
-}
-
 reload_web() {
 	if is_terminal() {
 		Send "!{Tab}"

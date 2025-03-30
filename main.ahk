@@ -23,19 +23,14 @@ InstallMouseHook
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 100
 
-; #Includeの相対パスの基準を現在のディレクトリに変更します
+; #Includeの相対パスの基準を現在のディレクトリに変更します。
 #Include %A_ScriptDir%
 
-; IME操作のための外部ライブラリを読み込みます
+; IME操作のための外部ライブラリを読み込みます。
 #Include vendor\IMEv2.ahk\IMEv2.ahk
 
-#Include functions\win_active_utils.ahk
-#Include functions\common.ahk
-#Include functions\move.ahk
-#Include functions\edit.ahk
-#Include functions\copypaste.ahk
-#Include functions\window.ahk
-#Include functions\bash.ahk
-#Include functions\command.ahk
+; 便利な関数群を読み込みます。
+#Include functions\main.ahk
 
+; キーマップの設定をします。
 #Include keymap\main.ahk

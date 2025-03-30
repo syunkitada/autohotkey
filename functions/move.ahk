@@ -182,9 +182,10 @@ move_newline(num:=1) {
     Return 1
 }
 
-
 find_text() {
-    if is_vscode() {
+    if is_terminal() {
+        Send " ft"
+    } else if is_vscode() {
         Send "^F"
     } else {
         Send "^f"
@@ -194,6 +195,8 @@ find_text() {
 find_file() {
     if is_browser() {
         Send "!d"
+    } else if is_terminal() {
+        Send " ff"
     } else if is_vscode() {
         Send "^E"
         Send "^p"

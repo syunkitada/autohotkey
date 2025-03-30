@@ -1,0 +1,8 @@
+#Include win_active_utils.ahk
+#Include common.ahk
+#Include move.ahk
+#Include edit.ahk
+#Include copypaste.ahk
+#Include window.ahk
+#Include bash.ahk
+#Include command.ahk

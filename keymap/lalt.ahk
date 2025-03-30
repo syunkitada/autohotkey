@@ -8,14 +8,13 @@ LAlt:: Return
 <!Tab:: Return
 
 ; row 1 left
-<!q:: Return
-<!w:: Return
-<!e:: Return
 ; [KEYBIND] key=<!q; tags=window; action=タブを閉じる;
-<!r:: close_tab()
+<!q:: close_tab()
 ; [KEYBIND] key=<!t; tags=window; action=新しいタブを開く;
-<!t:: new_tab()
-; [KEYBIND] key=<!+t; tags=window; action=タブを閉じる;
+<!w:: new_tab()
+<!e:: Return
+<!r:: Return
+<!t:: find_text()
 
 ; row 1 right
 ; [KEYBIND] key=<!y; tags=window; action=ブラウザをリロードします（ターミナルで実行した場合はウィンドウを切り替えてからリロードします）;
@@ -36,9 +35,9 @@ LAlt:: Return
 ; [KEYBIND] key=<!a; tags=move; action=キャッシュ（ヒストリ）を検索して移動します;
 <!s:: find_cache()
 ; [KEYBIND] key=<!d; tags=move; action=ファイル名からファイルを検索して移動します;
-<!d:: find_file()
+<!d:: Return
 ; [KEYBIND] key=<!f; tags=move; action=テキストからファイルを検索して移動します;
-<!f:: find_text()
+<!f:: find_file()
 ; [KEYBIND] key=<!g; tags=search; action=クリップボードのテキストをグーグルで検索します;
 <!g:: search_google(A_Clipboard)
 
@@ -47,12 +46,14 @@ LAlt:: Return
 <!h:: previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
 <!j:: AltTab
+; [KEYBIND] key=<!+j; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
+<!+j:: Send "#{Tab}"
 ; [KEYBIND] key=<!k; tags=window; action=前のWindows画面へ移動します;
 <!k:: ShiftAltTab
 ; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!l:: next_tab()
 ; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
-<!;:: Send "#{Tab}"
+<!;:: Return
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
 <!sc028:: mycommand_gui_show() ; sc028 = :
 <!@:: Return
@@ -64,7 +65,7 @@ LAlt:: Return
 <!x:: switch_transparent(150)
 <!c:: Return
 <!v:: Return
-; [KEYBIND] key=<!x; tags=window; action=カレントウィンドウを透明にします（薄め: バックウィンドウにフォーカス）;
+; [KEYBIND] key=<!x; tags=move; action=ブックマークマネージャーを開きます ;
 <!b:: find_bookmark()
 
 ; row 3 right
