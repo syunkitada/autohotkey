@@ -200,12 +200,16 @@ find_file() {
     } else if is_vscode() {
         Send "^E"
         Send "^p"
+    } else if is_slack() {
+        Send "^g"
     }
 }
 
 find_tab() {
     if is_browser() {
         Send "^A"
+    } else if is_slack() {
+        Send "^k"
     }
 }
 

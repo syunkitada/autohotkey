@@ -6,3 +6,4 @@
 #Include window.ahk
 #Include bash.ahk
 #Include command.ahk
+#Include doc.ahk

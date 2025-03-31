@@ -7,6 +7,7 @@ escape() {
     Send "{Esc}"
 
 	mycommand_gui_hide()
+	doc_gui_hide()
 	
     Return 1
 }
@@ -49,9 +50,9 @@ content_assist(asc:=1) {
 }
 
 search() {
-	if is_bypass() or is_terminal() {
+	if is_bypass() {
 		Return 0
-	} else if is_gvim() {
+	} else if is_terminal() or is_vscode() {
 		Send "{Esc}/"
 	} else {
 		send "^f"

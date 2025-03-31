@@ -53,7 +53,7 @@ LAlt:: Return
 ; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!l:: next_tab()
 ; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
-<!;:: Return
+<!;:: doc_gui_show()
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
 <!sc028:: mycommand_gui_show() ; sc028 = :
 <!@:: Return

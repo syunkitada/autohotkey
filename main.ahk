@@ -19,6 +19,9 @@ InstallMouseHook
 ; このため、#UseHook を使ったほうが基本的に良いと思います。
 #UseHook
 
+; ファイル操作時のエンコーディングをUTF-8にします。
+A_FileEncoding := "UTF-8"
+
 ; 指定ミリ秒(A_HotkeyInterval )以内に実行できる最大のホットキー数(A_MaxHotkeysPerInterval)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 100

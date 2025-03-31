@@ -49,3 +49,7 @@ is_firefox() {
 is_msedge() {
     Return WinActive("ahk_exe" "msedge.exe")
 }
+
+is_slack() {
+    Return WinActive("ahk_exe" "Slack.exe")
+}

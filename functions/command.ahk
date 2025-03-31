@@ -101,6 +101,7 @@ get_help(command) {
 }
 
 mycommand_gui := Gui(, "MyCommand")
+mycommand_gui.SetFont(, "Consolas") ; Consolasは、VSCodeのデフォルトです
 mycommand_input := mycommand_gui.Add("Edit", "Y10 X10 w270 r1 WantReturn")
 mycommand_button := mycommand_gui.Add("Button", "Default Y8 X300", "OK")
 mycommand_button.OnEvent("click", onSumitMyCommand)
