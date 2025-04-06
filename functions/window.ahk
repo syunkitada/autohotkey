@@ -29,6 +29,8 @@ window_move(monitor_num, direction, width_size:=1) {
 	if (direction == "right") {
 		x := work_area_right - width
 	}
+
+	WinRestore "A"
 	WinMove x, y, width, height, "A"
 
 	Return 1
@@ -45,6 +47,7 @@ window_move_center() {
 	y := (A_ScreenHeight - height)//2
 	;MsgBox, %x%:%y%:%width%:%height%
 
+	WinRestore "A"
 	WinMove x, y, width, height, "A"
 
 	Return 1
@@ -62,6 +65,7 @@ window_maximize(monitor_num) {
 	width := Abs(work_area_left - work_area_right)
 	x := work_area_left
 
+	WinRestore "A"
 	WinMove x, y, width, height, "A"
 
 	Return 1
