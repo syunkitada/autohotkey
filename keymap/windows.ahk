@@ -12,14 +12,22 @@
 ; #t::
 
 ; row 1 right
-; [KEYBIND] key=#y; tags=window; action=カレントウィンドウをメインモニタの左に寄せます;
+; [KEYBIND] key=#y; tags=window; action=カレントウィンドウを1/2のサイズでメインモニタの左に寄せます;
 #y:: window_move(0, "left")
-; [KEYBIND] key=#u; tags=window; action=カレントウィンドウをメインモニタの右に寄せます;
+; [KEYBIND] key=#+y; tags=window; action=カレントウィンドウを3/4のサイズでメインモニタの左に寄せます;
+#+y:: window_move(0, "left", 1.5)
+; [KEYBIND] key=#u; tags=window; action=カレントウィンドウを1/2のサイズでメインモニタの右に寄せます;
 #u:: window_move(0, "right")
-; [KEYBIND] key=#i; tags=window; action=カレントウィンドウをサブモニタの左に寄せます;
+; [KEYBIND] key=#+y; tags=window; action=カレントウィンドウを3/4のサイズでメインモニタの右に寄せます;
+#+u:: window_move(0, "right", 1.5)
+; [KEYBIND] key=#i; tags=window; action=カレントウィンドウを1/2のサイズでサブモニタの左に寄せます;
 #i:: window_move(-1, "left")
-; [KEYBIND] key=#o; tags=window; action=カレントウィンドウをサブモニタの右に寄せます;
+; [KEYBIND] key=#+i; tags=window; action=カレントウィンドウを3/4のサイズでサブモニタの左に寄せます;
+#+i:: window_move(-1, "left", 1.5)
+; [KEYBIND] key=#o; tags=window; action=カレントウィンドウを1/2のサイズでサブモニタの右に寄せます;
 #o:: window_move(-1, "right")
+; [KEYBIND] key=#o; tags=window; action=カレントウィンドウを3/4のサイズでサブモニタの右に寄せます;
+#+o:: window_move(-1, "right", 1.5)
 ; #p::
 
 
@@ -33,6 +41,7 @@
 ; #g::
 
 ; row 2 right
+; [KEYBIND] key=<!w; tags=window; action=カレントウインドウをメインモニタの中央に配置する;
 #h:: window_move_center()
 ; [KEYBIND] key=<!w; tags=window; action=カレントウインドウをメインモニタで最大化する;
 #j:: window_maximize(0)

@@ -7,12 +7,9 @@
 ; ----------------------------------------------------------------------------------------------------
 >^q:: Return
 >^w:: Return
-; [KEYBIND] key=>^e; tags=clipboard; action=コピーします(rEplicate text);
->^e:: copy()
-; [KEYBIND] key=>^r; tags=clipboard; action=ペーストします(paste Replicated text);
->^r:: paste()
-; [KEYBIND] key=>^t; tags=clipboard; action=切り取ります(cuT text);
->^t:: cut()
+>^e:: Return
+>^r:: Return
+>^t:: Return
 ; ----------------------------------------------------------------------------------------------------
 ; row 1 right
 ; ----------------------------------------------------------------------------------------------------
@@ -23,8 +20,7 @@
 >^i:: move_forward_word()
 ; [KEYBIND] key=>^o; tags=edit; action=下へ新規の行追加して移動します(new Oneline);
 >^o:: move_newline(1)
-; [KEYBIND] key=>^O; tags=edit; action=上へ新規の行追加して移動します(new Oneline);
->^+o:: move_newline(-1)
+>^+o:: Return
 >^p:: Return
 >^[:: Return
 >^]:: Return
@@ -34,14 +30,14 @@
 ; ----------------------------------------------------------------------------------------------------
 ; [KEYBIND] key=>^a; tags=select; action=全選択します;
 >^a:: select_all()
-; [KEYBIND] key=>^s; tags=edit; action=前の5文字を削除します(delete conSecutive 5 chars);
->^s:: delete_left_char(5)
-; [KEYBIND] key=>^d; tags=edit; action=前の1文字を削除します(Delete left char);
+; [KEYBIND] key=>^v; tags=edit; action=前の一単語を削除します(Delete backward word);
+>^s:: delete_backward_word()
+; [KEYBIND] key=>^d; tags=edit; action=前の1文字を削除します(Delete backward char);
 >^d:: delete_left_char()
-; [KEYBIND] key=>^f; tags=edit; action=後ろの一文字を削除します(delete Following char);
+; [KEYBIND] key=>^f; tags=edit; action=後ろの一文字を削除します(delete Forward char);
 >^f:: delete_right_char()
-; [KEYBIND] key=>^g; tags=edit; action=後ろの5文字を削除します(delete followinG 5 chars);
->^g:: delete_right_char(5)
+; [KEYBIND] key=>^b; tags=edit; action=次の一単語を削除します(Delete forward word);
+>^g:: delete_forward_word()
 ; ----------------------------------------------------------------------------------------------------
 ; row 2 right
 ; ----------------------------------------------------------------------------------------------------
@@ -62,12 +58,13 @@
 ; row 3 left
 ; ----------------------------------------------------------------------------------------------------
 >^z:: Reload
->^x:: Return
->^c:: Return
-; [KEYBIND] key=>^v; tags=edit; action=前の一単語を削除します(remoVe backward word);
->^v:: delete_backward_word()
-; [KEYBIND] key=>^b; tags=edit; action=次の一単語を削除します(remove suBsequent word);
->^b:: delete_forward_word()
+; [KEYBIND] key=>^x; tags=clipboard; action=切り取ります(Cut text);
+>^x:: cut()
+; [KEYBIND] key=>^c; tags=clipboard; action=コピーします(Copy text);
+>^c:: copy()
+; [KEYBIND] key=>^v; tags=clipboard; action=ペーストします(Paste text);
+>^v:: paste()
+>^b:: Return
 ; ----------------------------------------------------------------------------------------------------
 ; row 3 right
 ; ----------------------------------------------------------------------------------------------------

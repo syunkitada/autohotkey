@@ -2,23 +2,6 @@
 ; vimやscreenなどのコマンドラッパー 
 ; 関数名はすべてbash_で始まります。
 
-bash_vim_unite() {
-	if is_terminal() or is_gvim() {
-		; use unite
-		Send "{Esc},u"
-		Return 1
-	}
-	Return 0
-}
-
-bash_vim_unit_history() {
-	if is_gvim() or is_terminal() {
-		Send "^l"
-		Return 1
-	}
-	Return 0
-}
-
 bash_vim_operate_internal_window() {
 	if is_gvim() or is_terminal() {
 		Send "^w"

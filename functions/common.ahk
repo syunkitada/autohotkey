@@ -135,15 +135,6 @@ close_tab() {
 	Return 1
 }
 
-close_window() {
-	if is_bypass() {
-		Return 0
-	} else {
-		Send "!{F4}"
-	}
-	Return 1
-}
-
 focus_addressbar()  {
 	if is_bypass() {
 		Return 0
@@ -153,39 +144,6 @@ focus_addressbar()  {
 		Run "https://www.google.co.jp/"
 		Send "!d"
 		IME_SET(0)
-	}
-	Return 1
-}
-
-run_program() {
-	if is_bypass() {
-		Return 0
-	} else if is_terminal() or is_gvim() {
-		Send "{Esc},r"
-	} else {
-		Return 0
-	}
-	Return 1
-}
-
-undo() {
-	if is_bypass() {
-		Return 0
-	} else if is_terminal() or is_gvim() {
-		Send "{Esc}u"
-	} else {
-		Return 0
-	}
-	Return 1
-}
-
-resume() {
-	if is_bypass() {
-		Return 0
-	} else if is_terminal() or is_gvim() {
-		Send "{Esc}^r"
-	} else {
-		Return 0
 	}
 	Return 1
 }

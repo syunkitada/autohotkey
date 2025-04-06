@@ -3,9 +3,10 @@
 関数名はすべてwindow_で始まります。
 */
 
-window_move(monitor_num, direction) {
-	if is_bypass()
+window_move(monitor_num, direction, width_size:=1) {
+	if is_bypass() {
 		Return 0
+	}
 
 	monitor_num := __get_target_monitor(monitor_num)
 	MonitorGetWorkArea(monitor_num, &work_area_left, &work_area_top, &work_area_right, &work_area_bottom)
@@ -23,7 +24,7 @@ window_move(monitor_num, direction) {
 
 	y := work_area_top
 	height := Abs(work_area_top - work_area_bottom)
-	width := Abs(work_area_left - work_area_right) / 2
+	width := Abs(work_area_left - work_area_right) * width_size / 2
 	x := work_area_left
 	if (direction == "right") {
 		x := work_area_right - width
@@ -34,11 +35,12 @@ window_move(monitor_num, direction) {
 }
 
 window_move_center() {
-	if is_bypass()
+	if is_bypass() {
 		Return 0
+	}
 
-	width := A_ScreenWidth - 200
-	height := A_ScreenHeight - 200
+	width := A_ScreenWidth - 100
+	height := A_ScreenHeight - 100
 	x := (A_ScreenWidth - width)//2
 	y := (A_ScreenHeight - height)//2
 	;MsgBox, %x%:%y%:%width%:%height%
