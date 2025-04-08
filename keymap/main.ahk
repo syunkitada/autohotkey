@@ -8,9 +8,11 @@ RCtrl:: escape()
 ; [KEYBIND] key=!:; tags=keybind; action=<">キーを送信します;
 +sc028:: Send "`""
 ; [KEYBIND] key=>^!\;; tags=keybind; action=<+>キーを送信します;
->^+;:: Send "{NumpadAdd}"
+; NOTE Send "{NumpadAdd} では、RLogin上で<+>キーの入力ができなかったので注意です。
+>^+;:: Send "+;"
 ; [KEYBIND] key=>^!:; tags=keybind; action=<*>キーを送信します;
->^+sc028:: Send "{NumpadMult}"
+; NOTE Send "{NumpadMulti} では、RLogin上で<*>キーの入力ができなかったので注意です。
+>^+sc028:: Send "+{sc028}"
 
 ; [KEYBIND] key=>^<Space>; tags=keybind; action=<Enter>キーを送信します;
 >^Space:: Send "{Enter}"
