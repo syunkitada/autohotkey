@@ -2,7 +2,7 @@
 ; 関数名はすべてmove_で始まります。
 
 move_left(count:=1) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
@@ -13,7 +13,7 @@ move_left(count:=1) {
 }
 
 move_right(count:=1) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
@@ -24,7 +24,7 @@ move_right(count:=1) {
 }
 
 move_up(count:=1) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
@@ -35,7 +35,7 @@ move_up(count:=1) {
 }
 
 move_down(count:=1) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
@@ -46,9 +46,9 @@ move_down(count:=1) {
 }
 
 move_home() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         Send "^a"
     } else {
         Send "{Home}"
@@ -57,9 +57,9 @@ move_home() {
 }
 
 move_end() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         Send "^e"
     } else {
         Send "{End}"
@@ -68,9 +68,9 @@ move_end() {
 }
 
 move_half_pageup() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() or is_terminal() or is_vscode() {
+    } else if winactive_is_gvim() or winactive_is_terminal() or winactive_is_vscode() {
         Send "^u"
     } else {
         move_pageup()
@@ -79,9 +79,9 @@ move_half_pageup() {
 }
 
 move_pageup() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() or is_terminal() or is_vscode() {
+    } else if winactive_is_gvim() or winactive_is_terminal() or winactive_is_vscode() {
         Send "^b"
     } else {
         Send "{PgUp}"
@@ -90,9 +90,9 @@ move_pageup() {
 }
 
 move_pagedown() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() or is_terminal() or is_vscode() {
+    } else if winactive_is_gvim() or winactive_is_terminal() or winactive_is_vscode() {
         Send "^f"
     } else {
         Send "{PgDn}"
@@ -101,9 +101,9 @@ move_pagedown() {
 }
 
 move_half_pagedown() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() or is_terminal() or is_vscode() {
+    } else if winactive_is_gvim() or winactive_is_terminal() or winactive_is_vscode() {
         Send "^d"
     } else {
         move_pagedown()
@@ -112,9 +112,9 @@ move_half_pagedown() {
 }
 
 move_top() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         Send "{Esc}gg"
     } else {
         Send "{Home}"
@@ -123,9 +123,9 @@ move_top() {
 }
 
 move_bottom() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         Send "{Esc}+g"
     } else {
         Send "{End}"
@@ -134,12 +134,12 @@ move_bottom() {
 }
 
 move_backward_word() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         escape()
             Send "bi"
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         Send "{Esc}"
         Send "b"
     } else {
@@ -149,12 +149,12 @@ move_backward_word() {
 }
 
 move_forward_word() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         escape()
         Send "lwi"
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         Send "{Esc}"
         Send "f"
     } else {
@@ -164,9 +164,9 @@ move_forward_word() {
 }
 
 move_newline(num:=1) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_terminal() or is_gvim() {
+    } else if winactive_is_terminal() or winactive_is_gvim() {
         if (num = "1") {
             Send "{Esc}o"
         } else {
@@ -182,45 +182,26 @@ move_newline(num:=1) {
     Return 1
 }
 
-find_text() {
-    if is_terminal() {
-        Send " ft"
-    } else if is_vscode() {
-        Send "^F"
-    } else {
-        Send "^f"
-    }
+move_backward_history() {
+	if winactive_is_ignored_app() {
+		Return 0
+	} if winactive_is_vscode() {
+		Send "!{Left}"
+	} else if winactive_is_terminal() or winactive_is_gvim() {
+		Send "^t"
+	} else {
+		Send "!{Left}"
+	}
+	Return 1
 }
 
-find_file() {
-    if is_browser() {
-        Send "!d"
-    } else if is_terminal() {
-        Send " ff"
-    } else if is_vscode() {
-        Send "^E"
-        Send "^p"
-    } else if is_slack() {
-        Send "^g"
-    }
-}
-
-find_tab() {
-    if is_browser() {
-        Send "^A"
-    } else if is_slack() {
-        Send "^k"
-    }
-}
-
-find_cache() {
-    if is_browser() {
-        Send "^h"
-    }
-}
-
-find_bookmark() {
-    if is_browser() {
-        Send "^O"
-    }
+move_forward_history() {
+	if winactive_is_vscode() {
+		Send "!{Right}"
+	} else if winactive_is_terminal() or winactive_is_gvim() {
+		Send "g^]"
+	} else {
+		Send "!{Right}"
+	}
+	Return 1
 }

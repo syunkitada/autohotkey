@@ -3,8 +3,69 @@
 関数名はすべてwindow_で始まります。
 */
 
+window_next_tab() {
+	if winactive_is_ignored_app() {
+		Return 0
+	} else if winactive_is_terminal() or winactive_is_gvim() {
+		Send "{Esc}:tabn{Enter}"
+	} else if winactive_is_vscode() {
+		Send "^{PgDn}"
+	} else {
+		Send "^{Tab}"
+	}
+	Return 1
+}
+
+window_previous_tab() {
+	if winactive_is_ignored_app() {
+		Return 0
+	} else if winactive_is_gvim() {
+		Send "{Esc}:tabp{Enter}"
+	} else if winactive_is_terminal() {
+		Send "{Esc}:tabp{Enter}"
+	} else if winactive_is_vscode() {
+		Send "^{PgUp}"
+	} else {
+		Send "^+{Tab}"
+	}
+	Return 1
+}
+
+window_new_tab() {
+	if winactive_is_ignored_app() {
+		Return 0
+	} else if winactive_is_gvim() {
+		Send "{Esc}"
+		Send ":tabe{Enter}"
+	} else {
+		Send "^t"
+	}
+	Return 1
+}
+
+window_close_tab() {
+	if winactive_is_ignored_app() {
+		Return 0
+	} else if winactive_is_gvim() or winactive_is_terminal() {
+		Send "{Esc}:tabc{Enter}:tabp{Enter}"
+	} else {
+		Send "^w"
+	}
+	Return 1
+}
+
+window_switch_transparent(alpha:=200) {
+	tp := WinGetTransparent("A")
+
+	if tp
+		WinSetTransparent "Off", "A"
+	else
+		WinSetTransparent alpha, "A"
+	return
+}
+
 window_move(monitor_num, direction, width_size:=1) {
-	if is_bypass() {
+	if winactive_is_ignored_app() {
 		Return 0
 	}
 
@@ -37,7 +98,7 @@ window_move(monitor_num, direction, width_size:=1) {
 }
 
 window_move_center() {
-	if is_bypass() {
+	if winactive_is_ignored_app() {
 		Return 0
 	}
 
@@ -54,7 +115,7 @@ window_move_center() {
 }
 
 window_maximize(monitor_num) {
-	if is_bypass()
+	if winactive_is_ignored_app()
 		Return 0
 
 	monitor_num := __get_target_monitor(monitor_num)

@@ -18,22 +18,6 @@ bash() {
     Return
 }
 
-search_google(word) {
-    if (word = "") {
-        Run "https://www.google.com/search?q=" . A_Clipboard
-    } else {
-        Run "https://www.google.com/search?q=" . word
-    }
-}
-
-search_eng(word) {
-    if (word = "") {
-        Run "http://ejje.weblio.jp/content/" . A_Clipboard
-    } else {
-        Run "http://ejje.weblio.jp/content/" . word
-    }
-}
-
 command_map := Map(
     "ahk", {
         help: "ahk;[sub_command] `t autohotkey helper command",
@@ -55,12 +39,12 @@ command_map := Map(
     "eng", {
         help: "eng;[word]        `t Search English word",
         help_long: "",
-        func: (this, arg) => search_eng(arg),
+        func: (this, arg) => find_eng_by_web(arg),
     },
     "g", {
         help: "g;[word]          `t Search word by google",
         help_long: "",
-        func: (this, arg) => search_google(arg),
+        func: (this, arg) => find_text_by_web(arg),
     },
 )
 

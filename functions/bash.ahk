@@ -3,7 +3,7 @@
 ; 関数名はすべてbash_で始まります。
 
 bash_vim_operate_internal_window() {
-	if is_gvim() or is_terminal() {
+	if winactive_is_gvim() or winactive_is_terminal() {
 		Send "^w"
 		Return 1
 	}
@@ -11,7 +11,7 @@ bash_vim_operate_internal_window() {
 }
 
 bash_tmux_operate_over_winder() {
-	if is_terminal() or is_vscode() {
+	if winactive_is_terminal() or winactive_is_vscode() {
 		Send "^b" ; tmux
 		Return 1
 	}
@@ -19,7 +19,7 @@ bash_tmux_operate_over_winder() {
 }
 
 bash_tmux_operate_under_window() {
-	if is_terminal() or is_vscode() {
+	if winactive_is_terminal() or winactive_is_vscode() {
 		Send "^t" ; tmuxt
 		Return 1
 	}

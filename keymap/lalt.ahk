@@ -9,9 +9,9 @@ LAlt:: Return
 
 ; row 1 left
 ; [KEYBIND] key=<!q; tags=window; action=タブを閉じる;
-<!q:: close_tab()
+<!q:: window_close_tab()
 ; [KEYBIND] key=<!t; tags=window; action=新しいタブを開く;
-<!w:: new_tab()
+<!w:: window_new_tab()
 <!e:: Return
 <!r:: Return
 <!t:: find_text()
@@ -38,12 +38,11 @@ LAlt:: Return
 <!d:: Return
 ; [KEYBIND] key=<!f; tags=move; action=テキストからファイルを検索して移動します;
 <!f:: find_file()
-; [KEYBIND] key=<!g; tags=search; action=クリップボードのテキストをグーグルで検索します;
-<!g:: search_google(A_Clipboard)
+<!g:: find_selected_text_by_web()
 
 ; row 2 right
 ; [KEYBIND] key=<!h; tags=window; action=前のタブへ移動します（RLoginの時はvimのみ有効です）;
-<!h:: previous_tab()
+<!h:: window_previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
 <!j:: AltTab
 ; [KEYBIND] key=<!+j; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
@@ -51,7 +50,7 @@ LAlt:: Return
 ; [KEYBIND] key=<!k; tags=window; action=前のWindows画面へ移動します;
 <!k:: ShiftAltTab
 ; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
-<!l:: next_tab()
+<!l:: window_next_tab()
 ; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
 <!;:: doc_gui_show()
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
@@ -60,9 +59,9 @@ LAlt:: Return
 
 ; row 3 left
 ; [KEYBIND] key=<!z; tags=window; action=カレントウィンドウを透明にします（濃い: カレントウィンドウにフォーカス）;
-<!z:: switch_transparent(220)
+<!z:: window_switch_transparent(220)
 ; [KEYBIND] key=<!x; tags=window; action=カレントウィンドウを透明にします（薄め: バックウィンドウにフォーカス）;
-<!x:: switch_transparent(150)
+<!x:: window_switch_transparent(150)
 <!c:: Return
 <!v:: Return
 ; [KEYBIND] key=<!x; tags=move; action=ブックマークマネージャーを開きます ;
@@ -75,7 +74,6 @@ LAlt:: Return
 <!m:: move_pageup()
 <!,:: Return
 <!.:: Return
-; [KEYBIND] key=<!/; tags=search; action=文字列検索モードへ移行します(ESCで戻ります);
-<!/:: search()
 ; [KEYBIND] key=<!\\; tags=search; action=ブラウザを開いて（Explorerの場合はExplorerで）カーソルをアドレスバーにフォーカスします;
-<!sc073:: focus_addressbar() ; sc073 = \
+<!/:: find_by_web()
+<!sc073:: Return ; sc073 = \

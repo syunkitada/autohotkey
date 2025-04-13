@@ -1,11 +1,11 @@
 ;; ------------------------------
 ;; mouse mapping
 ;; ------------------------------
-;XButton1::backward_history()
+;XButton1::move_backward_history()
 
 ;RButton::RButton
 ;
-;RButton & LButton::backward_history()
+;RButton & LButton::move_backward_history()
 ;
 ;RButton & WheelDown::next_tab()
 ;
@@ -16,7 +16,7 @@
 ;
 ;XButton1 & RButton::paste()
 ;
-;XButton2::forward_history()
+;XButton2::move_forward_history()
 ;
 ;XButton2 & WheelDown::AltTab
 ;

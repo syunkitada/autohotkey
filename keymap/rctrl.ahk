@@ -73,9 +73,9 @@
 ; [KEYBIND] key=>^m; tags=page; action=ページを上へスクロールします;
 >^m:: move_half_pageup()
 ; [KEYBIND] key=>^,; tags=page; action=ヒストリを前へ戻ります FIXME;
->^,:: backward_history()
+>^,:: move_backward_history()
 ; [KEYBIND] key=>^.; tags=page; action=ヒストリを先へ進みます FIXME;
 ; [KEYBIND] key=<TODO>; tags=page; action=定義元へ飛びます FIXME;
->^.:: forward_history()
+>^.:: move_forward_history()
 >^/:: Return
 >^sc073:: Return ; sc073 = \

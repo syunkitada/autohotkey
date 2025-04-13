@@ -1,36 +1,59 @@
 ; コピー、ペースト関連の関数群です。
 
+select_all() {
+	if winactive_is_terminal() or winactive_is_gvim() winactive_is_vscode() {
+		Send "{Esc}"
+		Send "+g"
+		Send "+v"
+		Send "gg"
+	} else {
+		Send "^a"
+	}
+	Return 1
+}
+
 cut() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
-    } else if is_gvim() {
+    }
+    
+    A_Clipboard := "" ; Empty the clipboard for ClipWait
+    
+    if winactive_is_gvim() {
         Send "x"
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         copy()
     } else {
         Send "^x"
     }
+
+    ClipWait(2)
+
     Return 1
 }
 
 copy() {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
-    if is_terminal() {
+    A_Clipboard := "" ; Empty the clipboard for ClipWait
+
+    if winactive_is_terminal() {
         Send "^{Ins}"
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         Send "^{Ins}"
     } else {
         Send "^c"
     }
 
+    ClipWait(2)
+
     Return 1
 }
 
 paste(id:=0) {
-    if is_bypass() {
+    if winactive_is_ignored_app() {
         Return 0
     }
 
@@ -41,11 +64,11 @@ paste(id:=0) {
         A_Clipboard := text
     }
 
-    if is_ubuntu_terminal() {
+    if winactive_is_ubuntu_terminal() {
         Send "^+v"
-    } else if is_terminal() {
+    } else if winactive_is_terminal() {
         Send "+{Insert}"
-    } else if is_gvim() {
+    } else if winactive_is_gvim() {
         Send "{Esc}`"*P"
     } else {
         Send "^v"
