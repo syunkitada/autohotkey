@@ -18,7 +18,7 @@ RCtrl:: escape()
 >^Space:: Send "{Enter}"
 
 ; [KEYBIND] key=>^<Tab>; tags=programming; action=TODO 補完モードに移行します;
-+Tab:: content_assist()
+>+Tab:: content_assist()
 >^Tab:: content_assist(0)
 
 ; [KEYBIND] key=>+<Space>; tags=language; action=英数字入力に切り替えます;
