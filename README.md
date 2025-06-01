@@ -1,14 +1,36 @@
-# autohotkey v2
+# AutoHotkey v2
 
-[autohotkey v2](https://www.autohotkey.com/docs/v2/index.htm) のスクリプトです。
+[AutoHotkey v2](https://www.autohotkey.com/docs/v2/index.htm) のキーバインド設定のためのスクリプトです。
 
-main.ahk が本体で、 以下のようなショートカットを作成して、スタートアップに登録しておくと便利です。  
-（パスは適宜変更してください）  
+## 使い方
 
-`C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\hogehoge\autohotkey\main.ahk`
+### Change Keyのセットアップ
 
-- Windows10のスタートアップに登録する場合は以下のディレクトリにショートカットを配置します
-  - `C:\Users\owner\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+[Change Key](https://forest.watch.impress.co.jp/library/software/changekey/) をインストールし、以下のようにキー配列を書き換えます。
+
+![change key](./assets/changekey.png)
+
+| 変換元                         | 変換先         |
+| ------------------------------ | -------------- |
+| Spaceの左1(無変換キー)         | RCtrl          |
+| Spaceの左2(LAlt)               | LAlt(変化なし) |
+| Spaceの右1(変換キー)           | LShift         |
+| Spaceの右2(カタカナ・ひらがな) | RShift         |
+| CapsLock                       | Tab            |
+| Enterの上左2(@)                | [              |
+| Enterの上左1([)                | ]              |
+| Enterの下左1(])                | @              |
+
+
+### Autohotkeyのセットアップ
+
+[AutoHotkey公式サイト](https://www.autohotkey.com/) からAutoHotkey v2をダウンロードしてインストールします。
+
+次に本リポジトリを `git clone` し、`main.ahk` を引数に `AutoHotkey.exe` を起動する以下のようなショートカットを作成します。  
+`C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe" C:\Users\[Path...]\autohotkey\main.ahk`
+
+次にWindows10/11のスタートアップにショートカットを登録するため、以下のディレクトリにショートカットを配置して完了です。  
+`C:\Users\[User Name]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 
 ## キーバインドの考え方
 
@@ -41,7 +63,7 @@ JIS、USのどちらがよいかですが、キーの豊富さからJIS配列を
 
 キーボードの配列をOSのレジストリによって書き換える層です。
 
-「change key」を利用して以下のように配列を書き換えます。
+「Change Key」を利用して以下のように配列を書き換えます。
 
 | 変換元                         | 変換先         |
 | ------------------------------ | -------------- |
