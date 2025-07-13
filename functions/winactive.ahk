@@ -11,6 +11,8 @@ winactive_is_terminal() {
         Return 1
     } else if winactive_is_ubuntu_terminal() {
         Return 1
+    } else if winactive_is_windows_terminal() {
+        Return 1
     }
     Return 0
 }
@@ -25,6 +27,10 @@ winactive_is_ubuntu_terminal() {
 
 winactive_is_vscode() {
     Return WinActive("ahk_exe" "Code.exe")
+}
+
+winactive_is_windows_terminal() {
+    Return WinActive("ahk_exe" "WindowsTerminal.exe")
 }
 
 winactive_is_browser() {

@@ -14,7 +14,7 @@ LAlt:: Return
 <!w:: window_new_tab()
 <!e:: Return
 <!r:: Return
-<!t:: find_text()
+<!t:: vscode_switch_terminal()
 
 ; row 1 right
 ; [KEYBIND] key=<!y; tags=window; action=ブラウザをリロードします（ターミナルで実行した場合はウィンドウを切り替えてからリロードします）;
@@ -35,9 +35,10 @@ LAlt:: Return
 ; [KEYBIND] key=<!a; tags=move; action=キャッシュ（ヒストリ）を検索して移動します;
 <!s:: find_cache()
 ; [KEYBIND] key=<!d; tags=move; action=ファイル名からファイルを検索して移動します;
-<!d:: Return
+<!d:: find_text()
 ; [KEYBIND] key=<!f; tags=move; action=テキストからファイルを検索して移動します;
 <!f:: find_file()
+; [KEYBIND] key=<!g; tags=move; action=選択中のテキストをWebで検索します;
 <!g:: find_selected_text_by_web()
 
 ; row 2 right
