@@ -1,3 +1,7 @@
 vscode_switch_terminal() {
-    Send "^@"
+    Send "{F1}"
+}
+
+vscode_toggle_maximized_panel() {
+    Send "{F2}"
 }

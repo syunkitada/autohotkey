@@ -1,27 +1,27 @@
 doc_map := Map(
     "default", {
         help: "default `t Show keymap",
-        help_file: A_ScriptDir . "\..\home\docs_env\keybind\default.txt",
+        help_file: A_ScriptDir . "\..\home\docs\env\keybind\default.txt",
         help_text: ""
     },
     "tmux", {
         help: "tmux    `t Show keymap",
-        help_file: A_ScriptDir . "\..\home\docs_env\keybind\tmux.txt",
+        help_file: A_ScriptDir . "\..\home\docs\env\keybind\tmux.txt",
         help_text: ""
     },
     "zsh", {
         help: "zsh     `t Show keymap",
-        help_file: A_ScriptDir . "\..\home\docs_env\keybind\zsh.txt",
+        help_file: A_ScriptDir . "\..\home\docs\env\keybind\zsh.txt",
         help_text: ""
     },
     "vim", {
         help: "vim     `t Show keymap",
-        help_file: A_ScriptDir . "\..\home\docs_env\keybind\vim.txt",
+        help_file: A_ScriptDir . "\..\home\docs\env\keybind\vim.txt",
         help_text: ""
     },
     "slack", {
         help: "slack   `t Show keymap",
-        help_file: A_ScriptDir . "\..\home\docs_env\keybind\vim.txt",
+        help_file: A_ScriptDir . "\..\home\docs\env\keybind\vim.txt",
         help_text: ""
     },
 )

@@ -138,8 +138,8 @@ move_backward_word() {
         Return 0
     } else if winactive_is_gvim() {
         escape()
-            Send "bi"
-    } else if winactive_is_terminal() {
+        Send "bi"
+    } else if winactive_is_terminal() or winactive_is_vscode() {
         Send "{Esc}"
         Send "b"
     } else {
@@ -154,7 +154,7 @@ move_forward_word() {
     } else if winactive_is_gvim() {
         escape()
         Send "lwi"
-    } else if winactive_is_terminal() {
+    } else if winactive_is_terminal() or winactive_is_vscode() {
         Send "{Esc}"
         Send "f"
     } else {

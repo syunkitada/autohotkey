@@ -13,7 +13,9 @@ LAlt:: Return
 ; [KEYBIND] key=<!t; tags=window; action=新しいタブを開く;
 <!w:: window_new_tab()
 <!e:: Return
-<!r:: Return
+; [KEYBIND] key=<!r; tags=window; action=VSCodeのターミナルパネルの最大化を切り替えます;
+<!r:: vscode_toggle_maximized_panel()
+; [KEYBIND] key=<!t; tags=window; action=VSCodeのエディタとターミナルを切り替えます;
 <!t:: vscode_switch_terminal()
 
 ; row 1 right
