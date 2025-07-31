@@ -133,13 +133,14 @@ move_bottom() {
     Return 1
 }
 
+; FIXME
 move_backward_word() {
     if winactive_is_ignored_app() {
         Return 0
     } else if winactive_is_gvim() {
         escape()
         Send "bi"
-    } else if winactive_is_terminal() or winactive_is_vscode() {
+    } else if winactive_is_terminal() {
         Send "{Esc}"
         Send "b"
     } else {
@@ -148,13 +149,14 @@ move_backward_word() {
     Return 1
 }
 
+; FIXME
 move_forward_word() {
     if winactive_is_ignored_app() {
         Return 0
     } else if winactive_is_gvim() {
         escape()
         Send "lwi"
-    } else if winactive_is_terminal() or winactive_is_vscode() {
+    } else if winactive_is_terminal() {
         Send "{Esc}"
         Send "f"
     } else {

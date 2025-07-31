@@ -33,7 +33,7 @@ delete_right_char(count:=1) {
     Loop count {
         if winactive_is_gvim() {
             Send "{Del}"
-        } else if winactive_is_terminal() {
+        } else if winactive_is_terminal() or winactive_is_vscode() {
             Send "^d"
         } else {
             Send "{Del}"
@@ -50,7 +50,7 @@ delete_left_char(count:=1) {
     Loop count {
         if winactive_is_gvim() {
             Send "{BS}"
-        } else if winactive_is_terminal() {
+        } else if winactive_is_terminal() or winactive_is_vscode() {
             Send "^h"
         } else {
             Send "{BS}"
@@ -64,7 +64,7 @@ delete_backward_word() {
 		Return 0
 	} else if winactive_is_gvim() {
 		Send "{Esc}dbcl"
-	} else if winactive_is_terminal() {
+	} else if winactive_is_terminal() or winactive_is_vscode() {
 		Send "^w"
 	} else {
 		Send "+^{Left}"
@@ -76,7 +76,7 @@ delete_backward_word() {
 delete_forward_word() {
 	if winactive_is_ignored_app() {
 		Return 0
-	} else if winactive_is_gvim() {
+	} else if winactive_is_gvim() or winactive_is_vscode() {
 		Send "{Esc}"
 		Send "lcw"
 	} else if winactive_is_terminal() {
