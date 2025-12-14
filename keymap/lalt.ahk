@@ -54,11 +54,12 @@ LAlt:: Return
 <!k:: ShiftAltTab
 ; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
 <!l:: window_next_tab()
-; [KEYBIND] key=<!\;; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
-<!;:: doc_gui_show()
+; [KEYBIND] key=<!\;; tags=window; action=プロンプトモードへ移行します;
+<!;:: myprompt_gui_show()
+; [KEYBIND] key=<!:; tags=command; action=ドキュメントモードへ移行します;
+<!sc028:: mydoc_gui_show() ; sc028 = :
 ; [KEYBIND] key=<!:; tags=command; action=コマンドモードへ移行します;
-<!sc028:: mycommand_gui_show() ; sc028 = :
-<!@:: Return
+<!@:: mycommand_gui_show()
 
 ; row 3 left
 ; [KEYBIND] key=<!z; tags=window; action=カレントウィンドウを透明にします（濃い: カレントウィンドウにフォーカス）;

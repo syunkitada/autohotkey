@@ -1,4 +1,25 @@
-doc_map := Map(
+mydoc_gui := Gui(, "Doc")
+mydoc_gui.SetFont(, "Consolas") ; Consolasは、VSCodeのデフォルトです
+mydoc_input := mydoc_gui.Add("Edit", "Y10 X10 w500 r1 WantReturn")
+mydoc_input.OnEvent("change", mydoc_input_on_change)
+mydoc_help_text := mydoc_gui.Add("Edit", "X10 w500 r50 Multi ReadOnly Wrap", "")
+
+mydoc_gui_show() {
+    mydoc_help_text.Value := mydoc_get_help_text("")
+    mydoc_gui.Show()
+}
+
+mydoc_gui_hide() {
+    mydoc_input.Text := ""
+    mydoc_help_text.Value := ""
+    mydoc_gui.Hide()
+}
+
+mydoc_input_on_change(obj, info) {
+    mydoc_help_text.Value := mydoc_get_help_text(mydoc_input.Text)
+}
+
+mydoc_map := Map(
     "default", {
         help: "default `t Show keymap",
         help_file: A_ScriptDir . "\..\home\docs\env\keybind\default.txt",
@@ -26,12 +47,12 @@ doc_map := Map(
     },
 )
 
-get_doc_help(input_text) {
+mydoc_get_help_text(input_text) {
     inputs := StrSplit(input_text, ";")
 
     if inputs.Length > 0 {
-        if (doc_map.has(inputs[1])) {
-            doc := doc_map.get(inputs[1])
+        if (mydoc_map.has(inputs[1])) {
+            doc := mydoc_map.get(inputs[1])
             if doc.help_text == "" {
                 doc.help_text := FileRead(doc.help_file) 
             }
@@ -40,31 +61,9 @@ get_doc_help(input_text) {
     }
 
     help_msg := ""
-    for (key, value in doc_map) {
+    for (key, value in mydoc_map) {
         help_msg := help_msg . value.help . "`n"
     }
 
     return help_msg
-}
-
-doc_gui := Gui(, "Doc")
-doc_gui.SetFont(, "Consolas") ; Consolasは、VSCodeのデフォルトです
-doc_input := doc_gui.Add("Edit", "Y10 X10 w500 r1 WantReturn")
-doc_help_text := doc_gui.Add("Edit", "X10 w500 r50 Multi ReadOnly Wrap", "")
-
-doc_input.OnEvent("change", onChangeDoc)
-
-onChangeDoc(obj, info) {
-    doc_help_text.Value := get_doc_help(doc_input.Text)
-}
-
-doc_gui_hide() {
-    doc_input.Text := ""
-    doc_help_text.Value := ""
-    doc_gui.Hide()
-}
-
-doc_gui_show() {
-    doc_help_text.Value := get_doc_help("")
-    doc_gui.Show()
 }

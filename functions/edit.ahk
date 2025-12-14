@@ -5,8 +5,9 @@ escape() {
     IME_SET(0)
     Send "{Esc}"
 
+	myprompt_gui_hide()
 	mycommand_gui_hide()
-	doc_gui_hide()
+	mydoc_gui_hide()
 	
     Return 1
 }
