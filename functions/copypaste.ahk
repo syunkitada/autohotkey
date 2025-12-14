@@ -52,16 +52,9 @@ copy() {
     Return 1
 }
 
-paste(id:=0) {
+paste() {
     if winactive_is_ignored_app() {
         Return 0
-    }
-
-    clipsaved := A_Clipboard
-
-    if (id) {
-        text := FileRead(A_ScriptDir . "\templates\" . id)
-        A_Clipboard := text
     }
 
     if winactive_is_ubuntu_terminal() {
@@ -73,8 +66,6 @@ paste(id:=0) {
     } else {
         Send "^v"
     }
-
-    A_Clipboard := clipsaved
 
     Return 1
 }
