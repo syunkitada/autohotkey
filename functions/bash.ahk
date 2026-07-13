@@ -3,8 +3,11 @@
 ; 関数名はすべてbash_で始まります。
 
 bash_vim_operate_internal_window() {
-	if winactive_is_gvim() or winactive_is_terminal() {
-		Send "^w"
+	if winactive_is_terminal() {
+		Send "^z"
+		Return 1
+	} else if winactive_is_browser() {
+		Send "^z"
 		Return 1
 	}
 	Return 0

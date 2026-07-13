@@ -6,7 +6,9 @@
 window_next_tab() {
 	if winactive_is_ignored_app() {
 		Return 0
-	} else if winactive_is_terminal() or winactive_is_gvim() {
+	} else if winactive_is_terminal() {
+		Send "{Esc}:tabn{Enter}"
+	} else if winactive_is_browser() {
 		Send "{Esc}:tabn{Enter}"
 	} else if winactive_is_vscode() {
 		Send "^{PgDn}"
@@ -19,9 +21,9 @@ window_next_tab() {
 window_previous_tab() {
 	if winactive_is_ignored_app() {
 		Return 0
-	} else if winactive_is_gvim() {
-		Send "{Esc}:tabp{Enter}"
 	} else if winactive_is_terminal() {
+		Send "{Esc}:tabp{Enter}"
+	} else if winactive_is_browser() {
 		Send "{Esc}:tabp{Enter}"
 	} else if winactive_is_vscode() {
 		Send "^{PgUp}"
