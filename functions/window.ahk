@@ -9,7 +9,7 @@ window_next_tab() {
 	} else if winactive_is_terminal() {
 		Send "{Esc}:tabn{Enter}"
 	} else if winactive_is_browser() {
-		Send "{Esc}:tabn{Enter}"
+		Send "^{Tab}"
 	} else if winactive_is_vscode() {
 		Send "^{PgDn}"
 	} else {
@@ -24,7 +24,7 @@ window_previous_tab() {
 	} else if winactive_is_terminal() {
 		Send "{Esc}:tabp{Enter}"
 	} else if winactive_is_browser() {
-		Send "{Esc}:tabp{Enter}"
+		Send "^+{Tab}"
 	} else if winactive_is_vscode() {
 		Send "^{PgUp}"
 	} else {
