@@ -17,6 +17,9 @@ bash_tmux_operate_over_winder() {
 	if winactive_is_terminal() or winactive_is_vscode() {
 		Send "^b" ; tmux
 		Return 1
+	} else if winactive_is_browser() {
+		Send "^b" ; tmux
+		Return 1
 	}
 	Return 0
 }

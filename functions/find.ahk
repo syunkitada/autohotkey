@@ -42,17 +42,20 @@ find_text() {
         Send " ft"
     } else if winactive_is_vscode() {
         Send "^F"
+    } else if winactive_is_browser() {
+        Send "^F"
     } else {
         Send "^f"
     }
 }
 
 find_file() {
-    if winactive_is_browser() {
-        Send "!d"
-    } else if winactive_is_terminal() {
+    if winactive_is_terminal() {
         Send " ff"
     } else if winactive_is_vscode() {
+        Send "^E"
+        Send "^p"
+    } else if winactive_is_browser() {
         Send "^E"
         Send "^p"
     } else if winactive_is_slack() {
