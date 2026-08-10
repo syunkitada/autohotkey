@@ -68,8 +68,7 @@ delete_backward_word() {
 	} else if winactive_is_terminal() or winactive_is_vscode() {
 		Send "^w"
 	} else {
-		Send "+^{Left}"
-		Send "{Del}"
+		Send "^{Backspace}"
 	}
 	Return 1
 }
