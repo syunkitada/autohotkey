@@ -18,8 +18,8 @@
 >^u:: move_backward_word()
 ; [KEYBIND] key=>^i; tags=move; action=次のワードへ移動します(move to next contIguous word) ;
 >^i:: move_forward_word()
-; [KEYBIND] key=>^o; tags=edit; action=下へ新規の行追加して移動します(new Oneline);
->^o:: move_newline(1)
+; [KEYBIND] key=>^o; tags=keybind; action=このキーの組み合わせを無効にします;
+>^o:: Return
 >^+o:: Return
 >^p:: Return
 >^[:: Return
@@ -36,8 +36,8 @@
 >^d:: delete_left_char()
 ; [KEYBIND] key=>^f; tags=edit; action=後ろの一文字を削除します(delete Forward char);
 >^f:: delete_right_char()
-; [KEYBIND] key=>^b; tags=edit; action=次の一単語を削除します(Delete forward word);
->^g:: delete_forward_word()
+; [KEYBIND] key=>^g; tags=keybind; action=このキーの組み合わせを無効にします;
+>^g:: Return
 ; ----------------------------------------------------------------------------------------------------
 ; row 2 right
 ; ----------------------------------------------------------------------------------------------------
@@ -57,7 +57,6 @@
 ; ----------------------------------------------------------------------------------------------------
 ; row 3 left
 ; ----------------------------------------------------------------------------------------------------
->^z:: Reload
 ; [KEYBIND] key=>^x; tags=clipboard; action=切り取ります(Cut text);
 >^x:: cut()
 ; [KEYBIND] key=>^c; tags=clipboard; action=コピーします(Copy text);
@@ -65,6 +64,8 @@
 ; [KEYBIND] key=>^v; tags=clipboard; action=ペーストします(Paste text);
 >^v:: paste()
 >^b:: Return
+; [KEYBIND] key=>^z; tags=keybind; action=このキーの組み合わせを無効にします;
+>^z:: Return
 ; ----------------------------------------------------------------------------------------------------
 ; row 3 right
 ; ----------------------------------------------------------------------------------------------------
@@ -72,10 +73,9 @@
 >^n:: move_half_pagedown()
 ; [KEYBIND] key=>^m; tags=page; action=ページを上へスクロールします;
 >^m:: move_half_pageup()
-; [KEYBIND] key=>^,; tags=page; action=ヒストリを前へ戻ります FIXME;
->^,:: move_backward_history()
-; [KEYBIND] key=>^.; tags=page; action=ヒストリを先へ進みます FIXME;
-; [KEYBIND] key=<TODO>; tags=page; action=定義元へ飛びます FIXME;
->^.:: move_forward_history()
+; [KEYBIND] key=>^,; tags=keybind; action=このキーの組み合わせを無効にします;
+>^,:: Return
+; [KEYBIND] key=>^.; tags=keybind; action=このキーの組み合わせを無効にします;
+>^.:: Return
 >^/:: Return
 >^sc073:: Return ; sc073 = \

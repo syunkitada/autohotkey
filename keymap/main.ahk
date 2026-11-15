@@ -38,4 +38,3 @@ RCtrl:: escape()
 #Include lalt.ahk
 #Include rctrl.ahk
 #Include windows.ahk
-#Include mouse.ahk

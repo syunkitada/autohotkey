@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JIS キーマップ比較</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --page: #f4f6f8;
+      --panel: #fff;
+      --key: #fff;
+      --key-border: #c8ced6;
+      --ink: #1b2430;
+      --muted: #5e6875;
+      --accent: #2368d1;
+      --confirmed: #d9e8ff;
+      --mapped: #d9f2e3;
+      --review: #fff0c2;
+      --blocked: #e5e8ed;
+      --shadow: 0 2px 6px #1b243018;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #16191e;
+        --panel: #22272e;
+        --key: #2d333b;
+        --key-border: #555e69;
+        --ink: #edf1f5;
+        --muted: #aeb8c4;
+        --accent: #89b4ff;
+        --confirmed: #233d61;
+        --mapped: #244d36;
+        --review: #594817;
+        --blocked: #41464e;
+        --shadow: 0 2px 6px #0005;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--page); color: var(--ink); }
+    main { width: min(1200px, 100%); margin: 0 auto; padding: 28px 20px 48px; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.5rem, 4vw, 2rem); }
+    h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    p { line-height: 1.55; }
+    .intro { margin: 0 0 18px; color: var(--muted); }
+    .notice { margin: 0 0 18px; padding: 10px 14px; border-left: 4px solid #d59a18; border-radius: 4px; background: var(--review); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 14px; }
+    .tabs button { padding: 9px 13px; border: 1px solid var(--key-border); border-radius: 7px; background: var(--panel); color: var(--ink); font: inherit; cursor: pointer; }
+    .tabs button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent); }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .layer-note { min-height: 2.5em; margin: 0 0 14px; color: var(--muted); }
+    .keyboard-wrap { overflow-x: auto; padding: 8px 2px 14px; }
+    .keyboard { display: grid; gap: 7px; min-width: 1080px; padding: 18px; border: 1px solid var(--key-border); border-radius: 14px; background: var(--panel); box-shadow: var(--shadow); }
+    .key-row { display: flex; gap: 6px; width: max-content; }
+    .key { display: flex; flex-direction: column; justify-content: space-between; width: 48px; height: 48px; padding: 5px 6px; border: 1px solid var(--key-border); border-radius: 6px; background: var(--key); box-shadow: 0 2px 0 var(--key-border); color: var(--ink); text-align: left; cursor: pointer; }
+    .key .legend { font-size: 12px; font-weight: 650; line-height: 1; }
+    .key .hint { overflow: hidden; max-width: 100%; color: var(--muted); font-size: 9px; line-height: 1.05; text-overflow: ellipsis; white-space: nowrap; }
+    .wide-1 { width: 65px; }
+    .wide-2 { width: 82px; }
+    .wide-3 { width: 104px; }
+    .wide-4 { width: 132px; }
+    .space { width: 170px; }
+    .confirmed { background: var(--confirmed); }
+    .mapped, .candidate { background: var(--mapped); }
+    .review { background: var(--review); }
+    .blocked { background: var(--blocked); }
+    .selected { outline: 3px solid var(--accent); outline-offset: 1px; z-index: 1; }
+    .bottom-row { justify-content: center; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 0; color: var(--muted); font-size: .9rem; }
+    .swatch { display: inline-block; width: 13px; height: 13px; margin: 0 5px -2px 0; border: 1px solid var(--key-border); border-radius: 3px; }
+    .details { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr); gap: 16px; margin-top: 16px; }
+    .panel { min-width: 0; padding: 16px; border: 1px solid var(--key-border); border-radius: 10px; background: var(--panel); }
+    .panel p { margin: 6px 0; }
+    .detail-output { color: var(--accent); font-size: 1.1rem; font-weight: 650; }
+    .small { color: var(--muted); font-size: .9rem; }
+    .compare-table-wrap { overflow-x: auto; border: 1px solid var(--key-border); border-radius: 10px; background: var(--panel); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 11px 13px; border-bottom: 1px solid var(--key-border); text-align: left; vertical-align: top; line-height: 1.45; }
+    th { background: var(--key); }
+    tr:last-child td { border-bottom: 0; }
+    .compare-note { margin: 10px 0 0; color: var(--muted); font-size: .9rem; }
+    [hidden] { display: none !important; }
+    @media (max-width: 680px) {
+      main { padding: 20px 14px 36px; }
+      .details { grid-template-columns: 1fr; }
+      .keyboard { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>JIS キーマップ比較</h1>
+    <p class="intro">Windows の現行設定と MacBook Pro JIS 向けの案を、このページで見比べます。レイヤーを選び、キーを押すと割り当ての詳細が表示されます。</p>
+    <p class="notice"><strong>Windows 側の基準:</strong> Windows の図は Change Key と現在の AHK を反映しています。README の要約とは RCtrl+A、Home / End の割り当てに差があるため、実装コードを基準にしています。</p>
+
+    <div class="tabs" id="view-tabs" role="group" aria-label="表示">
+      <button type="button" data-view="compare" aria-pressed="true">比較</button>
+      <button type="button" data-view="windows" aria-pressed="false">Windows</button>
+      <button type="button" data-view="macos" aria-pressed="false">macOS</button>
+    </div>
+
+    <section id="compare-view">
+      <h2>修飾キーと共通操作</h2>
+      <div class="compare-table-wrap">
+        <table>
+          <thead><tr><th>役割</th><th>Windows JIS</th><th>macOS JIS 案</th></tr></thead>
+          <tbody id="compare-rows"></tbody>
+        </table>
+      </div>
+      <p class="compare-note">Mac 側の「候補」「要検討」は実設定前の案です。各 OS の図へ切り替えると、レイヤー内の詳細を確認できます。</p>
+    </section>
+
+    <section id="map-view" hidden>
+      <h2 id="map-title"></h2>
+      <div class="tabs" id="layer-tabs" role="group" aria-label="キーレイヤー"></div>
+      <p class="layer-note" id="layer-note" aria-live="polite"></p>
+      <div class="keyboard-wrap" aria-label="JIS キーボード図"><div class="keyboard" id="keyboard"></div></div>
+      <div class="legend" id="map-legend"></div>
+      <section class="details" aria-label="キーの詳細">
+        <div class="panel" aria-live="polite">
+          <h2 id="detail-title">キーを選択してください</h2>
+          <p class="detail-output" id="detail-output">—</p>
+          <p id="detail-description"></p>
+          <p class="small" id="detail-source"></p>
+        </div>
+        <div class="panel" id="map-context"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const key = (status, output, description) => ({ status, output, description });
+    const entries = (data, status = "mapped") => Object.fromEntries(data.map(([id, output, description]) => [id, key(status, output, description)]));
+
+    const WINDOWS_ROWS = [
+      [["zenkaku", "半角/全角", "wide-2"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["0", "0"], ["minus", "-"], ["caret", "^"], ["yen", "¥"], ["backspace", "Backspace", "wide-2"]],
+      [["tab", "Tab", "wide-1"], ["q", "Q"], ["w", "W"], ["e", "E"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["at", "@"], ["open_bracket", "["], ["return", "Enter", "wide-3"]],
+      [["caps_lock", "CapsLock", "wide-2"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], ["semicolon", ";"], ["colon", ":"], ["close_bracket", "]"], ["enter", "Enter", "wide-1"]],
+      [["left_shift", "Shift", "wide-3"], ["z", "Z"], ["x", "X"], ["c", "C"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], ["comma", ","], ["period", "."], ["slash", "/"], ["backslash", "\\"], ["right_shift", "Shift", "wide-3"]],
+      [["left_control", "Ctrl"], ["left_win", "Win"], ["left_alt", "Alt"], ["muhenkan", "無変換"], ["space", "Space", "space"], ["henkan", "変換"], ["katakana", "カタカナ"], ["right_alt", "Alt"], ["right_win", "Win"], ["application", "App"], ["right_control", "Ctrl"]]
+    ];
+
+    const MACOS_ROWS = [
+      [["grave", "半角"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["0", "0"], ["minus", "-"], ["caret", "^"], ["yen", "¥"], ["delete", "Delete", "wide-2"]],
+      [["tab", "Tab", "wide-1"], ["q", "Q"], ["w", "W"], ["e", "E"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["at", "@"], ["open_bracket", "["], ["return", "Return", "wide-2"]],
+      [["left_control", "Control", "wide-2"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], ["semicolon", ";"], ["colon", ":"], ["close_bracket", "]"]],
+      [["left_shift", "Shift", "wide-3"], ["z", "Z"], ["x", "X"], ["c", "C"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], ["comma", ","], ["period", "."], ["slash", "/"], ["backslash", "\\"], ["right_shift", "Shift", "wide-3"]],
+      [["caps_lock", "CapsLock"], ["left_option", "Option", "wide-1"], ["left_command", "⌘", "wide-1"], ["eisu", "英数", "wide-1"], ["space", "Space", "space"], ["kana", "かな", "wide-1"], ["right_command", "⌘", "wide-1"], ["fn", "fn"]]
+    ];
+
+    const WINDOWS = {
+      title: "Windows JIS",
+      rows: WINDOWS_ROWS,
+      context: "Windows の図は Change Key と AHK の現行設定です。物理変換は Change Key、Windowsキーを起点にするAHK独自ショートカットはありません。",
+      source: "keymap/*.ahk · README.md",
+      layers: {
+        base: { label: "通常 / Change Key", note: "Change Key による物理キー変換と共通ホットキー。通常時は修飾キーを他のキーと同じ表示にしています。", entries: {
+          left_control: key("modifier", "Left Control", "通常の Left Control として使います。"),
+          left_win: key("modifier", "Windows キー", "Windows 標準のショートカットに使います。キーを起点にするAHK独自割り当てはありません。"),
+          left_alt: key("modifier", "Left Alt / LAlt レイヤー", "アプリ操作用の LAlt レイヤーを起動します。"),
+          caps_lock: key("mapped", "Tab", "物理 CapsLock を Tab に変換します。"),
+          muhenkan: key("mapped", "Right Control / 単押し Esc", "無変換を Right Control に変換します。RCtrl 単押しは Esc を送ります。"),
+          right_control: key("modifier", "Right Control", "通常の Right Control として使います。"),
+          left_shift: key("modifier", "Left Shift", "通常の Left Shift として使います。"),
+          henkan: key("mapped", "Left Shift", "物理 変換キーを Left Shift に変換します。"),
+          katakana: key("mapped", "Right Shift", "物理 カタカナ・ひらがなキーを Right Shift に変換します。"),
+          right_shift: key("modifier", "Right Shift", "通常の Right Shift として使います。"),
+          right_alt: key("modifier", "Right Alt", "通常の Right Alt として使います。"),
+          right_win: key("modifier", "Windows キー", "Windows 標準のショートカットに使います。キーを起点にするAHK独自割り当てはありません。"),
+          at: key("mapped", "[", "JIS の @ キー位置を [ に変換します。"),
+          open_bracket: key("mapped", "]", "JIS の [ キー位置を ] に変換します。"),
+          close_bracket: key("mapped", "@", "JIS の ] キー位置を @ に変換します。"),
+          space: key("mapped", "RCtrl+Space → Enter / RShift+Space → 英数", "Right Control+Space は Enter。Right Shift+Space は IME を英数字入力にします。"),
+          tab: key("mapped", "RCtrl+Tab: 補完候補 前 / RCtrl+Shift+Tab: 次", "ターミナルや Vim では Ctrl+P / Ctrl+N を送信します。"),
+          semicolon: key("mapped", "Shift+; → ' / RCtrl+Shift+; → +", "記号入力を変更します。後者は RLogin でも '+' を入力できるよう通常の '+' を送ります。"),
+          colon: key("mapped", "Shift+: → \" / RCtrl+Shift+: → *", "JIS のコロン位置の記号入力を変更します。")
+        }},
+        rctrl: { label: "RCtrl", note: "無変換（Right Control）を押しながら使うレイヤー。青く表示した起点キーだけが修飾キーです。色のないキーの一部は AHK で明示的に無効化しています。", entries: {
+          muhenkan: key("confirmed", "RCtrl 押下中", "無変換から変換された Right Control がこのレイヤーを起動しています。"),
+          q: key("blocked", "無効", "元の入力を抑止します。"), w: key("blocked", "無効", "元の入力を抑止します。"), e: key("blocked", "無効", "元の入力を抑止します。"), r: key("blocked", "無効", "元の入力を抑止します。"), t: key("blocked", "無効", "元の入力を抑止します。"), y: key("blocked", "無効", "元の入力を抑止します。"),
+          u: key("mapped", "前の単語へ", "Ctrl+Left を送信します。"), i: key("mapped", "次の単語へ", "Ctrl+Right を送信します。"), o: key("blocked", "無効", "RCtrl+O の入力を抑止します。RCtrl+Shift+O も無効です。"), p: key("blocked", "無効", "元の入力を抑止します。"), at: key("blocked", "無効", "RCtrl+[ を抑止します。"), open_bracket: key("blocked", "無効", "RCtrl+] を抑止します。"),
+          a: key("mapped", "全選択", "一般アプリでは Ctrl+A。ターミナル、Vim、VS Code では選択方法を切り替えます。"), s: key("mapped", "前の単語を削除", "アプリに応じて削除方法を切り替えます。"), d: key("mapped", "前の1文字を削除", "カーソル左側の1文字を削除します。"), f: key("mapped", "後ろの1文字を削除", "カーソル右側の1文字を削除します。"), g: key("blocked", "無効", "RCtrl+G の入力を抑止します。"),
+          h: key("mapped", "←", "左へ移動します。"), j: key("mapped", "↓", "下へ移動します。"), k: key("mapped", "↑", "上へ移動します。"), l: key("mapped", "→", "右へ移動します。"), semicolon: key("mapped", "行頭へ", "ターミナルでは Ctrl+A、それ以外では Home。"), colon: key("mapped", "行末へ", "ターミナルでは Ctrl+E、それ以外では End。"),
+          x: key("mapped", "切り取り", "通常は Ctrl+X、ターミナルや Vim では専用処理。"), c: key("mapped", "コピー", "通常は Ctrl+C、ターミナルや Vim では専用処理。"), v: key("mapped", "貼り付け", "アプリに応じて Ctrl+V、Ctrl+Shift+V、Shift+Insert など。"), b: key("blocked", "無効", "元の入力を抑止します。"), z: key("blocked", "無効", "RCtrl+Z の入力を抑止します。"),
+          n: key("mapped", "半ページ下", "ターミナル / Vim / VS Code は Ctrl+D、それ以外は Page Down。"), m: key("mapped", "半ページ上", "ターミナル / Vim / VS Code は Ctrl+U、それ以外は Page Up。"), comma: key("blocked", "無効", "RCtrl+, の入力を抑止します。"), period: key("blocked", "無効", "RCtrl+. の入力を抑止します。"), slash: key("blocked", "無効", "元の入力を抑止します。"), backslash: key("blocked", "無効", "元の入力を抑止します。")
+        }},
+        lalt: { label: "LAlt", note: "Left Alt を押しながら使うアプリ操作レイヤー。", entries: {
+          left_alt: key("confirmed", "LAlt 押下中", "Left Alt がこのレイヤーを起動しています。"),
+          space: key("blocked", "無効", "LAlt+Space を抑止します。"), tab: key("blocked", "無効", "LAlt+Tab を抑止します。"),
+          q: key("blocked", "無効", "LAlt+Q の入力を抑止します。"), w: key("blocked", "無効", "LAlt+W の入力を抑止します。"), e: key("blocked", "無効", "元の入力を抑止します。"), r: key("blocked", "無効", "LAlt+R の入力を抑止します。"), t: key("blocked", "無効", "LAlt+T の入力を抑止します。"), y: key("blocked", "無効", "LAlt+Y の入力を抑止します。"), u: key("mapped", "Ctrl+T (under tmux)", "~/home の tmux 設定では under tmux のprefixは Ctrl+T です。"), i: key("mapped", "Ctrl+Z (Vim)", "~/home の Neovim 設定では Ctrl+Z に続けて H/J/K/L でウィンドウ移動します。"), o: key("mapped", "Ctrl+B (over tmux)", "over tmux は標準prefixの Ctrl+B を使います。"), p: key("blocked", "無効", "元の入力を抑止します。"), at: key("blocked", "無効", "元の入力を抑止します。"), open_bracket: key("blocked", "無効", "元の入力を抑止します。"),
+          a: key("mapped", "タブ検索", "find_tab()。"), s: key("mapped", "履歴検索", "find_cache()。"), d: key("blocked", "無効", "LAlt+D の入力を抑止します。"), f: key("blocked", "無効", "LAlt+F の入力を抑止します。"), g: key("blocked", "無効", "LAlt+G の入力を抑止します。"), h: key("mapped", "前のタブ", "RLogin では Vim の場合だけ有効。"), j: key("mapped", "次のウィンドウ", "Alt+Tab。Shift+J はタスクビュー。"), k: key("mapped", "前のウィンドウ", "Shift+Alt+Tab。"), l: key("mapped", "次のタブ", "RLogin では Vim の場合だけ有効。"), semicolon: key("blocked", "無効", "LAlt+; の入力を抑止します。"), colon: key("blocked", "無効", "LAlt+: の入力を抑止します。"), close_bracket: key("blocked", "無効", "LAlt+] の入力を抑止します。"),
+          z: key("mapped", "透明度 220", "アクティブウィンドウを透明にします。"), x: key("mapped", "透明度 150", "別の透明度で透明にします。"), c: key("blocked", "無効", "元の入力を抑止します。"), v: key("blocked", "無効", "元の入力を抑止します。"), b: key("blocked", "無効", "LAlt+B の入力を抑止します。"), n: key("mapped", "ページ下", "move_pagedown()。"), m: key("mapped", "ページ上", "move_pageup()。"), comma: key("blocked", "無効", "元の入力を抑止します。"), period: key("blocked", "無効", "元の入力を抑止します。"), slash: key("blocked", "無効", "LAlt+/ の入力を抑止します。"), backslash: key("blocked", "無効", "元の入力を抑止します。")
+        }},
+        rshift: { label: "RShift", note: "カタカナ・ひらがなキーを Right Shift として使うレイヤー。", entries: {
+          katakana: key("confirmed", "RShift 押下中", "カタカナ・ひらがなキーが Right Shift としてこのレイヤーを起動しています。"), space: key("mapped", "英数字入力に切替", "IME_SET(0) を実行します。"), muhenkan: key("mapped", "日本語入力に切替", "IME を英数にした後、日本語入力を選択します。"),
+          ...entries("qwertyuiopasdfghjkl;:zxcvbnm".split("").filter(ch => /[a-z;:]/.test(ch)).map(ch => [ch === ";" ? "semicolon" : ch === ":" ? "colon" : ch, "無効", "Right Shift の組み合わせを抑止します。"]), "blocked")
+        }}
+      }
+    };
+
+    const MACOS = {
+      title: "macOS JIS 案",
+      rows: MACOS_ROWS,
+      context: "MacBook Pro JIS 向けの案です。Karabiner の設定 JSON はまだ作成していません。決定済みの修飾キーと、Windows の操作を移す候補を分けています。",
+      source: "Mac のキーマップ案 · Windows の意味は keymap/*.ahk を参照",
+      layers: {
+        base: { label: "通常", note: "指定された修飾キーの役割。", entries: {
+          caps_lock: key("confirmed", "Right Command", "単純な Command キーです。単押し専用の動作は付けません。"), left_option: key("confirmed", "Option のまま", "Option は変更しません。"), left_command: key("confirmed", "Windows の LAlt レイヤー", "単独の Command としては使わず、LAlt と同じ役割のレイヤーキーにします。"), eisu: key("confirmed", "単押し Esc / 長押し Right Control", "Windows の無変換→RCtrl に合わせます。"), kana: key("confirmed", "Left Shift", "物理かなキーを Left Shift として使います。Space と英数との組み合わせは、かな / Shift レイヤーで切り替えます。"), right_command: key("confirmed", "Right Command のまま", "変更しません。CapsLock からも Right Command を送ります。"), left_control: key("confirmed", "単押し Tab / 長押し Left Control", "A の左隣。タップで Tab、保持すると Control です。")
+        }},
+        kana_shift: { label: "かな / Shift", note: "かなキーを押しながら使うレイヤー。かなは Left Shift として働き、Space で英数入力、英数でかな入力に切り替えます。", entries: {
+          kana: key("confirmed", "Left Shift 押下中", "かなキーが Left Shift としてこのレイヤーを起動しています。"),
+          space: key("confirmed", "英数入力に切替", "かな + Space で英数入力に切り替えます。"),
+          eisu: key("confirmed", "かな入力に切替", "かな + 英数でかな入力に切り替えます。")
+        }},
+        rctrl: { label: "英数 / RCtrl", note: "英数を押しながら使うレイヤー。Windows の RCtrl レイヤーを基準にしています。", entries: {
+          eisu: key("confirmed", "単押し Esc / 長押し Right Control", "このキーがレイヤーの起点です."), u: key("candidate", "Option + ←", "前の単語へ移動する候補。"), i: key("candidate", "Option + →", "次の単語へ移動する候補。"), o: key("blocked", "無効", "RCtrl+O の入力を抑止します。"), a: key("candidate", "Command + A", "全選択。ターミナルやエディタは要確認。"), s: key("candidate", "Option + Delete", "前の単語を削除する候補。"), d: key("candidate", "Delete", "前の1文字を削除。"), f: key("candidate", "Fn + Delete", "後ろの1文字を削除。"), g: key("blocked", "無効", "RCtrl+G の入力を抑止します。"), h: key("candidate", "←", "左へ移動。"), j: key("candidate", "↓", "下へ移動。"), k: key("candidate", "↑", "上へ移動。"), l: key("candidate", "→", "右へ移動。"), semicolon: key("candidate", "Command + ←", "テキストの行頭へ移動。ターミナルは要確認。"), colon: key("candidate", "Command + →", "テキストの行末へ移動。ターミナルは要確認。"), x: key("candidate", "Command + X", "切り取り。"), c: key("candidate", "Command + C", "コピー。"), v: key("candidate", "Command + V", "ペースト。"), z: key("blocked", "無効", "RCtrl+Z の入力を抑止します。"), n: key("review", "出力未決定", "半ページ下。アプリ別の動作を整理します。"), m: key("review", "出力未決定", "半ページ上。アプリ別の動作を整理します。"), comma: key("blocked", "無効", "RCtrl+, の入力を抑止します。"), period: key("blocked", "無効", "RCtrl+. の入力を抑止します。"), close_bracket: key("blocked", "無効", "RCtrl+] の入力を抑止します。")
+        }},
+        lalt: { label: "左 Command / LAlt", note: "Left Command を押しながら使うレイヤー。Windows LAlt の操作を基に、Mac の出力候補を整理しています。", entries: {
+          left_command: key("confirmed", "LAlt レイヤーキー", "Windows の Left Alt と同じ役割です。"), space: key("blocked", "無効化", "Windows の LAlt+Space に合わせる候補。"), tab: key("blocked", "無効化", "Windows の LAlt+Tab に合わせる候補。"), q: key("blocked", "無効", "LAlt+Q の入力を抑止します。"), w: key("blocked", "無効", "LAlt+W の入力を抑止します。"), e: key("blocked", "無効化", "Windows で無効。"), r: key("blocked", "無効", "LAlt+R の入力を抑止します。"), t: key("blocked", "無効", "LAlt+T の入力を抑止します。"), y: key("blocked", "無効", "LAlt+Y の入力を抑止します。"), u: key("candidate", "Control + T", "under tmux のprefix。~/home/home/.config/tmux/tmux.conf では C-t を使います。"), i: key("candidate", "Control + Z", "Vimのウィンドウ操作prefix。~/home/home/.config/nvim/rc/keymap.vim で Ctrl+Z+h/j/k/l を Ctrl+W+h/j/k/l に対応させています。"), o: key("candidate", "Control + B", "over tmux のprefix。標準の C-b を使います。"), p: key("blocked", "無効化", "Windows で無効。"), at: key("blocked", "無効化", "Windows LAlt+[ に相当。"), open_bracket: key("blocked", "無効化", "Windows LAlt+] に相当。"),
+          a: key("review", "タブ検索を要検討", "Windows の find_tab() 相当。"), s: key("review", "履歴検索を要検討", "Windows の find_cache() 相当。"), d: key("blocked", "無効", "LAlt+D の入力を抑止します。"), f: key("blocked", "無効", "LAlt+F の入力を抑止します。"), g: key("blocked", "無効", "LAlt+G の入力を抑止します。"), h: key("candidate", "Right Command + Shift + [", "前のタブ。アプリごとの対応は要確認。"), j: key("candidate", "Right Command + Tab", "次のアプリへ切替。Shift+J のタスクビュー相当は要検討。"), k: key("candidate", "Right Command + Shift + Tab", "前のアプリへ切替。"), l: key("candidate", "Right Command + Shift + ]", "次のタブ。アプリごとの対応は要確認。"), semicolon: key("blocked", "無効", "LAlt+; の入力を抑止します。"), colon: key("blocked", "無効", "LAlt+: の入力を抑止します。"), close_bracket: key("blocked", "無効", "LAlt+] の入力を抑止します。"), z: key("review", "透明化を要検討", "Windows はウィンドウ透明度を変更。"), x: key("review", "透明化を要検討", "Windows は別の透明度を設定。"), c: key("blocked", "無効化", "Windows で無効。"), v: key("blocked", "無効化", "Windows で無効。"), b: key("blocked", "無効", "LAlt+B の入力を抑止します。"), n: key("candidate", "Fn + ↓", "ページ下へスクロール。"), m: key("candidate", "Fn + ↑", "ページ上へスクロール。"), comma: key("blocked", "無効化", "Windows で無効。"), period: key("blocked", "無効化", "Windows で無効。"), slash: key("blocked", "無効", "LAlt+/ の入力を抑止します。"), backslash: key("blocked", "無効化", "Windows で無効。")
+        }}
+      }
+    };
+
+    const COMPARISON = [
+      ["CapsLock", "Tab", "Right Command（単純な Command）"],
+      ["無変換 / 英数", "Right Control。単押し Esc", "Right Control。単押し Esc"],
+      ["Left Alt / 左 Command", "LAlt アプリ操作レイヤー", "LAlt アプリ操作レイヤー"],
+      ["変換 / かな", "Left Shift", "Left Shift"],
+      ["英数入力へ切替", "RShift + Space", "かな + Space"],
+      ["かな入力へ切替", "RShift + 無変換", "かな + 英数"],
+      ["Left Control", "通常の Control", "単押し Tab / 長押し Control"],
+      ["Option", "LAlt レイヤー / RAlt は通常 Alt", "Option のまま"],
+      ["Windows キー", "Windows標準動作（キー起点のAHK設定なし）", "該当キーなし"],
+      ["Right Command", "Windows 修飾キーの相当なし", "変更なし"],
+      ["RCtrl + H/J/K/L", "カーソル ←/↓/↑/→", "カーソル ←/↓/↑/→ 候補"],
+      ["RCtrl + A", "全選択", "Command+A 候補"],
+      ["RCtrl + X/C/V", "切り取り / コピー / ペースト", "Command+X/C/V 候補"],
+      ["RCtrl + G/Z/]", "すべて無効", "すべて無効"],
+      ["LAlt + Q/W/R/T/Y", "すべて無効", "すべて無効"],
+      ["LAlt + B", "無効", "無効"],
+      ["LAlt + D/F/G", "すべて無効", "すべて無効"],
+      ["LAlt + /", "無効", "無効"],
+      ["LAlt + ;/:/]", "すべて無効", "すべて無効"],
+      ["LAlt + U/I/O", "Ctrl+T / Ctrl+Z / Ctrl+B", "Control+T / Control+Z / Control+B 候補"],
+      ["LAlt + H/J/K/L", "タブ・ウィンドウ移動", "タブ / アプリ切替の候補"]
+    ];
+
+    let currentView = "compare";
+    const currentLayers = { windows: "base", macos: "base" };
+    let selectedKey = null;
+    const compareView = document.getElementById("compare-view");
+    const mapView = document.getElementById("map-view");
+
+    function renderComparison() {
+      const body = document.getElementById("compare-rows");
+      body.replaceChildren();
+      COMPARISON.forEach(([role, win, mac]) => {
+        const row = document.createElement("tr");
+        [role, win, mac].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        });
+        body.append(row);
+      });
+    }
+
+    function setView(view) {
+      currentView = view;
+      document.querySelectorAll("[data-view]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.view === view)));
+      compareView.hidden = view !== "compare";
+      mapView.hidden = view === "compare";
+      selectedKey = null;
+      resetDetail();
+      if (view !== "compare") renderMap();
+    }
+
+    function renderMap() {
+      const map = viewMap();
+      const layerId = currentLayers[currentView];
+      const layer = map.layers[layerId];
+      document.getElementById("map-title").textContent = map.title;
+      document.getElementById("layer-note").textContent = layer.note;
+      const tabs = document.getElementById("layer-tabs");
+      tabs.replaceChildren();
+      Object.entries(map.layers).forEach(([id, data]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = data.label;
+        button.setAttribute("aria-pressed", String(id === layerId));
+        button.addEventListener("click", () => {
+          currentLayers[currentView] = id;
+          selectedKey = null;
+          resetDetail();
+          renderMap();
+        });
+        tabs.append(button);
+      });
+
+      const keyboard = document.getElementById("keyboard");
+      keyboard.replaceChildren();
+      map.rows.forEach((row, rowIndex) => {
+        const rowElement = document.createElement("div");
+        rowElement.className = `key-row${rowIndex === 4 ? " bottom-row" : ""}`;
+        row.forEach(([id, label, size]) => {
+          const binding = layer.entries[id];
+          const keyButton = document.createElement("button");
+          keyButton.type = "button";
+          keyButton.className = `key${size ? ` ${size}` : ""}${binding ? ` ${binding.status}` : ""}${selectedKey === id ? " selected" : ""}`;
+          keyButton.setAttribute("aria-label", binding ? `${label}: ${binding.output}` : label);
+          const legend = document.createElement("span");
+          legend.className = "legend";
+          legend.textContent = label;
+          const hint = document.createElement("span");
+          hint.className = "hint";
+          hint.textContent = binding ? binding.output : "";
+          keyButton.append(legend, hint);
+          keyButton.addEventListener("click", () => selectKey(id, label));
+          rowElement.append(keyButton);
+        });
+        keyboard.append(rowElement);
+      });
+
+      renderLegend(currentView);
+      renderContextLinks(currentView);
+    }
+
+    function viewMap() { return currentView === "windows" ? WINDOWS : MACOS; }
+
+    function renderLegend(view) {
+      const legend = document.getElementById("map-legend");
+      const labels = [
+        ["confirmed", "起点キー / 決定済み"],
+        ["mapped", "割り当て / 候補"],
+        ["review", "要検討"],
+        ["blocked", "無効化"]
+      ];
+      legend.replaceChildren();
+      labels.forEach(([kind, text]) => {
+        const item = document.createElement("span");
+        const swatch = document.createElement("i");
+        swatch.className = `swatch ${kind}`;
+        item.append(swatch, document.createTextNode(text));
+        legend.append(item);
+      });
+      const note = document.createElement("span");
+      note.textContent = "色のないキーは、このレイヤーに割り当てなし";
+      legend.append(note);
+    }
+
+    function renderContextLinks(view) {
+      const panel = document.getElementById("map-context");
+      const title = document.createElement("h2");
+      title.textContent = "この表示について";
+      const description = document.createElement("p");
+      description.textContent = view === "windows"
+        ? "Windows の図は Change Key と AHK の現行設定です。通常時は修飾キーを通常表示にし、選択中レイヤーの起点キーだけを Mac と同じ青色で表示します。"
+        : "MacBook Pro JIS 向けの案です。Karabiner の設定 JSON はまだありません。決定済みの修飾キーと、Windows の操作を移す候補を分けています。";
+      const source = document.createElement("p");
+      source.className = "small";
+      source.textContent = view === "windows" ? "参照: keymap/*.ahk · README.md" : "参照: macOS 案 · Windows keymap/*.ahk";
+      panel.replaceChildren(title, description, source);
+    }
+
+    function selectKey(id, label) {
+      selectedKey = id;
+      const binding = viewMap().layers[currentLayers[currentView]].entries[id];
+      renderMap();
+      document.getElementById("detail-title").textContent = label;
+      document.getElementById("detail-output").textContent = binding ? binding.output : "このレイヤーに割り当てなし";
+      document.getElementById("detail-description").textContent = binding ? binding.description : "このキーの組み合わせに個別の割り当てはありません。";
+      document.getElementById("detail-source").textContent = binding ? `参照: ${viewMap().source}` : "";
+    }
+
+    function resetDetail() {
+      document.getElementById("detail-title").textContent = "キーを選択してください";
+      document.getElementById("detail-output").textContent = "—";
+      document.getElementById("detail-description").textContent = "";
+      document.getElementById("detail-source").textContent = "";
+    }
+
+    document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
+    renderComparison();
+  </script>
+</body>
+</html>
