@@ -69,10 +69,10 @@
 ; ----------------------------------------------------------------------------------------------------
 ; row 3 right
 ; ----------------------------------------------------------------------------------------------------
-; [KEYBIND] key=>^n; tags=page; action=ページを下へスクロールします;
->^n:: move_half_pagedown()
-; [KEYBIND] key=>^m; tags=page; action=ページを上へスクロールします;
->^m:: move_half_pageup()
+; [KEYBIND] key=>^n; tags=page; action=Page Downキーを送信します;
+>^n:: Send "{PgDn}"
+; [KEYBIND] key=>^m; tags=page; action=Page Upキーを送信します;
+>^m:: Send "{PgUp}"
 ; [KEYBIND] key=>^,; tags=keybind; action=このキーの組み合わせを無効にします;
 >^,:: Return
 ; [KEYBIND] key=>^.; tags=keybind; action=このキーの組み合わせを無効にします;

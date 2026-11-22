@@ -161,6 +161,34 @@
         },
         {
           "type": "basic",
+          "from": {"key_code": "n","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "page_down"}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+n でPage Downを送信する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "m","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "page_up"}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+m でPage Upを送信する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "semicolon","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "a","modifiers": ["left_control"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.apple\\.Terminal$","^com\\.googlecode\\.iterm2$"]}],
+          "description": "Terminal/iTerm2の英数/RCtrl+; でCtrl+Aを送信する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "quote","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "e","modifiers": ["left_control"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.apple\\.Terminal$","^com\\.googlecode\\.iterm2$"]}],
+          "description": "Terminal/iTerm2の英数/RCtrl+: でCtrl+Eを送信する"
+        },
+        {
+          "type": "basic",
           "from": {"key_code": "semicolon","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "left_arrow","modifiers": ["left_command"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],

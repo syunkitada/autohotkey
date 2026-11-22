@@ -38,6 +38,8 @@ Karabiner-EventViewer を開いて、次を確認します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力する。
 - 右Commandと物理Optionは通常どおり動作し、左CommandはLAltレイヤーとして働く。
 - RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
+- Terminal.app / iTerm2 で英数 + ; / : を押すと、Ctrl+A / Ctrl+E が送られる。
+- 英数 + N / M で Page Down / Page Up が送られる。
 
 JIS配列では、印字された記号とKarabinerの `key_code` 名が一致しないキーがあります。設定はJIS用のコードで記述しています。キー位置を確認するときは [KarabinerのJISキーコード表](https://karabiner-elements.pqrs.org/docs/help/troubleshooting/symbols-with-non-ansi-keyboard/)とEventViewerを参照してください。
 
@@ -48,6 +50,8 @@ JIS配列では、印字された記号とKarabinerの `key_code` 名が一致�
 - 左CommandはOptionを出力するLAltレイヤーです。物理Optionはレイヤー判定に使わず、通常のOptionとして残します。
 - かなはLeft Shiftです。かな + Space は英数入力、かな + 英数の単押しはかな入力に切り替えます。かな + ; / : は `'` / `"`、かな + 英数を保持したまま ; / : は `+` / `*` を入力します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力します。
+- Terminal.app / iTerm2 では英数 + ; / : が Ctrl+A / Ctrl+E、それ以外のアプリでは Command + ← / → になります。
+- 英数 + N / M は Page Down / Page Up を送信します。
 - RCtrl・LAltの候補は `keymap.html` に記載されたMac向け出力で実装しています。無効化項目は入力を抑止し、要検討項目は実装していません。
 
 ### Vim / tmux のプレフィックス
