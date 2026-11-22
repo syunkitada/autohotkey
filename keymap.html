@@ -155,7 +155,7 @@
       title: "Windows JIS",
       rows: WINDOWS_ROWS,
       context: "Windows の図は Change Key と AHK の現行設定です。物理変換は Change Key、Windowsキーを起点にするAHK独自ショートカットはありません。",
-      source: "keymap/*.ahk · README.md",
+      source: "windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md",
       layers: {
         base: { label: "通常 / Change Key", note: "Change Key による物理キー変換と共通ホットキー。通常時は修飾キーを他のキーと同じ表示にしています。", entries: {
           left_control: key("modifier", "Left Control", "通常の Left Control として使います。"),
@@ -205,7 +205,7 @@
       title: "macOS JIS",
       rows: MACOS_ROWS,
       context: "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。",
-      source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows の意味は keymap/*.ahk を参照",
+      source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows: windows/autohotkey/keymap/*.ahk",
       layers: {
         base: { label: "通常", note: "指定された修飾キーの役割とJIS記号キーの入れ替え。", entries: {
           caps_lock: key("confirmed", "Right Command", "単純な Command キーです。単押し専用の動作は付けません。"), left_option: key("confirmed", "Left Option のまま", "物理Left Optionは変更しません。"), left_command: key("confirmed", "Left Option出力のLAltレイヤー", "Left Command は Left Option を出力し、LAlt と同じ役割のレイヤーキーとして使います。"), eisu: key("confirmed", "単押し 英数入力 + Esc / 長押し Right Control", "通常は単押しで英数入力に切り替えてからEscapeを送信し、保持でRight Controlです。かな押下中は英数を単押しするとかな入力、保持するとRight Controlになります。"), kana: key("confirmed", "Left Shift", "物理かなキーを Left Shift として使います。Space、英数、記号キーとの組み合わせは各レイヤーで確認できます。"), right_command: key("confirmed", "Right Command のまま", "変更しません。CapsLock からも Right Command を送ります。"), left_control: key("confirmed", "単押し Tab / 長押し Left Control", "A の左隣。タップで Tab、保持すると Control です。"), at: key("mapped", "[", "JISの@キーを[にします（Karabiner: open_bracket → close_bracket）。"), open_bracket: key("mapped", "]", "JISの[キーを]にします（Karabiner: close_bracket → backslash）。"), close_bracket: key("mapped", "@", "JISの]キーを@にします（Karabiner: backslash → open_bracket）。")
@@ -376,7 +376,7 @@
         : "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。";
       const source = document.createElement("p");
       source.className = "small";
-      source.textContent = view === "windows" ? "参照: keymap/*.ahk · README.md" : "参照: macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows keymap/*.ahk";
+      source.textContent = view === "windows" ? "参照: windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md" : "参照: macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows: windows/autohotkey/keymap/*.ahk";
       panel.replaceChildren(title, description, source);
     }
 

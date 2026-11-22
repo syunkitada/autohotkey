@@ -7,7 +7,7 @@ myprompt_button.OnEvent("click", myprompt_on_sumit)
 myprompt_help_text := myprompt_gui.Add("Text", "X10 w300 r10", "")
 
 myprompt_gui_show() {
-    myprompt_help_text.Text := myprompt_get_text(A_ScriptDir . "\..\home_ex\ai\prompts", "")
+    myprompt_help_text.Text := myprompt_get_text(A_ScriptDir . "\..\..\..\home_ex\ai\prompts", "")
     myprompt_gui.Show()
 }
 
@@ -18,7 +18,7 @@ myprompt_gui_hide() {
 }
 
 myprompt_input_on_change(obj, info) {
-    myprompt_help_text.Text := myprompt_get_text(A_ScriptDir . "\..\home_ex\ai\prompts", myprompt_input.Text)
+    myprompt_help_text.Text := myprompt_get_text(A_ScriptDir . "\..\..\..\home_ex\ai\prompts", myprompt_input.Text)
 }
 
 myprompt_on_sumit(obj, info) {

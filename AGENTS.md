@@ -4,11 +4,12 @@
 
 - ルートの `keymap.html` を、Windows と macOS のキーマップ案を確認・比較する唯一のHTMLページとして管理する。OS別の重複HTMLは作らない。
 - `keymap.html` は人が読むキーマップ台帳であり、配列、レイヤー、各キーの動作、比較表の正とする。実行設定はこの台帳から同期する。
+- ルートの `README.md` は共通の概要とOS別説明への入口とする。Windowsの導入・使い方は `windows/autohotkey/README.md`、macOSは `macos/karabiner/README.md` に置く。
 - READMEに詳細な割り当て表を新設しない。既存の簡易一覧に変更が及ぶ場合はAHKとHTMLを照合して更新し、詳しいレイヤー表は `keymap.html` へ案内する。
 
 ## 実設定との同期
 
-- Windowsの実行時設定は `main.ahk` と `keymap/*.ahk` が担う。Windowsの動作を変更するときは、該当するAHK設定と `keymap.html` のWindows表示を同じ変更で更新する。現行動作の確認ではAHKコードを基準にする。
+- Windowsの実行時設定は `windows/autohotkey/main.ahk` と `windows/autohotkey/keymap/*.ahk` が担う。Windowsの動作を変更するときは、該当するAHK設定と `keymap.html` のWindows表示を同じ変更で更新する。現行動作の確認ではAHKコードを基準にする。
 - macOSの正は `keymap.html` とし、Karabiner-Elementsの配布用ルール `macos/karabiner/assets/complex_modifications/autohotkey-jis.json` と `macos/karabiner/README.md` を同期する。ユーザー設定の `~/.config/karabiner/karabiner.json` は直接編集しない。配布用ルールを新規作成・変更するのは、ユーザーが実設定への移行を依頼した場合に限る。
 - WindowsキーはOS標準のショートカット用として残し、Windowsキーを起点にする独自AHKホットキーを追加しない。ユーザーが明示的に方針を変更した場合のみ見直す。
 - LAlt+U/I/OのVim・tmuxプレフィックスは、作業前に `~/home/home/.config/tmux/README.md`、`~/home/home/.config/tmux/tmux.conf`、`~/home/home/.config/nvim/rc/keymap.vim` を確認する。説明と比較表も実際のプレフィックスに合わせる。
