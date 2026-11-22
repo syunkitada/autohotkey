@@ -36,7 +36,7 @@ Karabiner-EventViewer を開いて、次を確認します。
 - かなをShiftとして押しながら Space で英数入力に、英数を単押しするとかな入力に切り替わる。かな + ; / : ではそれぞれ `'` / `"` が入力され、かな + 英数を保持しながら ; / : を押すと `+` / `*` が入力される。
 - 通常のLeft Shiftとの組み合わせでは入力モードを切り替えず、かなキーを押している場合だけ記号レイヤーを使う。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力する。
-- 右Commandと物理Optionは通常どおり動作し、左CommandはLAltレイヤーとして働く。
+- 右Commandと物理Left Optionは通常どおり動作し、左CommandはLeft Option出力でLAltレイヤーとして働く。
 - RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
 - Terminal.app / iTerm2 で英数 + ; / : を押すと、Ctrl+A / Ctrl+E が送られる。
 - 英数 + N / M で Page Down / Page Up が送られる。
@@ -47,7 +47,7 @@ JIS配列では、印字された記号とKarabinerの `key_code` 名が一致�
 
 - CapsLock は Right Command として動作します。右Commandは変更しません。
 - 英数キーは単押しで英数入力に切り替えてからEscapeを送り、保持するとRight Controlになります。かな押下中の英数単押しはかな入力へ切り替えます。英数と左Controlの単押し／長押し判定は200msです。
-- 左CommandはOptionを出力するLAltレイヤーです。物理Optionはレイヤー判定に使わず、通常のOptionとして残します。
+- 左CommandはLeft Optionを出力するLAltレイヤーです。物理Left Optionはレイヤー判定に使わず、通常のLeft Optionとして残します。
 - かなはLeft Shiftです。かな + Space は英数入力、かな + 英数の単押しはかな入力に切り替えます。かな + ; / : は `'` / `"`、かな + 英数を保持したまま ; / : は `+` / `*` を入力します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力します。
 - Terminal.app / iTerm2 では英数 + ; / : が Ctrl+A / Ctrl+E、それ以外のアプリでは Command + ← / → になります。

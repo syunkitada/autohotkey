@@ -17,7 +17,7 @@
           "to": [{"set_variable": {"name": "autohotkey_jis_left_command_pressed","value": 1}},{"key_code": "left_option"}],
           "to_after_key_up": [{"set_variable": {"name": "autohotkey_jis_left_command_pressed","value": 0}}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "左CommandをOption出力のLAltレイヤーにする"
+          "description": "左CommandをLeft Option出力のLAltレイヤーにする"
         },
         {
           "type": "basic",
@@ -94,14 +94,14 @@
           "from": {"key_code": "u","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "left_arrow","modifiers": ["left_option"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+u を割り当てる"
+          "description": "英数/RCtrl+u でLeft Option+←を送る"
         },
         {
           "type": "basic",
           "from": {"key_code": "i","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "right_arrow","modifiers": ["left_option"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+i を割り当てる"
+          "description": "英数/RCtrl+i でLeft Option+→を送る"
         },
         {
           "type": "basic",
@@ -115,7 +115,7 @@
           "from": {"key_code": "s","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "delete_or_backspace","modifiers": ["left_option"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+s を割り当てる"
+          "description": "英数/RCtrl+s でLeft Option+Deleteを送る"
         },
         {
           "type": "basic",
