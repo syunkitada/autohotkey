@@ -32,8 +32,10 @@ Karabiner-Elements Settings を開き、**Complex Modifications** → **Add pred
 
 Karabiner-EventViewer を開いて、次を確認します。
 
-- CapsLock が Right Command、英数が単押しで Escape／保持中は Right Control、左Controlが単押しで Tab／保持中は Left Control になる。
-- かなをShiftとして押しながら Space で英数入力に、英数キーでかな入力に切り替わる。通常のLeft Shiftとの組み合わせでは入力モードを切り替えない。
+- CapsLock が Right Command、英数が単押しで英数入力へ切替後Escape／保持中は Right Control、左Controlが単押しで Tab／保持中は Left Control になる。
+- かなをShiftとして押しながら Space で英数入力に、英数を単押しするとかな入力に切り替わる。かな + ; / : ではそれぞれ `'` / `"` が入力され、かな + 英数を保持しながら ; / : を押すと `+` / `*` が入力される。
+- 通常のLeft Shiftとの組み合わせでは入力モードを切り替えず、かなキーを押している場合だけ記号レイヤーを使う。
+- JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力する。
 - 右Commandと物理Optionは通常どおり動作し、左CommandはLAltレイヤーとして働く。
 - RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
 
@@ -42,9 +44,10 @@ JIS配列では、印字された記号とKarabinerの `key_code` 名が一致�
 ## 割当の要点
 
 - CapsLock は Right Command として動作します。右Commandは変更しません。
-- 英数キーは単押しでEscape、保持するとRight Controlになります。英数と左Controlの単押し／長押し判定は200msです。
+- 英数キーは単押しで英数入力に切り替えてからEscapeを送り、保持するとRight Controlになります。かな押下中の英数単押しはかな入力へ切り替えます。英数と左Controlの単押し／長押し判定は200msです。
 - 左CommandはOptionを出力するLAltレイヤーです。物理Optionはレイヤー判定に使わず、通常のOptionとして残します。
-- かなはLeft Shiftです。かなキーの押下状態を使って、かな + Space とかな + 英数だけを入力モード切替にします。
+- かなはLeft Shiftです。かな + Space は英数入力、かな + 英数の単押しはかな入力に切り替えます。かな + ; / : は `'` / `"`、かな + 英数を保持したまま ; / : は `+` / `*` を入力します。
+- JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力します。
 - RCtrl・LAltの候補は `keymap.html` に記載されたMac向け出力で実装しています。無効化項目は入力を抑止し、要検討項目は実装していません。
 
 ### Vim / tmux のプレフィックス

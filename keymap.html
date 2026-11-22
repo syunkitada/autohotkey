@@ -207,16 +207,24 @@
       context: "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。",
       source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows の意味は keymap/*.ahk を参照",
       layers: {
-        base: { label: "通常", note: "指定された修飾キーの役割。", entries: {
-          caps_lock: key("confirmed", "Right Command", "単純な Command キーです。単押し専用の動作は付けません。"), left_option: key("confirmed", "Option のまま", "Option は変更しません。"), left_command: key("confirmed", "Windows の LAlt レイヤー", "単独の Command としては使わず、LAlt と同じ役割のレイヤーキーにします。"), eisu: key("confirmed", "単押し Esc / 長押し Right Control", "Windows の無変換→RCtrl に合わせます。"), kana: key("confirmed", "Left Shift", "物理かなキーを Left Shift として使います。Space と英数との組み合わせは、かな / Shift レイヤーで切り替えます。"), right_command: key("confirmed", "Right Command のまま", "変更しません。CapsLock からも Right Command を送ります。"), left_control: key("confirmed", "単押し Tab / 長押し Left Control", "A の左隣。タップで Tab、保持すると Control です。")
+        base: { label: "通常", note: "指定された修飾キーの役割とJIS記号キーの入れ替え。", entries: {
+          caps_lock: key("confirmed", "Right Command", "単純な Command キーです。単押し専用の動作は付けません。"), left_option: key("confirmed", "Option のまま", "Option は変更しません。"), left_command: key("confirmed", "Windows の LAlt レイヤー", "単独の Command としては使わず、LAlt と同じ役割のレイヤーキーにします。"), eisu: key("confirmed", "単押し 英数入力 + Esc / 長押し Right Control", "通常は単押しで英数入力に切り替えてからEscapeを送信し、保持でRight Controlです。かな押下中は英数を単押しするとかな入力、保持するとRight Controlになります。"), kana: key("confirmed", "Left Shift", "物理かなキーを Left Shift として使います。Space、英数、記号キーとの組み合わせは各レイヤーで確認できます。"), right_command: key("confirmed", "Right Command のまま", "変更しません。CapsLock からも Right Command を送ります。"), left_control: key("confirmed", "単押し Tab / 長押し Left Control", "A の左隣。タップで Tab、保持すると Control です。"), at: key("mapped", "[", "JISの@キーを[にします（Karabiner: open_bracket → close_bracket）。"), open_bracket: key("mapped", "]", "JISの[キーを]にします（Karabiner: close_bracket → backslash）。"), close_bracket: key("mapped", "@", "JISの]キーを@にします（Karabiner: backslash → open_bracket）。")
         }},
-        kana_shift: { label: "かな / Shift", note: "かなキーを押しながら使うレイヤー。かなは Left Shift として働き、Space で英数入力、英数でかな入力に切り替えます。", entries: {
+        kana_shift: { label: "かな / Shift", note: "かなキーを押しながら使うレイヤー。Spaceで英数入力、英数の単押しでかな入力に切り替えます。; でアポストロフィ、: でダブルクォートを入力します。", entries: {
           kana: key("confirmed", "Left Shift 押下中", "かなキーが Left Shift としてこのレイヤーを起動しています。"),
           space: key("confirmed", "英数入力に切替", "かな + Space で英数入力に切り替えます。"),
-          eisu: key("confirmed", "かな入力に切替", "かな + 英数でかな入力に切り替えます。")
+          eisu: key("confirmed", "単押し: かな入力 / 保持: Right Control", "かな + 英数を単押しするとかな入力へ切り替わります。保持中はRight Controlになり、かな + 英数レイヤーを使えます。"),
+          semicolon: key("confirmed", "'", "かな + ; でアポストロフィを入力します。"),
+          colon: key("confirmed", "\u0022", "かな + : でダブルクォートを入力します。")
+        }},
+        kana_eisu: { label: "かな + 英数", note: "かなを押したまま英数も保持するレイヤー。; で +、: で * を入力します。英数を他のキーを押さずに離すとかな入力へ切り替わります。", entries: {
+          kana: key("confirmed", "Left Shift 押下中", "かなキーがLeft Shiftとして働いています。"),
+          eisu: key("confirmed", "Right Control 押下中", "英数を保持するとRight Controlとしてこのレイヤーを起動します。"),
+          semicolon: key("confirmed", "+", "かな + 英数 + ; でプラスを入力します。"),
+          colon: key("confirmed", "*", "かな + 英数 + : でアスタリスクを入力します。")
         }},
         rctrl: { label: "英数 / RCtrl", note: "英数を押しながら使うレイヤー。Windows の RCtrl レイヤーを基準にしています。", entries: {
-          eisu: key("confirmed", "単押し Esc / 長押し Right Control", "このキーがレイヤーの起点です."), u: key("candidate", "Option + ←", "前の単語へ移動する候補。"), i: key("candidate", "Option + →", "次の単語へ移動する候補。"), o: key("blocked", "無効", "RCtrl+O の入力を抑止します。"), a: key("candidate", "Command + A", "全選択。ターミナルやエディタは要確認。"), s: key("candidate", "Option + Delete", "前の単語を削除する候補。"), d: key("candidate", "Delete", "前の1文字を削除。"), f: key("candidate", "Fn + Delete", "後ろの1文字を削除。"), g: key("blocked", "無効", "RCtrl+G の入力を抑止します。"), h: key("candidate", "←", "左へ移動。"), j: key("candidate", "↓", "下へ移動。"), k: key("candidate", "↑", "上へ移動。"), l: key("candidate", "→", "右へ移動。"), semicolon: key("candidate", "Command + ←", "テキストの行頭へ移動。ターミナルは要確認。"), colon: key("candidate", "Command + →", "テキストの行末へ移動。ターミナルは要確認。"), x: key("candidate", "Command + X", "切り取り。"), c: key("candidate", "Command + C", "コピー。"), v: key("candidate", "Command + V", "ペースト。"), z: key("blocked", "無効", "RCtrl+Z の入力を抑止します。"), n: key("review", "出力未決定", "半ページ下。アプリ別の動作を整理します。"), m: key("review", "出力未決定", "半ページ上。アプリ別の動作を整理します。"), comma: key("blocked", "無効", "RCtrl+, の入力を抑止します。"), period: key("blocked", "無効", "RCtrl+. の入力を抑止します。"), close_bracket: key("blocked", "無効", "RCtrl+] の入力を抑止します。")
+          eisu: key("confirmed", "単押し 英数入力 + Esc / 長押し Right Control", "通常の英数単押しは英数入力に切り替えてからEscapeを送信します。このキーがレイヤーの起点です。"), u: key("candidate", "Option + ←", "前の単語へ移動する候補。"), i: key("candidate", "Option + →", "次の単語へ移動する候補。"), o: key("blocked", "無効", "RCtrl+O の入力を抑止します。"), a: key("candidate", "Command + A", "全選択。ターミナルやエディタは要確認。"), s: key("candidate", "Option + Delete", "前の単語を削除する候補。"), d: key("candidate", "Delete", "前の1文字を削除。"), f: key("candidate", "Fn + Delete", "後ろの1文字を削除。"), g: key("blocked", "無効", "RCtrl+G の入力を抑止します。"), h: key("candidate", "←", "左へ移動。"), j: key("candidate", "↓", "下へ移動。"), k: key("candidate", "↑", "上へ移動。"), l: key("candidate", "→", "右へ移動。"), semicolon: key("candidate", "Command + ←", "テキストの行頭へ移動。ターミナルは要確認。"), colon: key("candidate", "Command + →", "テキストの行末へ移動。ターミナルは要確認。"), x: key("candidate", "Command + X", "切り取り。"), c: key("candidate", "Command + C", "コピー。"), v: key("candidate", "Command + V", "ペースト。"), z: key("blocked", "無効", "RCtrl+Z の入力を抑止します。"), n: key("review", "出力未決定", "半ページ下。アプリ別の動作を整理します。"), m: key("review", "出力未決定", "半ページ上。アプリ別の動作を整理します。"), comma: key("blocked", "無効", "RCtrl+, の入力を抑止します。"), period: key("blocked", "無効", "RCtrl+. の入力を抑止します。"), close_bracket: key("blocked", "無効", "RCtrl+] の入力を抑止します。")
         }},
         lalt: { label: "左 Command / LAlt", note: "Left Command を押しながら使うレイヤー。Windows LAlt の操作を基に、Mac の出力候補を整理しています。", entries: {
           left_command: key("confirmed", "LAlt レイヤーキー", "Windows の Left Alt と同じ役割です。"), space: key("blocked", "無効化", "Windows の LAlt+Space に合わせる候補。"), tab: key("blocked", "無効化", "Windows の LAlt+Tab に合わせる候補。"), q: key("blocked", "無効", "LAlt+Q の入力を抑止します。"), w: key("blocked", "無効", "LAlt+W の入力を抑止します。"), e: key("blocked", "無効化", "Windows で無効。"), r: key("blocked", "無効", "LAlt+R の入力を抑止します。"), t: key("blocked", "無効", "LAlt+T の入力を抑止します。"), y: key("blocked", "無効", "LAlt+Y の入力を抑止します。"), u: key("candidate", "Control + T", "under tmux のprefix。~/home/home/.config/tmux/tmux.conf では C-t を使います。"), i: key("candidate", "Control + Z", "Vimのウィンドウ操作prefix。~/home/home/.config/nvim/rc/keymap.vim で Ctrl+Z+h/j/k/l を Ctrl+W+h/j/k/l に対応させています。"), o: key("candidate", "Control + B", "over tmux のprefix。標準の C-b を使います。"), p: key("blocked", "無効化", "Windows で無効。"), at: key("blocked", "無効化", "Windows LAlt+[ に相当。"), open_bracket: key("blocked", "無効化", "Windows LAlt+] に相当。"),
@@ -227,11 +235,15 @@
 
     const COMPARISON = [
       ["CapsLock", "Tab", "Right Command（単純な Command）"],
-      ["無変換 / 英数", "Right Control。単押し Esc", "Right Control。単押し Esc"],
+      ["無変換 / 英数", "Right Control。単押し Esc", "Right Control。単押しで英数入力 + Esc"],
       ["Left Alt / 左 Command", "LAlt アプリ操作レイヤー", "LAlt アプリ操作レイヤー"],
       ["変換 / かな", "Left Shift", "Left Shift"],
       ["英数入力へ切替", "RShift + Space", "かな + Space"],
       ["かな入力へ切替", "RShift + 無変換", "かな + 英数"],
+      ["かな + ;", "—", "アポストロフィ (')"],
+      ["かな + :", "—", "ダブルクォート (\u0022)"],
+      ["かな + 英数 + ; / :", "—", "プラス (+) / アスタリスク (*)"],
+      ["JIS記号キー @ / [ / ]", "[ / ] / @", "[ / ] / @"],
       ["Left Control", "通常の Control", "単押し Tab / 長押し Control"],
       ["Option", "LAlt レイヤー / RAlt は通常 Alt", "Option のまま"],
       ["Windows キー", "Windows標準動作（キー起点のAHK設定なし）", "該当キーなし"],

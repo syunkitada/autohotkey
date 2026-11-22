@@ -37,18 +37,20 @@
         {
           "type": "basic",
           "from": {"key_code": "japanese_eisuu","modifiers": {"mandatory": ["left_shift"]}},
-          "to": [{"key_code": "japanese_kana"}],
+          "to": [{"key_code": "right_control"}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
-          "description": "かな+英数でかな入力に切り替える"
+          "description": "かな押下中は英数を単押しでかな入力、保持時Right Controlにする",
+          "to_if_alone": [{"key_code": "japanese_kana"}],
+          "parameters": {"basic.to_if_alone_timeout_milliseconds": 200}
         },
         {
           "type": "basic",
           "from": {"key_code": "japanese_eisuu","modifiers": {"optional": ["any"]}},
           "to": [{"key_code": "right_control"}],
-          "to_if_alone": [{"key_code": "escape"}],
+          "to_if_alone": [{"key_code": "japanese_eisuu"},{"key_code": "escape"}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_unless","name": "autohotkey_jis_kana_pressed","value": 1}],
           "parameters": {"basic.to_if_alone_timeout_milliseconds": 200},
-          "description": "英数を単押しEscape、保持時Right Controlにする"
+          "description": "英数を単押しで英数入力に切替えてEscape、保持時Right Controlにする"
         },
         {
           "type": "basic",
@@ -58,6 +60,34 @@
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
           "parameters": {"basic.to_if_alone_timeout_milliseconds": 200},
           "description": "左Controlを単押しTab、保持時Controlにする"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "semicolon","modifiers": {"mandatory": ["left_shift"]}},
+          "to": [{"key_code": "7","modifiers": ["left_shift"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
+          "description": "かな+; でアポストロフィを入力する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "quote","modifiers": {"mandatory": ["left_shift"]}},
+          "to": [{"key_code": "2","modifiers": ["left_shift"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
+          "description": "かな+: でダブルクォートを入力する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "semicolon","modifiers": {"mandatory": ["left_shift","right_control"]}},
+          "to": [{"key_code": "semicolon","modifiers": ["left_shift"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
+          "description": "かな+英数+; でプラスを入力する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "quote","modifiers": {"mandatory": ["left_shift","right_control"]}},
+          "to": [{"key_code": "quote","modifiers": ["left_shift"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
+          "description": "かな+英数+: でアスタリスクを入力する"
         },
         {
           "type": "basic",
@@ -166,9 +196,21 @@
         },
         {
           "type": "basic",
+          "from": {"key_code": "open_bracket","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+@ を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "close_bracket","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+[ を無効化する"
+        },
+        {
+          "type": "basic",
           "from": {"key_code": "backslash","modifiers": {"mandatory": ["right_control"]}},
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+backslash を無効化する"
+          "description": "英数/RCtrl+] を無効化する"
         },
         {
           "type": "basic",
@@ -406,6 +448,27 @@
           "from": {"key_code": "y","modifiers": {"mandatory": ["left_option"]}},
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
           "description": "左Command/LAlt+y を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "open_bracket","modifiers": {"optional": ["any"]}},
+          "to": [{"key_code": "close_bracket"}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "JISの@キーを[にする"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "close_bracket","modifiers": {"optional": ["any"]}},
+          "to": [{"key_code": "backslash"}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "JISの[キーを]にする"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "backslash","modifiers": {"optional": ["any"]}},
+          "to": [{"key_code": "open_bracket"}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "JISの]キーを@にする"
         }
       ]
     }
