@@ -1,34 +1,66 @@
-# macOS キーマップ案
+# MacBook Pro JIS キーマップ
 
-このディレクトリは、MacBook Pro の JIS キーボード向けのキーマップ案を管理します。Karabiner-Elements の実設定はまだ作成していません。
+MacBook Pro の内蔵 JIS キーボード向けに、Karabiner-Elements の Complex Modifications ルールを用意しています。キー割当の正はリポジトリルートの [keymap.html](../../keymap.html) です。実行用ルールは [`autohotkey-jis.json`](assets/complex_modifications/autohotkey-jis.json) にあります。
 
-Windows と macOS の配列は、リポジトリルートの [keymap.html](../../keymap.html) で比較できます。macOS の表示では、通常、かな / Shift、英数 / Right Control、左 Command / LAlt の各レイヤーを確認できます。
+「決定済み」「候補」「無効化」をルールに反映しています。「要検討」と色のないキーには個別ルールがありません。その場合、英数や左Commandが送る修飾キーの標準動作が適用されます。
 
-## 管理方法
+## 導入
 
-- macOS のキーマップ案は、ルートの `keymap.html` を正として管理します。
-- 各キーには出力、説明、状態を記録します。「候補」はMac向けの割り当て案、「要検討」はアプリごとの動作など未確定の割り当て、「決定済み」は合意した割り当てです。「無効」は入力を抑止する組み合わせです。
-- Option は変更しません。CapsLock は Right Command、英数は単押しで Esc / 長押しで Right Control、左 Command は LAlt レイヤー、かなは Left Shift として扱います。かな + Space は英数入力、かな + 英数はかな入力へ切り替えます。A の左隣の Control は、単押しで Tab、長押しで Control とします。
+### 1. Karabiner-Elementsを準備する
 
-## Vim / tmux のプレフィックス
+インストールされていない場合は、[Karabiner-Elements公式手順](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)に従ってインストールし、macOSが表示するバックグラウンドサービス、アクセシビリティ、入力監視などの許可を設定します。
 
-LAlt+U/I/O は `~/home` の設定を基準にします。
+Karabiner-Elements Settings の Virtual Keyboard で、仮想キーボードの種類を **JIS** にします。記号キーの出力はこの設定に影響されます。
 
-| キー | 送るキー | 用途・参照設定 |
-| --- | --- | --- |
-| LAlt+U | Ctrl+T | under tmux のプレフィックス。`~/home/home/.config/tmux/tmux.conf` が `IS_TTMUXT` のときに `C-t` を使います。 |
-| LAlt+I | Ctrl+Z | Neovim のウィンドウ操作プレフィックス。`~/home/home/.config/nvim/rc/keymap.vim` で Ctrl+Z に続く H/J/K/L を Ctrl+W のウィンドウ移動に対応させています。 |
-| LAlt+O | Ctrl+B | over tmux のプレフィックス。tmux の標準 `C-b` を使います。 |
+### 2. ルールを配置する
 
-`~/home/home/.config/tmux/README.md` では under tmux と over tmux の起動方法および LAlt+U/O の対応を説明しています。Windows AHK はアプリに応じてこれらのプレフィックスを送ります。Mac の候補では出力キーを記録し、アプリ別の条件はKarabiner設定を作る段階で確認します。
+リポジトリのルートで、次を実行します。
 
-## 実設定に移すとき
+```sh
+mkdir -p "$HOME/.config/karabiner/assets/complex_modifications"
+cp macos/karabiner/assets/complex_modifications/autohotkey-jis.json \
+  "$HOME/.config/karabiner/assets/complex_modifications/autohotkey-jis.json"
+```
 
-キーマップ案を確認した後、選んだ割り当てを Karabiner-Elements の `karabiner.json` に反映します。それまでは候補や未確定の動作を、このページ上で区別して管理します。
+このファイルはKarabinerの読み込み用Complex Modificationsルールです。ユーザー設定の `karabiner.json` は置き換えません。[ファイル形式と配置先](https://karabiner-elements.pqrs.org/docs/json/root-data-structure/)
 
-## 参照元
+### 3. ルールを有効にする
 
-- Windows の実装: `keymap/rctrl.ahk`、`keymap/lalt.ahk`、`functions/bash.ahk`
-- tmux のプレフィックス: `~/home/home/.config/tmux/README.md`、`~/home/home/.config/tmux/tmux.conf`
-- Neovim のウィンドウ操作: `~/home/home/.config/nvim/rc/keymap.vim`
-- README の Windows キーマップ要約は `keymap/rctrl.ahk` の現行設定と一部差があります。RCtrl+A は全選択、RCtrl+; / RCtrl+: は Home / End として実装されています。
+Karabiner-Elements Settings を開き、**Complex Modifications** → **Add predefined rule** を選び、**AutoHotkey MacBook Pro JIS** のルールを追加して有効にします。内蔵キーボードのイベントだけに適用し、外付けキーボードには適用しません。
+
+### 4. 動作を確認する
+
+Karabiner-EventViewer を開いて、次を確認します。
+
+- CapsLock が Right Command、英数が単押しで Escape／保持中は Right Control、左Controlが単押しで Tab／保持中は Left Control になる。
+- かなをShiftとして押しながら Space で英数入力に、英数キーでかな入力に切り替わる。通常のLeft Shiftとの組み合わせでは入力モードを切り替えない。
+- 右Commandと物理Optionは通常どおり動作し、左CommandはLAltレイヤーとして働く。
+- RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
+
+JIS配列では、印字された記号とKarabinerの `key_code` 名が一致しないキーがあります。設定はJIS用のコードで記述しています。キー位置を確認するときは [KarabinerのJISキーコード表](https://karabiner-elements.pqrs.org/docs/help/troubleshooting/symbols-with-non-ansi-keyboard/)とEventViewerを参照してください。
+
+## 割当の要点
+
+- CapsLock は Right Command として動作します。右Commandは変更しません。
+- 英数キーは単押しでEscape、保持するとRight Controlになります。英数と左Controlの単押し／長押し判定は200msです。
+- 左CommandはOptionを出力するLAltレイヤーです。物理Optionはレイヤー判定に使わず、通常のOptionとして残します。
+- かなはLeft Shiftです。かなキーの押下状態を使って、かな + Space とかな + 英数だけを入力モード切替にします。
+- RCtrl・LAltの候補は `keymap.html` に記載されたMac向け出力で実装しています。無効化項目は入力を抑止し、要検討項目は実装していません。
+
+### Vim / tmux のプレフィックス
+
+LAlt+U/I/O は `~/home` の設定に合わせ、Karabinerから Ctrl+T / Ctrl+Z / Ctrl+B を送ります。under tmux は `IS_TTMUXT=true` のとき `tmux.conf` が Ctrl+T をprefixにし、Neovimは `keymap.vim` で Ctrl+Z+h/j/k/l を Ctrl+W のウィンドウ移動に対応させています。over tmux は標準の Ctrl+B を使います。
+
+参照元は `~/home/home/.config/tmux/README.md`、`~/home/home/.config/tmux/tmux.conf`、`~/home/home/.config/nvim/rc/keymap.vim` です。
+
+## 更新・無効化
+
+ルールを更新する場合は、リポジトリのルートで「ルールを配置する」のコマンドを再実行し、Settings の Complex Modifications で既存の AutoHotkey ルールを削除してから、Add predefined rule で追加し直します。
+
+一時的に止める場合は、Complex Modifications でルールを無効にします。完全に外す場合は、Karabinerの画面でルールを削除してから、配置したJSONを削除します。
+
+```sh
+rm "$HOME/.config/karabiner/assets/complex_modifications/autohotkey-jis.json"
+```
+
+Karabiner-Elementsのインストール自体を削除する場合は、SettingsのUninstallから公式アンインストーラーを実行してください。

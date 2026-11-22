@@ -93,7 +93,7 @@
 <body>
   <main>
     <h1>JIS キーマップ比較</h1>
-    <p class="intro">Windows の現行設定と MacBook Pro JIS 向けの案を、このページで見比べます。レイヤーを選び、キーを押すと割り当ての詳細が表示されます。</p>
+    <p class="intro">Windows の現行設定と MacBook Pro JIS 向けの設定を、このページで見比べます。レイヤーを選び、キーを押すと割り当ての詳細が表示されます。</p>
     <p class="notice"><strong>Windows 側の基準:</strong> Windows の図は Change Key と現在の AHK を反映しています。README の要約とは RCtrl+A、Home / End の割り当てに差があるため、実装コードを基準にしています。</p>
 
     <div class="tabs" id="view-tabs" role="group" aria-label="表示">
@@ -106,11 +106,11 @@
       <h2>修飾キーと共通操作</h2>
       <div class="compare-table-wrap">
         <table>
-          <thead><tr><th>役割</th><th>Windows JIS</th><th>macOS JIS 案</th></tr></thead>
+          <thead><tr><th>役割</th><th>Windows JIS</th><th>macOS JIS</th></tr></thead>
           <tbody id="compare-rows"></tbody>
         </table>
       </div>
-      <p class="compare-note">Mac 側の「候補」「要検討」は実設定前の案です。各 OS の図へ切り替えると、レイヤー内の詳細を確認できます。</p>
+      <p class="compare-note">Mac 側の「候補」はKarabinerのルールに反映されています。「要検討」と色のないキーには個別ルールがありません。<a href="macos/karabiner/README.md">導入方法</a>を参照してください。</p>
     </section>
 
     <section id="map-view" hidden>
@@ -202,10 +202,10 @@
     };
 
     const MACOS = {
-      title: "macOS JIS 案",
+      title: "macOS JIS",
       rows: MACOS_ROWS,
-      context: "MacBook Pro JIS 向けの案です。Karabiner の設定 JSON はまだ作成していません。決定済みの修飾キーと、Windows の操作を移す候補を分けています。",
-      source: "Mac のキーマップ案 · Windows の意味は keymap/*.ahk を参照",
+      context: "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。",
+      source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows の意味は keymap/*.ahk を参照",
       layers: {
         base: { label: "通常", note: "指定された修飾キーの役割。", entries: {
           caps_lock: key("confirmed", "Right Command", "単純な Command キーです。単押し専用の動作は付けません。"), left_option: key("confirmed", "Option のまま", "Option は変更しません。"), left_command: key("confirmed", "Windows の LAlt レイヤー", "単独の Command としては使わず、LAlt と同じ役割のレイヤーキーにします。"), eisu: key("confirmed", "単押し Esc / 長押し Right Control", "Windows の無変換→RCtrl に合わせます。"), kana: key("confirmed", "Left Shift", "物理かなキーを Left Shift として使います。Space と英数との組み合わせは、かな / Shift レイヤーで切り替えます。"), right_command: key("confirmed", "Right Command のまま", "変更しません。CapsLock からも Right Command を送ります。"), left_control: key("confirmed", "単押し Tab / 長押し Left Control", "A の左隣。タップで Tab、保持すると Control です。")
@@ -359,10 +359,10 @@
       const description = document.createElement("p");
       description.textContent = view === "windows"
         ? "Windows の図は Change Key と AHK の現行設定です。通常時は修飾キーを通常表示にし、選択中レイヤーの起点キーだけを Mac と同じ青色で表示します。"
-        : "MacBook Pro JIS 向けの案です。Karabiner の設定 JSON はまだありません。決定済みの修飾キーと、Windows の操作を移す候補を分けています。";
+        : "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。";
       const source = document.createElement("p");
       source.className = "small";
-      source.textContent = view === "windows" ? "参照: keymap/*.ahk · README.md" : "参照: macOS 案 · Windows keymap/*.ahk";
+      source.textContent = view === "windows" ? "参照: keymap/*.ahk · README.md" : "参照: macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows keymap/*.ahk";
       panel.replaceChildren(title, description, source);
     }
 

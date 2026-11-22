@@ -19,11 +19,11 @@ JIS キーボードをベースに、
 | RCtrl + d       | Delete     |
 | RCtrl 単押し    | Esc        |
 
-他のキーバインドを参照するには、[keymap](keymap/) ディレクトリ内のコードを直接確認してください。Windows の現行設定と macOS の案は、ルートの[キーマップ比較ページ](keymap.html)で確認できます。
+他のキーバインドを参照するには、[keymap](keymap/) ディレクトリ内のコードを直接確認してください。Windows の現行設定と macOS の設定は、ルートの[キーマップ比較ページ](keymap.html)で確認できます。
 
-## macOS のキーマップ案
+## macOS のキーマップ
 
-MacBook Pro の JIS キーボード向けの設定案も、上記の[キーマップ比較ページ](keymap.html)で Windows と見比べられます。現時点では対応表のみで、Karabiner-Elements の実設定はまだありません。
+MacBook Pro の内蔵 JIS キーボード向けに Karabiner-Elements のルールを用意しています。導入手順は [Karabiner の README](macos/karabiner/README.md)、Windows との比較は[キーマップ比較ページ](keymap.html)を参照してください。
 
 ## 使い方
 
