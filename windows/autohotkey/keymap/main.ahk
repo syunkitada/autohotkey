@@ -2,16 +2,13 @@
 RCtrl:: escape()
 
 ; SR1 + SL1 + ;/: で +/* を入力します。
-; [KEYBIND] key=>^!\;; tags=keybind; action=<+>キーを送信します;
+; [KEYBIND] key=>^<+\;; tags=keybind; action=<+>キーを送信します;
 ; NOTE Send "{NumpadAdd} では、RLogin上で<+>キーの入力ができなかったので注意です。
->^+;:: Send "+;"
-; [KEYBIND] key=>^!:; tags=keybind; action=<*>キーを送信します;
+>^<+;:: Send "+;"
+; [KEYBIND] key=>^<+sc028; tags=keybind; action=<*>キーを送信します;
 ; NOTE Send "{NumpadMulti} では、RLogin上で<*>キーの入力ができなかったので注意です。
->^+sc028:: Send "+{sc028}"
+>^<+sc028:: Send "+{sc028}"
 
-
-; [KEYBIND] key=>+<Tab>; tags=programming; action=次の補完候補へ移動します;
->+Tab:: content_assist()
 
 ; [KEYBIND] key=<+<Space>; tags=language; action=英数字入力に切り替えます;
 <+Space:: {
@@ -26,7 +23,6 @@ RCtrl:: escape()
 	Return
 }
 
-#Include rshift.ahk
 #Include lalt.ahk
 #Include rctrl.ahk
 #Include windows.ahk

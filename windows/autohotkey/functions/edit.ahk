@@ -12,20 +12,6 @@ escape() {
     Return 1
 }
 
-content_assist(asc:=1) {
-	if winactive_is_ignored_app() {
-		Return 0
-	} else if winactive_is_terminal() or winactive_is_gvim() {
-		if asc
-			Send "^n"
-		else
-			Send "^p"
-	} else {
-		Return 0
-	}
-	Return 1
-}
-
 delete_right_char(count:=1) {
 	if winactive_is_ignored_app() {
 		Return 0

@@ -23,7 +23,7 @@
 >^i:: move_forward_word()
 ; [KEYBIND] key=>^o; tags=keybind; action=このキーの組み合わせを無効にします;
 >^o:: Return
->^+o:: Return
+>^<+o:: Return
 >^p:: Return
 >^[:: Return
 >^]:: Return

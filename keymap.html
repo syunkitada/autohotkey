@@ -257,12 +257,11 @@
       rows: WINDOWS_ROWS,
       context: "Windows の図は Change Key と AHK の現行設定です。物理変換は Change Key、Windowsキーを起点にするAHK独自ショートカットはありません。",
       source: "windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md",
-      cheatsheetLayers: ["base", "rshift"],
+      cheatsheetLayers: ["base"],
       keyAliases: { caps_control: "caps_lock", sl4: "left_control", sl3: "left_win", sl2: "left_alt", sl1: "muhenkan", sr1: "henkan", sr2: "katakana", sr3: "right_alt", sr4: "right_win", sr5: "application" },
       physicalKeys: { caps_control: "CapsLock", sl4: "Left Ctrl", sl3: "Left Win", sl2: "Left Alt", sl1: "無変換", sr1: "変換", sr2: "カタカナ", sr3: "Right Alt", sr4: "Right Win", sr5: "Application" },
       cheatsheetNotes: {
-        base: "仮想配列と同じキー配置です。SL1・SL2・SR1などの位置には実際のキー名も表示しています。各起点キーの割り当ては仮想配列で確認できます。",
-        rshift: "仮想配列では割り当てを定めていない Right Shift / SR2 の組み合わせです。"
+        base: "仮想配列と同じキー配置です。SL1・SL2・SR1などの位置には実際のキー名も表示しています。各起点キーの割り当ては仮想配列で確認できます。"
       },
       layers: {
         base: { label: "通常 / Change Key", note: "Change Key による物理キー変換と共通ホットキー。通常時は修飾キーを他のキーと同じ表示にしています。", entries: {
@@ -295,7 +294,7 @@
           left_alt: key("confirmed", "SL2 押下中", "Left Alt がこのレイヤーを起動しています。"),
           space: key("blocked", "無効", "SL2 + Space を抑止します。"), tab: key("blocked", "無効", "SL2 + Tab を抑止します。"),
           q: key("blocked", "無効", "SL2 + Q の入力を抑止します。"), w: key("blocked", "無効", "SL2 + W の入力を抑止します。"), e: key("blocked", "無効", "元の入力を抑止します。"), r: key("blocked", "無効", "SL2 + R の入力を抑止します。"), t: key("blocked", "無効", "SL2 + T の入力を抑止します。"), y: key("blocked", "無効", "SL2 + Y の入力を抑止します。"), u: key("mapped", "Ctrl+T (under tmux)", "~/home の tmux 設定では under tmux のprefixは Ctrl+T です。"), i: key("mapped", "Ctrl+Z (Vim)", "~/home の Neovim 設定では Ctrl+Z に続けて H/J/K/L でウィンドウ移動します。"), o: key("mapped", "Ctrl+B (over tmux)", "over tmux は標準prefixの Ctrl+B を使います。"), p: key("blocked", "無効", "元の入力を抑止します。"), at: key("mapped", "\"", "SL2 + [ でダブルクォートを入力します。仮想[はJIS @キー位置です。"), open_bracket: key("mapped", "'", "SL2 + ] でアポストロフィを入力します。仮想]はJIS [キー位置です。"),
-          a: key("mapped", "Chrome: Ctrl+Shift+A", "Chromeでタブ検索。ほかのブラウザではCtrl+A、SlackではCtrl+Kを送ります。find_tab()。"), s: key("mapped", "Chrome: Ctrl+H", "Chromeの履歴ページを開き、閲覧履歴を検索します。find_cache()。"), d: key("blocked", "無効", "SL2 + D の入力を抑止します。"), f: key("blocked", "無効", "SL2 + F の入力を抑止します。"), g: key("blocked", "無効", "SL2 + G の入力を抑止します。"), h: key("mapped", "前のタブ", "ブラウザや端末は Ctrl+Shift+Tab、VS Code は Ctrl+PgUp でタブを切り替えます。Vimのタブコマンドは送りません。"), j: key("mapped", "次のアプリ", "Alt+Tabで次のアプリへ切り替えます。Shift+J はタスクビューです。"), k: key("mapped", "前のアプリ", "Shift+Alt+Tabで前のアプリへ切り替えます。"), l: key("mapped", "次のタブ", "ブラウザや端末は Ctrl+Tab、VS Code は Ctrl+PgDn でタブを切り替えます。Vimのタブコマンドは送りません。"), semicolon: key("blocked", "無効", "SL2 + ; の入力を抑止します。"), colon: key("blocked", "無効", "SL2 + : の入力を抑止します。"), close_bracket: key("mapped", "範囲指定スクリーンショット", "Win+Shift+Sを送信してSnipping Toolを起動します。"),
+          a: key("mapped", "Chrome: Ctrl+Shift+A", "Chromeでタブ検索。ほかのブラウザではCtrl+A、SlackではCtrl+Kを送ります。find_tab()。"), s: key("mapped", "Chrome: Ctrl+H", "Chromeの履歴ページを開き、閲覧履歴を検索します。find_cache()。"), d: key("blocked", "無効", "SL2 + D の入力を抑止します。"), f: key("blocked", "無効", "SL2 + F の入力を抑止します。"), g: key("blocked", "無効", "SL2 + G の入力を抑止します。"), h: key("mapped", "前のタブ", "ブラウザや端末は Ctrl+Shift+Tab、VS Code は Ctrl+PgUp でタブを切り替えます。Vimのタブコマンドは送りません。"), j: key("mapped", "次のアプリ", "Alt+Tabで次のアプリへ切り替えます。Left Shift+J はタスクビューです。"), k: key("mapped", "前のアプリ", "Shift+Alt+Tabで前のアプリへ切り替えます。"), l: key("mapped", "次のタブ", "ブラウザや端末は Ctrl+Tab、VS Code は Ctrl+PgDn でタブを切り替えます。Vimのタブコマンドは送りません。"), semicolon: key("blocked", "無効", "SL2 + ; の入力を抑止します。"), colon: key("blocked", "無効", "SL2 + : の入力を抑止します。"), close_bracket: key("mapped", "範囲指定スクリーンショット", "Win+Shift+Sを送信してSnipping Toolを起動します。"),
           z: key("mapped", "透明度 220", "アクティブウィンドウを透明にします。"), x: key("mapped", "透明度 150", "別の透明度で透明にします。"), c: key("blocked", "無効", "元の入力を抑止します。"), v: key("blocked", "無効", "元の入力を抑止します。"), b: key("blocked", "無効", "SL2 + B の入力を抑止します。"), n: key("blocked", "無効", "SL2 + N の入力を抑止します。"), m: key("blocked", "無効", "SL2 + M の入力を抑止します。"), comma: key("blocked", "無効", "元の入力を抑止します。"), period: key("blocked", "無効", "元の入力を抑止します。"), slash: key("blocked", "無効", "SL2 + / の入力を抑止します。"), backslash: key("blocked", "無効", "元の入力を抑止します。")
         }},
         sr1: { label: "SR1 / Left Shift", note: "Space右1の変換キーをLeft Shiftにして使います。Spaceで英数入力へ切り替え、SR1 + SL1の単押しでかな入力へ切り替えます。SR1 + ; / : はJIS配列の標準Shift入力を使います。", entries: {
@@ -305,10 +304,6 @@
           henkan: key("confirmed", "SR1 押下中", "変換キーから送られるLeft Shiftを保持します。"), muhenkan: key("confirmed", "SL1 押下中", "無変換キーから送られるRight Controlを保持します。"),
           semicolon: key("mapped", "+", "SR1 + SL1 + ; でプラスを入力します。"), colon: key("mapped", "*", "SR1 + SL1 + : でアスタリスクを入力します。")
         }},
-        rshift: { label: "RShift / Space右2", note: "Space右2のカタカナ・ひらがなキーをRight Shiftとして使い、右Shiftの一部の組み合わせ入力を抑止します。英数・かな入力の操作はSR1にまとめています。", entries: {
-          right_shift: key("confirmed", "Right Shift 押下中", "物理Right Shiftがこのレイヤーを起動します。"), katakana: key("confirmed", "SR2 / Right Shift", "カタカナ・ひらがなキーもRight Shiftとしてこのレイヤーを起動します。"), tab: key("mapped", "Terminal/gVim: 次の補完候補", "content_assist() はターミナルや gVim で Ctrl+N を送り、他のアプリでは動作しません。"),
-          ...entries("qwertyuiopasdfghjkl;:zxcvbnm".split("").filter(ch => /[a-z;:]/.test(ch)).map(ch => [ch === ";" ? "semicolon" : ch === ":" ? "colon" : ch, "無効", "Right Shift の組み合わせを抑止します。"]), "blocked")
-        }}
       }
     };
 

@@ -48,8 +48,8 @@ LAlt:: Return
 <!h:: window_previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
 <!j:: AltTab
-; [KEYBIND] key=<!+j; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
-<!+j:: Send "#{Tab}"
+; [KEYBIND] key=<!<+j; tags=window; action=Windows画面の一覧を表示し、選択した画面へ移動します;
+<!<+j:: Send "#{Tab}"
 ; [KEYBIND] key=<!k; tags=window; action=前のWindows画面へ移動します;
 <!k:: ShiftAltTab
 ; [KEYBIND] key=<!l; tags=window; action=ブラウザや端末などで次のタブへ移動します;
