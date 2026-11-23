@@ -5,7 +5,3 @@
 #Include copypaste.ahk
 #Include window.ahk
 #Include bash.ahk
-#Include vscode.ahk
-#Include myprompt.ahk
-#Include mydoc.ahk
-#Include mycommand.ahk
