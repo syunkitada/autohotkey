@@ -73,10 +73,10 @@ LAlt:: Return
 <!b:: Return
 
 ; row 3 right
-; [KEYBIND] key=<!n; tags=window; action=ページを下へスクロールします;
-<!n:: move_pagedown()
-; [KEYBIND] key=<!m; tags=window; action=ページを上へスクロールします;
-<!m:: move_pageup()
+; [KEYBIND] key=<!n; tags=keybind; action=このキーの組み合わせを無効にします;
+<!n:: Return
+; [KEYBIND] key=<!m; tags=keybind; action=このキーの組み合わせを無効にします;
+<!m:: Return
 <!,:: Return
 <!.:: Return
 ; [KEYBIND] key=<!/; tags=keybind; action=このキーの組み合わせを無効にします;

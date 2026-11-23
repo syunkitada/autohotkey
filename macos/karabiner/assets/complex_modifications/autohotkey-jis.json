@@ -420,16 +420,14 @@
         {
           "type": "basic",
           "from": {"key_code": "n","modifiers": {"mandatory": ["left_option"]}},
-          "to": [{"key_code": "page_down"}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+n を割り当てる"
+          "description": "左Command/LAlt+n を無効化する"
         },
         {
           "type": "basic",
           "from": {"key_code": "m","modifiers": {"mandatory": ["left_option"]}},
-          "to": [{"key_code": "page_up"}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+m を割り当てる"
+          "description": "左Command/LAlt+m を無効化する"
         },
         {
           "type": "basic",
