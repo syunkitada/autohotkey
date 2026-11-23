@@ -5,6 +5,7 @@
 LAlt:: Return
 
 <!Space:: Return
+; Tab直下のCapsLockもChange Key後にTabとして届くため、同じ組み合わせで抑止します。
 <!Tab:: Return
 
 ; row 1 left

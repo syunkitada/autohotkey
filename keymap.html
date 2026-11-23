@@ -17,6 +17,11 @@
       --accent: #2368d1;
       --confirmed: #d9e8ff;
       --mapped: #d9f2e3;
+      --base-remap: #d9edf2;
+      --base-remap-border: #6c9ba7;
+      --base-remap-ink: #164e63;
+      --base-remap-muted: #edf4f6;
+      --base-remap-muted-border: #c6d8dd;
       --review: #fff0c2;
       --blocked: #e5e8ed;
       --difference: #ffe1c2;
@@ -36,6 +41,11 @@
         --accent: #89b4ff;
         --confirmed: #233d61;
         --mapped: #244d36;
+        --base-remap: #193c45;
+        --base-remap-border: #4b7883;
+        --base-remap-ink: #d4edf2;
+        --base-remap-muted: #27373c;
+        --base-remap-muted-border: #45565c;
         --review: #594817;
         --blocked: #41464e;
         --difference: #553312;
@@ -76,6 +86,7 @@
     .space { width: 170px; }
     .confirmed { background: var(--confirmed); }
     .mapped, .candidate { background: var(--mapped); }
+    .base-remap { background: var(--base-remap); }
     .review { background: var(--review); }
     .blocked { background: var(--blocked); }
     .difference { border-color: var(--difference-border); background: var(--difference); }
@@ -87,6 +98,7 @@
     .virtual-layer-overlay { position: absolute; inset: 0; width: 1160px; height: 535px; overflow: visible; }
     .virtual-layer-key { cursor: pointer; outline: none; pointer-events: all; }
     .virtual-layer-key .layer-key-shape { fill: transparent; stroke: transparent; }
+    .virtual-layer-key.base-remap-muted .layer-key-shape { fill: var(--base-remap-muted); fill-opacity: .7; stroke: var(--base-remap-muted-border); stroke-width: 1.5; }
     .virtual-layer-key.mapped .layer-key-shape { fill: var(--mapped); fill-opacity: .9; stroke: #4f8c62; stroke-width: 2.5; }
     .virtual-layer-key.blocked .layer-key-shape { fill: var(--blocked); fill-opacity: .94; stroke: #69727e; stroke-width: 2.5; }
     .virtual-layer-key.difference .layer-key-shape { fill: var(--difference); fill-opacity: .94; stroke: var(--difference-border); stroke-width: 2.5; }
@@ -150,15 +162,18 @@
           <svg class="virtual-layer-overlay" id="virtual-layer-keyboard" viewBox="0 0 1160 535" role="group" aria-label="通常配列のキー位置に重ねたレイヤー割り当て" hidden></svg>
         </div>
       </div>
-      <div class="legend" id="virtual-legend" hidden>
-        <span><i class="swatch mapped"></i>共通操作</span>
-        <span><i class="swatch difference"></i>OS差分・警告</span>
-        <span><i class="swatch blocked"></i>両OSで無効化</span>
-        <span>無色: 個別の割り当てなし</span>
+      <div class="legend" id="virtual-legend">
+        <span id="legend-base-remap"><i class="swatch base-remap"></i>通常配列の基本リマップ</span>
+        <span id="legend-layer-assignment" hidden><i class="swatch mapped"></i>SL1・SL2などの追加割り当て</span>
+        <span id="legend-muted-base-remap" hidden><i class="swatch base-remap-muted"></i>背景の基本リマップ</span>
+        <span id="legend-difference" hidden><i class="swatch difference"></i>OS差分・警告</span>
+        <span id="legend-blocked" hidden><i class="swatch blocked"></i>両OSで無効化</span>
+        <span id="legend-unassigned">無色: 通常配列で個別リマップなし</span>
       </div>
       <section class="details" id="virtual-details" aria-label="仮想配列の割り当て詳細" hidden>
         <div class="panel" aria-live="polite">
           <h2 id="virtual-detail-title">キーを選択してください</h2>
+          <p class="small" id="virtual-detail-category"></p>
           <p class="detail-output" id="virtual-detail-output">—</p>
           <p id="virtual-detail-description"></p>
           <p class="small" id="virtual-detail-windows"></p>
@@ -166,10 +181,12 @@
         </div>
         <div class="panel">
           <h2>色の見方</h2>
-          <p><span class="swatch mapped"></span>緑: WindowsとmacOSで共通の操作</p>
+          <p><span class="swatch base-remap"></span>青緑: 通常配列の基本リマップ</p>
+          <p><span class="swatch mapped"></span>緑: SL1・SL2などの追加割り当て</p>
+          <p><span class="swatch base-remap-muted"></span>薄い青緑: レイヤー表示で背景に残る基本リマップ</p>
           <p><span class="swatch difference"></span>オレンジ: 機能や対象アプリに差分あり</p>
           <p><span class="swatch blocked"></span>灰色: WindowsとmacOSの両方で無効化</p>
-          <p>色のないキー: 個別の割り当てなし</p>
+          <p>色のないキー: 通常配列で個別リマップなし</p>
         </div>
       </section>
       <section class="panel virtual-assignment-list" id="virtual-assignment-list" aria-labelledby="virtual-assignment-title" hidden>
@@ -211,6 +228,7 @@
     const MACOS_ROWS = KEYBOARD_ROWS;
     const VIRTUAL_ROWS = KEYBOARD_ROWS;
     const VIRTUAL_SYMBOL_LABELS = { at: "[", open_bracket: "]", close_bracket: "@" };
+    const BASE_REMAP_KEYS = ["at", "open_bracket", "close_bracket", "caps_control"];
     const VIRTUAL_ROW_GEOMETRY = [
       { x: 40, y: 104, height: 54, widths: [82, ...Array(14).fill(54)] },
       { x: 40, y: 164, height: 54, widths: [96, ...Array(12).fill(54), 99] },
@@ -265,7 +283,7 @@
           close_bracket: key("mapped", "@", "JIS の ] キー位置を @ に変換します。"),
         }},
         rctrl: { label: "SL1 / RCtrl", note: "SL1（Space左1）の無変換をRight Controlに変換して使うレイヤー。青く表示した起点キーだけが修飾キーです。色のないキーの一部は AHK で明示的に無効化しています。", entries: {
-          muhenkan: key("confirmed", "SL1 押下中", "無変換から変換された Right Control がこのレイヤーを起動しています。"),
+          muhenkan: key("confirmed", "SL1 押下中", "無変換から変換された Right Control がこのレイヤーを起動しています。"), tab: key("blocked", "無効", "SL1 + Tab を無効化します。WindowsではTab直下のCapsLockもChange Key後にTabとして届くため、同じく抑止します。"),
           q: key("blocked", "無効", "元の入力を抑止します。"), w: key("blocked", "無効", "元の入力を抑止します。"), e: key("blocked", "無効", "元の入力を抑止します。"), r: key("blocked", "無効", "元の入力を抑止します。"), t: key("blocked", "無効", "元の入力を抑止します。"), y: key("blocked", "無効", "元の入力を抑止します。"),
           u: key("mapped", "前の単語へ", "Ctrl+Left を送信します。"), i: key("mapped", "次の単語へ", "Ctrl+Right を送信します。"), o: key("blocked", "無効", "SL1 + O の入力を抑止します。SL1 + Shift+O も無効です。"), p: key("blocked", "無効", "元の入力を抑止します。"), at: key("blocked", "無効", "SL1 + [ を抑止します。"), open_bracket: key("blocked", "無効", "SL1 + ] を抑止します。"), close_bracket: key("blocked", "無効", "SL1 + ] キー位置の入力を抑止します。"),
           a: key("mapped", "全選択", "一般アプリでは Ctrl+A。ターミナル、Vim、VS Code では選択方法を切り替えます。"), s: key("mapped", "前の単語を削除", "アプリに応じて削除方法を切り替えます。"), d: key("mapped", "前の1文字を削除", "カーソル左側の1文字を削除します。"), f: key("mapped", "後ろの1文字を削除", "カーソル右側の1文字を削除します。"), g: key("blocked", "無効", "SL1 + G の入力を抑止します。"),
@@ -322,10 +340,10 @@
           colon: key("confirmed", "*", "SR1 + SL1 + : でアスタリスクを入力します。")
         }},
         rctrl: { label: "SL1 / 英数・RCtrl", note: "SL1（Space左1）の英数を保持して使うレイヤー。Windows の RCtrl レイヤーを基準にしています。", entries: {
-          eisu: key("confirmed", "単押し 英数入力 + Esc / 長押し Right Control", "通常の英数単押しは英数入力に切り替えてからEscapeを送信します。このキーがレイヤーの起点です。"), q: key("blocked", "無効", "WindowsのSL1 + Qと同じく入力を抑止します。"), w: key("blocked", "無効", "WindowsのSL1 + Wと同じく入力を抑止します。"), e: key("blocked", "無効", "WindowsのSL1 + Eと同じく入力を抑止します。"), r: key("blocked", "無効", "WindowsのSL1 + Rと同じく入力を抑止します。"), t: key("blocked", "無効", "WindowsのSL1 + Tと同じく入力を抑止します。"), y: key("blocked", "無効", "WindowsのSL1 + Yと同じく入力を抑止します。"), p: key("blocked", "無効", "WindowsのSL1 + Pと同じく入力を抑止します。"), at: key("blocked", "無効", "WindowsのSL1 + @位置と同じく入力を抑止します。"), open_bracket: key("blocked", "無効", "WindowsのSL1 + [位置と同じく入力を抑止します。"), b: key("blocked", "無効", "WindowsのSL1 + Bと同じく入力を抑止します。"), slash: key("blocked", "無効", "WindowsのSL1 + /と同じく入力を抑止します。"), backslash: key("blocked", "無効", "WindowsのSL1 + \\と同じく入力を抑止します。"), u: key("candidate", "Left Option + ←", "前の単語へ移動する候補。"), i: key("candidate", "Left Option + →", "次の単語へ移動する候補。"), o: key("blocked", "無効", "SL1 + O の入力を抑止します。"), a: key("candidate", "Command + A", "全選択。ターミナルやエディタは要確認。"), s: key("candidate", "Left Option + Delete", "前の単語を削除する候補。"), d: key("candidate", "Delete", "前の1文字を削除。"), f: key("candidate", "Fn + Delete", "後ろの1文字を削除。"), g: key("blocked", "無効", "SL1 + G の入力を抑止します。"), h: key("candidate", "←", "左へ移動。"), j: key("candidate", "↓", "下へ移動。"), k: key("candidate", "↑", "上へ移動。"), l: key("candidate", "→", "右へ移動。"), semicolon: key("candidate", "端末: Ctrl + A / その他: Command + ←", "Terminal.app と iTerm2 では Ctrl+A を送って行頭へ移動し、それ以外では Command+← を送ります。"), colon: key("candidate", "端末: Ctrl + E / その他: Command + →", "Terminal.app と iTerm2 では Ctrl+E を送って行末へ移動し、それ以外では Command+→ を送ります。"), x: key("candidate", "Command + X", "切り取り。"), c: key("candidate", "Command + C", "コピー。"), v: key("candidate", "Command + V", "ペースト。"), z: key("blocked", "無効", "SL1 + Z の入力を抑止します。"), n: key("mapped", "PgDn", "SL1 + N で Page Down キーを送信します。"), m: key("mapped", "PgUp", "SL1 + M で Page Up キーを送信します。"), comma: key("blocked", "無効", "SL1 + , の入力を抑止します。"), period: key("blocked", "無効", "SL1 + . の入力を抑止します。"), close_bracket: key("blocked", "無効", "SL1 + ] の入力を抑止します。")
+          eisu: key("confirmed", "単押し 英数入力 + Esc / 長押し Right Control", "通常の英数単押しは英数入力に切り替えてからEscapeを送信します。このキーがレイヤーの起点です。"), tab: key("blocked", "無効", "SL1 + Tab を無効化します。"), left_control: key("blocked", "無効", "SL1 + Tab直下のLeft Controlを無効化します。"), q: key("blocked", "無効", "WindowsのSL1 + Qと同じく入力を抑止します。"), w: key("blocked", "無効", "WindowsのSL1 + Wと同じく入力を抑止します。"), e: key("blocked", "無効", "WindowsのSL1 + Eと同じく入力を抑止します。"), r: key("blocked", "無効", "WindowsのSL1 + Rと同じく入力を抑止します。"), t: key("blocked", "無効", "WindowsのSL1 + Tと同じく入力を抑止します。"), y: key("blocked", "無効", "WindowsのSL1 + Yと同じく入力を抑止します。"), p: key("blocked", "無効", "WindowsのSL1 + Pと同じく入力を抑止します。"), at: key("blocked", "無効", "WindowsのSL1 + @位置と同じく入力を抑止します。"), open_bracket: key("blocked", "無効", "WindowsのSL1 + [位置と同じく入力を抑止します。"), b: key("blocked", "無効", "WindowsのSL1 + Bと同じく入力を抑止します。"), slash: key("blocked", "無効", "WindowsのSL1 + /と同じく入力を抑止します。"), backslash: key("blocked", "無効", "WindowsのSL1 + \\と同じく入力を抑止します。"), u: key("candidate", "Left Option + ←", "前の単語へ移動する候補。"), i: key("candidate", "Left Option + →", "次の単語へ移動する候補。"), o: key("blocked", "無効", "SL1 + O の入力を抑止します。"), a: key("candidate", "Command + A", "全選択。ターミナルやエディタは要確認。"), s: key("candidate", "Left Option + Delete", "前の単語を削除する候補。"), d: key("candidate", "Delete", "前の1文字を削除。"), f: key("candidate", "Fn + Delete", "後ろの1文字を削除。"), g: key("blocked", "無効", "SL1 + G の入力を抑止します。"), h: key("candidate", "←", "左へ移動。"), j: key("candidate", "↓", "下へ移動。"), k: key("candidate", "↑", "上へ移動。"), l: key("candidate", "→", "右へ移動。"), semicolon: key("candidate", "端末: Ctrl + A / その他: Command + ←", "Terminal.app と iTerm2 では Ctrl+A を送って行頭へ移動し、それ以外では Command+← を送ります。"), colon: key("candidate", "端末: Ctrl + E / その他: Command + →", "Terminal.app と iTerm2 では Ctrl+E を送って行末へ移動し、それ以外では Command+→ を送ります。"), x: key("candidate", "Command + X", "切り取り。"), c: key("candidate", "Command + C", "コピー。"), v: key("candidate", "Command + V", "ペースト。"), z: key("blocked", "無効", "SL1 + Z の入力を抑止します。"), n: key("mapped", "PgDn", "SL1 + N で Page Down キーを送信します。"), m: key("mapped", "PgUp", "SL1 + M で Page Up キーを送信します。"), comma: key("blocked", "無効", "SL1 + , の入力を抑止します。"), period: key("blocked", "無効", "SL1 + . の入力を抑止します。"), close_bracket: key("blocked", "無効", "SL1 + ] の入力を抑止します。")
         }},
         lalt: { label: "SL2 / 左Command・LAlt", note: "SL2（Space左2）のLeft Commandを押しながら使うレイヤー。Windows LAlt の操作を基に、Mac の出力候補を整理しています。", entries: {
-          left_command: key("confirmed", "Left Option出力のLAltレイヤー", "Left Command は Left Option を出力してこのレイヤーを起動します。"), space: key("blocked", "無効化", "Windows の SL2 + Space に合わせる候補。"), tab: key("blocked", "無効化", "Windows の SL2 + Tab に合わせる候補。"), q: key("blocked", "無効", "SL2 + Q の入力を抑止します。"), w: key("blocked", "無効", "SL2 + W の入力を抑止します。"), e: key("blocked", "無効化", "Windows で無効。"), r: key("blocked", "無効", "SL2 + R の入力を抑止します。"), t: key("blocked", "無効", "SL2 + T の入力を抑止します。"), y: key("blocked", "無効", "SL2 + Y の入力を抑止します。"), u: key("candidate", "Control + T", "under tmux のprefix。~/home/home/.config/tmux/tmux.conf では C-t を使います。"), i: key("candidate", "Control + Z", "Vimのウィンドウ操作prefix。~/home/home/.config/nvim/rc/keymap.vim で Ctrl+Z+h/j/k/l を Ctrl+W+h/j/k/l に対応させています。"), o: key("candidate", "Control + B", "over tmux のprefix。標準の C-b を使います。"), p: key("blocked", "無効化", "Windows で無効。"), at: key("mapped", "\"", "SL2 + [ でダブルクォートを入力します。仮想[はJIS @キー位置です。"), open_bracket: key("mapped", "'", "SL2 + ] でアポストロフィを入力します。仮想]はJIS [キー位置です。"),
+          left_command: key("confirmed", "Left Option出力のLAltレイヤー", "Left Command は Left Option を出力してこのレイヤーを起動します。"), space: key("blocked", "無効化", "Windows の SL2 + Space に合わせる候補。"), tab: key("blocked", "無効化", "SL2 + Tab を無効化します。"), left_control: key("blocked", "無効化", "SL2 + Tab直下のLeft Controlを無効化します。"), q: key("blocked", "無効", "SL2 + Q の入力を抑止します。"), w: key("blocked", "無効", "SL2 + W の入力を抑止します。"), e: key("blocked", "無効化", "Windows で無効。"), r: key("blocked", "無効", "SL2 + R の入力を抑止します。"), t: key("blocked", "無効", "SL2 + T の入力を抑止します。"), y: key("blocked", "無効", "SL2 + Y の入力を抑止します。"), u: key("candidate", "Control + T", "under tmux のprefix。~/home/home/.config/tmux/tmux.conf では C-t を使います。"), i: key("candidate", "Control + Z", "Vimのウィンドウ操作prefix。~/home/home/.config/nvim/rc/keymap.vim で Ctrl+Z+h/j/k/l を Ctrl+W+h/j/k/l に対応させています。"), o: key("candidate", "Control + B", "over tmux のprefix。標準の C-b を使います。"), p: key("blocked", "無効化", "Windows で無効。"), at: key("mapped", "\"", "SL2 + [ でダブルクォートを入力します。仮想[はJIS @キー位置です。"), open_bracket: key("mapped", "'", "SL2 + ] でアポストロフィを入力します。仮想]はJIS [キー位置です。"),
           a: key("mapped", "Chrome: ⌘+Shift+A", "Chromeでタブ検索を開きます。Chrome以外では個別ルールを適用しません。"), s: key("mapped", "Chrome: ⌘+Y", "Chromeの履歴ページを開き、閲覧履歴を検索します。Chrome以外では個別ルールを適用しません。"), d: key("blocked", "無効", "SL2 + D の入力を抑止します。"), f: key("blocked", "無効", "SL2 + F の入力を抑止します。"), g: key("blocked", "無効", "SL2 + G の入力を抑止します。"), h: key("candidate", "Right Command + Shift + [", "前のタブ。アプリごとの対応は要確認。"), j: key("mapped", "Right Command + Tab", "動作確認済み。次のアプリへ切り替えます。"), k: key("mapped", "Right Command + Shift + Tab", "動作確認済み。前のアプリへ切り替えます。"), l: key("candidate", "Right Command + Shift + ]", "次のタブ。アプリごとの対応は要確認。"), semicolon: key("blocked", "無効", "SL2 + ; の入力を抑止します。"), colon: key("blocked", "無効", "SL2 + : の入力を抑止します。"), close_bracket: key("blocked", "無効", "SL2 + @ の入力を抑止します。"), z: key("review", "透明化を要検討", "Windows はウィンドウ透明度を変更。"), x: key("review", "透明化を要検討", "Windows は別の透明度を設定。"), c: key("blocked", "無効化", "Windows で無効。"), v: key("blocked", "無効化", "Windows で無効。"), b: key("blocked", "無効", "SL2 + B の入力を抑止します。"), n: key("candidate", "Fn + ↓", "ページ下へスクロール。"), m: key("candidate", "Fn + ↑", "ページ上へスクロール。"), comma: key("blocked", "無効化", "Windows で無効。"), period: key("blocked", "無効化", "Windows で無効。"), slash: key("blocked", "無効", "SL2 + / の入力を抑止します。"), backslash: key("blocked", "無効化", "Windows で無効。")
         }}
       }
@@ -347,7 +365,7 @@
     });
 
     const VIRTUAL_LAYERS = {
-      base: { label: "通常", note: "通常レイヤーではOSごとの標準キーや物理キーの違いも仕様として表示し、差分警告は出しません。両OSで共通するJIS記号キーの入れ替えは緑で示します。", entries: {
+      base: { label: "通常", note: "青緑はJIS記号キーの入れ替えや単押しTabなど、通常配列の基本リマップを示します。OSごとの標準キーや物理キーの違いも仕様として表示し、差分警告は出しません。", entries: {
         at: shared("base", "at", "base", "at", "["), open_bracket: shared("base", "open_bracket", "base", "open_bracket", "]"), close_bracket: shared("base", "close_bracket", "base", "close_bracket", "@"),
         caps_control: expectedSpec("base", "caps_lock", "base", "left_control", "WindowsはCapsLockをTabに変換。macOSは単押しTab／長押しControl。"),
         sl1: expectedSpec("base", "muhenkan", "base", "eisu", "レイヤー起点は両OSでRight Controlですが、単押し時の動作が異なります。"),
@@ -360,7 +378,7 @@
         sr4: expectedSpec("base", "right_win", "base", "", "Windowsには標準のWindowsキーがありますが、対応するmacOSキーはありません。", "Windowsキー（標準）", "対応キーなし"),
         sr5: expectedSpec("base", "application", "base", "", "WindowsのApplicationキーに対応するmacOSキーはありません。", "Application（標準）", "対応キーなし")
       }},
-      sl1: { label: "SL1", note: "SL1を押しながら使う操作を表示します。共通の移動・編集機能を緑、OS差分をオレンジ、両OSで無効化した組み合わせを灰色で示します。色のないキーは個別の割り当てがありません。", entries: {
+      sl1: { label: "SL1", note: "SL1を押しながら使う追加割り当てを表示します。共通の移動・編集機能を緑、OS差分をオレンジ、両OSで無効化した組み合わせを灰色で示します。色のないキーは個別の割り当てがありません。", entries: {
         sl1: shared("rctrl", "muhenkan", "rctrl", "eisu", "Right Controlレイヤー起点"),
         u: shared("rctrl", "u", "rctrl", "u", "前の単語へ"), i: shared("rctrl", "i", "rctrl", "i", "次の単語へ"),
         a: shared("rctrl", "a", "rctrl", "a", "全選択"), s: shared("rctrl", "s", "rctrl", "s", "前の単語を削除"), d: shared("rctrl", "d", "rctrl", "d", "前の1文字を削除"), f: shared("rctrl", "f", "rctrl", "f", "後ろの1文字を削除"),
@@ -369,7 +387,7 @@
         x: shared("rctrl", "x", "rctrl", "x", "切り取り"), c: shared("rctrl", "c", "rctrl", "c", "コピー"), v: shared("rctrl", "v", "rctrl", "v", "貼り付け"),
         n: shared("rctrl", "n", "rctrl", "n", "PgDn"), m: shared("rctrl", "m", "rctrl", "m", "PgUp"),
       }},
-      sl2: { label: "SL2", note: "SL2のアプリ操作を表示します。共通機能を緑、OS差分や未確定の割り当てをオレンジ、両OSで無効化した組み合わせを灰色で示します。色のないキーは個別の割り当てがありません。", entries: {
+      sl2: { label: "SL2", note: "SL2の追加割り当てを表示します。共通機能を緑、OS差分や未確定の割り当てをオレンジ、両OSで無効化した組み合わせを灰色で示します。色のないキーは個別の割り当てがありません。", entries: {
         sl2: shared("lalt", "left_alt", "lalt", "left_command", "SL2レイヤー起点"),
         u: shared("lalt", "u", "lalt", "u", "Ctrl+T"), i: shared("lalt", "i", "lalt", "i", "Ctrl+Z"), o: shared("lalt", "o", "lalt", "o", "Ctrl+B"),
         h: shared("lalt", "h", "lalt", "h", "前のタブ"),
@@ -389,7 +407,7 @@
         sl1: shared("sr1", "muhenkan", "kana_shift", "eisu", "かな入力へ切替"),
         sr1: shared("sr1", "henkan", "kana_shift", "kana", "Left Shiftレイヤー起点"),
       }},
-      sr1_sl1: { label: "SR1 + SL1", note: "SR1とSL1を同時に保持するレイヤーです。緑は両OS共通の出力を示します。", entries: {
+      sr1_sl1: { label: "SR1 + SL1", note: "SR1とSL1を同時に保持する追加割り当てレイヤーです。緑は両OS共通の出力を示します。", entries: {
         sr1: shared("sr1_sl1", "henkan", "kana_eisu", "kana", "SR1 押下中"),
         sl1: shared("sr1_sl1", "muhenkan", "kana_eisu", "eisu", "SL1 押下中"),
         semicolon: shared("sr1_sl1", "semicolon", "kana_eisu", "semicolon", "+"),
@@ -398,8 +416,8 @@
     };
 
     const VIRTUAL_LAYER_SOURCES = {
-      sl1: { windows: ["rctrl", { sl1: "muhenkan" }], macos: ["rctrl", { sl1: "eisu" }] },
-      sl2: { windows: ["lalt", { sl2: "left_alt" }], macos: ["lalt", { sl2: "left_command" }] },
+      sl1: { windows: ["rctrl", { sl1: "muhenkan", caps_control: "tab" }], macos: ["rctrl", { sl1: "eisu", caps_control: "left_control" }] },
+      sl2: { windows: ["lalt", { sl2: "left_alt", caps_control: "tab" }], macos: ["lalt", { sl2: "left_command", caps_control: "left_control" }] },
       sr1: { windows: ["sr1", { sr1: "henkan", sl1: "muhenkan" }], macos: ["kana_shift", { sr1: "kana", sl1: "eisu" }] },
       sr1_sl1: { windows: ["sr1_sl1", { sr1: "henkan", sl1: "muhenkan" }], macos: ["kana_eisu", { sr1: "kana", sl1: "eisu" }] }
     };
@@ -464,8 +482,8 @@
     function renderVirtual() {
       const layer = VIRTUAL_LAYERS[currentVirtualLayer];
       document.getElementById("virtual-description").textContent = currentVirtualLayer === "base"
-        ? "通常の仮想配列を表示します。緑の割り当てキーをクリックすると、動作とOSごとの出力を確認できます。OSごとの標準キーや物理配置の違いは仕様として扱い、警告しません。"
-        : "通常の仮想配列を背景に、選択したレイヤーの割り当てを同じキー位置に重ねて表示します。割り当てキーをクリックすると、動作とOSごとの出力を詳細欄に表示します。キー上の短い表示と、下の割り当て一覧でも説明を確認できます。緑は共通の機能、オレンジは機能や対象アプリの差分、灰色は両OSで無効化した組み合わせです。色のないキーは個別の割り当てがありません。";
+        ? "通常配列の基本リマップを青緑で表示します。キーをクリックすると、基本配列での変換内容とOSごとの出力を確認できます。OSごとの標準キーや物理配置の違いは仕様として扱い、警告しません。"
+        : "通常配列の基本リマップを薄い青緑で残し、SL1・SL2などの追加割り当てを同じキー位置に重ねて表示します。キーをクリックすると、基本リマップとレイヤー追加割り当てを区別して詳細を確認できます。下の一覧でも動作を確認できます。緑はレイヤー追加割り当て、オレンジは機能や対象アプリの差分、灰色は両OSで無効化した組み合わせです。";
       document.getElementById("virtual-layer-note").textContent = layer.note;
       const tabs = document.getElementById("virtual-layer-tabs");
       tabs.replaceChildren();
@@ -486,7 +504,14 @@
       const isBase = currentVirtualLayer === "base";
       const keyboard = document.getElementById("virtual-layer-keyboard");
       keyboard.removeAttribute("hidden");
-      document.getElementById("virtual-legend").hidden = isBase;
+      document.getElementById("legend-base-remap").hidden = !isBase;
+      document.getElementById("legend-layer-assignment").hidden = isBase;
+      document.getElementById("legend-muted-base-remap").hidden = isBase;
+      document.getElementById("legend-difference").hidden = isBase;
+      document.getElementById("legend-blocked").hidden = isBase;
+      document.getElementById("legend-unassigned").textContent = isBase
+        ? "無色: 通常配列で個別リマップなし"
+        : "無色: このレイヤーに個別割り当てなし";
       document.getElementById("virtual-details").hidden = false;
       document.getElementById("virtual-assignment-list").hidden = isBase;
       const warning = document.getElementById("virtual-warning");
@@ -501,10 +526,10 @@
           const displayLabel = isBase ? label : VIRTUAL_SYMBOL_LABELS[id] || label;
           const geometry = VIRTUAL_KEY_GEOMETRY.get(id);
           const keyGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-          const bindingLabel = binding ? binding.difference ? "OS差分" : binding.blocked ? "無効化" : binding.expected ? "OS別仕様" : binding.commonLabel : "個別割り当てなし";
+          const bindingLabel = binding ? binding.difference ? "OS差分" : binding.blocked ? "無効化" : binding.expected ? "OS別仕様" : binding.commonLabel : !isBase && BASE_REMAP_KEYS.includes(id) ? "基本リマップのみ" : "個別割り当てなし";
           const colorClass = isBase
-            ? ["at", "open_bracket", "close_bracket"].includes(id) ? "mapped" : ""
-            : binding ? binding.difference ? "difference" : binding.blocked ? "blocked" : binding.expected ? "" : "mapped" : "";
+            ? ""
+            : binding ? binding.difference ? "difference" : binding.blocked ? "blocked" : binding.expected ? "" : "mapped" : BASE_REMAP_KEYS.includes(id) ? "base-remap-muted" : "";
           keyGroup.setAttribute("class", [
             "virtual-layer-key",
             colorClass,
@@ -647,9 +672,15 @@
       const title = currentVirtualLayer === "base"
         ? label
         : origins[currentVirtualLayer].includes(id) ? `${label}（レイヤー起点）` : `${prefixes[currentVirtualLayer]} + ${label}`;
+      const category = currentVirtualLayer === "base"
+        ? BASE_REMAP_KEYS.includes(id) ? "通常配列の基本リマップ" : "通常配列"
+        : origins[currentVirtualLayer].includes(id) ? "レイヤー起点"
+          : binding ? binding.difference ? "OS差分" : binding.blocked ? "レイヤー側の無効化" : "レイヤー追加割り当て"
+            : BASE_REMAP_KEYS.includes(id) ? "通常配列の基本リマップ（このレイヤーで追加割り当てなし）" : "このレイヤーで追加割り当てなし";
+      document.getElementById("virtual-detail-category").textContent = category;
       document.getElementById("virtual-detail-title").textContent = title;
-      document.getElementById("virtual-detail-output").textContent = binding ? binding.difference ? "⚠ OS間の差分" : binding.blocked ? "無効化" : binding.expected ? "OS別仕様" : binding.commonLabel : "個別割り当てなし";
-      document.getElementById("virtual-detail-description").textContent = binding ? binding.difference || (binding.blocked ? "WindowsとmacOSの両方で、この組み合わせの入力を抑止します。" : binding.expected || "両OSの割り当てを仮想キー上で共通の操作として表示しています。") : "このキーの組み合わせに個別の割り当てはありません。";
+      document.getElementById("virtual-detail-output").textContent = binding ? binding.difference ? "⚠ OS間の差分" : binding.blocked ? "無効化" : binding.expected ? "OS別仕様" : binding.commonLabel : currentVirtualLayer !== "base" && BASE_REMAP_KEYS.includes(id) ? "追加割り当てなし（基本リマップのみ）" : "個別割り当てなし";
+      document.getElementById("virtual-detail-description").textContent = binding ? binding.difference || (binding.blocked ? "WindowsとmacOSの両方で、この組み合わせの入力を抑止します。" : binding.expected || "両OSの割り当てを仮想キー上で共通の操作として表示しています。") : currentVirtualLayer !== "base" && BASE_REMAP_KEYS.includes(id) ? "通常配列の基本リマップは有効ですが、このレイヤーでは追加の割り当てを行いません。" : "このキーの組み合わせに個別の割り当てはありません。";
       document.getElementById("virtual-detail-windows").textContent = binding ? `Windows: ${virtualOutput(binding, "windows")}${binding.windows?.description ? ` — ${binding.windows.description}` : ""}` : "";
       document.getElementById("virtual-detail-macos").textContent = binding ? `macOS: ${virtualOutput(binding, "macos")}${binding.macos?.description ? ` — ${binding.macos.description}` : ""}` : "";
       document.getElementById("virtual-details").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -657,6 +688,7 @@
 
     function resetVirtualDetail() {
       document.getElementById("virtual-detail-title").textContent = "キーを選択してください";
+      document.getElementById("virtual-detail-category").textContent = "";
       document.getElementById("virtual-detail-output").textContent = "—";
       document.getElementById("virtual-detail-description").textContent = "";
       document.getElementById("virtual-detail-windows").textContent = "";

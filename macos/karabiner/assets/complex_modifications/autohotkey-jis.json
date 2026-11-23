@@ -54,6 +54,30 @@
         },
         {
           "type": "basic",
+          "from": {"key_code": "tab","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "SL1/英数+Tab を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "left_control","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "SL1/英数+Tab直下のLeft Controlを無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "tab","modifiers": {"mandatory": ["left_option"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
+          "description": "SL2/左Command+Tab を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "left_control","modifiers": {"mandatory": ["left_option"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
+          "description": "SL2/左Command+Tab直下のLeft Controlを無効化する"
+        },
+        {
+          "type": "basic",
           "from": {"key_code": "left_control","modifiers": {"optional": ["any"]}},
           "to": [{"key_code": "left_control"}],
           "to_if_alone": [{"key_code": "tab"}],
@@ -514,12 +538,6 @@
           "from": {"key_code": "t","modifiers": {"mandatory": ["left_option"]}},
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
           "description": "左Command/LAlt+t を無効化する"
-        },
-        {
-          "type": "basic",
-          "from": {"key_code": "tab","modifiers": {"mandatory": ["left_option"]}},
-          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+tab を無効化する"
         },
         {
           "type": "basic",
