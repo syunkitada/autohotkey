@@ -63,20 +63,6 @@
         },
         {
           "type": "basic",
-          "from": {"key_code": "semicolon","modifiers": {"mandatory": ["left_shift"]}},
-          "to": [{"key_code": "7","modifiers": ["left_shift"]}],
-          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
-          "description": "かな+; でアポストロフィを入力する"
-        },
-        {
-          "type": "basic",
-          "from": {"key_code": "quote","modifiers": {"mandatory": ["left_shift"]}},
-          "to": [{"key_code": "2","modifiers": ["left_shift"]}],
-          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
-          "description": "かな+: でダブルクォートを入力する"
-        },
-        {
-          "type": "basic",
           "from": {"key_code": "semicolon","modifiers": {"mandatory": ["left_shift","right_control"]}},
           "to": [{"key_code": "semicolon","modifiers": ["left_shift"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_kana_pressed","value": 1}],
@@ -266,6 +252,66 @@
         },
         {
           "type": "basic",
+          "from": {"key_code": "b","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+b を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "e","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+e を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "international1","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+backslash を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "p","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+p を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "q","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+q を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "r","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+r を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "slash","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+slash を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "t","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+t を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "w","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+w を無効化する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "y","modifiers": {"mandatory": ["right_control"]}},
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
+          "description": "英数/RCtrl+y を無効化する"
+        },
+        {
+          "type": "basic",
           "from": {"key_code": "z","modifiers": {"mandatory": ["right_control"]}},
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
           "description": "英数/RCtrl+z を無効化する"
@@ -290,6 +336,20 @@
           "to": [{"key_code": "b","modifiers": ["left_control"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
           "description": "左Command/LAlt+o を割り当てる"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "a","modifiers": {"mandatory": ["left_option"]}},
+          "to": [{"key_code": "a","modifiers": ["right_command","left_shift"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.google\\.Chrome$"]}],
+          "description": "Chromeで左Command/LAlt+a をタブ検索に割り当てる"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "s","modifiers": {"mandatory": ["left_option"]}},
+          "to": [{"key_code": "y","modifiers": ["right_command"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.google\\.Chrome$"]}],
+          "description": "Chromeで左Command/LAlt+s を履歴ページ表示に割り当てる"
         },
         {
           "type": "basic",
@@ -343,7 +403,7 @@
           "type": "basic",
           "from": {"key_code": "backslash","modifiers": {"mandatory": ["left_option"]}},
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+backslash を無効化する"
+          "description": "左Command/LAlt+backslash（JIS ] / 仮想@）を無効化する"
         },
         {
           "type": "basic",
@@ -354,8 +414,9 @@
         {
           "type": "basic",
           "from": {"key_code": "close_bracket","modifiers": {"mandatory": ["left_option"]}},
+          "to": [{"key_code": "7","modifiers": ["left_shift"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+close_bracket を無効化する"
+          "description": "左Command/LAlt+close_bracket（JIS [ / 仮想]）でアポストロフィを入力する"
         },
         {
           "type": "basic",
@@ -396,8 +457,9 @@
         {
           "type": "basic",
           "from": {"key_code": "open_bracket","modifiers": {"mandatory": ["left_option"]}},
+          "to": [{"key_code": "2","modifiers": ["left_shift"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+open_bracket を無効化する"
+          "description": "左Command/LAlt+open_bracket（JIS @ / 仮想[）でダブルクォートを入力する"
         },
         {
           "type": "basic",

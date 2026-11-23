@@ -23,8 +23,12 @@ LAlt:: Return
 ; [KEYBIND] key=<!o; tags=window; action=over tmux の Ctrl+B prefix を入力します;
 <!o:: bash_tmux_operate_over_winder()
 <!p:: Return
-<![:: Return
-<!]:: Return
+; JIS @キー位置は仮想配列の [ です。
+; [KEYBIND] key=<![; tags=keybind; action=ダブルクォートを入力します;
+<![:: Send "`""
+; JIS [キー位置は仮想配列の ] です。
+; [KEYBIND] key=<!]; tags=keybind; action=アポストロフィを入力します;
+<!]:: Send "'"
 
 ; row 2 left
 ; [KEYBIND] key=<!a; tags=move; action=タブを検索して移動します;
@@ -39,7 +43,7 @@ LAlt:: Return
 <!g:: Return
 
 ; row 2 right
-; [KEYBIND] key=<!h; tags=window; action=前のタブへ移動します（RLoginの時はvimのみ有効です）;
+; [KEYBIND] key=<!h; tags=window; action=ブラウザや端末などで前のタブへ移動します;
 <!h:: window_previous_tab()
 ; [KEYBIND] key=<!j; tags=window; action=次のWindows画面へ移動します;
 <!j:: AltTab
@@ -47,7 +51,7 @@ LAlt:: Return
 <!+j:: Send "#{Tab}"
 ; [KEYBIND] key=<!k; tags=window; action=前のWindows画面へ移動します;
 <!k:: ShiftAltTab
-; [KEYBIND] key=<!l; tags=window; action=次のタブへ移動します（RLoginの時はvimのみ有効です）;
+; [KEYBIND] key=<!l; tags=window; action=ブラウザや端末などで次のタブへ移動します;
 <!l:: window_next_tab()
 ; [KEYBIND] key=<!\;; tags=keybind; action=このキーの組み合わせを無効にします;
 <!;:: Return

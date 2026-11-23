@@ -64,7 +64,9 @@ find_file() {
 }
 
 find_tab() {
-    if winactive_is_browser() {
+	if winactive_is_chrome() {
+		Send "^+a"
+	} else if winactive_is_browser() {
         Send "^A"
     } else if winactive_is_slack() {
         Send "^k"
