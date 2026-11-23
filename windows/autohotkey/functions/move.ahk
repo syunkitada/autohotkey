@@ -136,6 +136,8 @@ move_bottom() {
 move_backward_word() {
     if winactive_is_ignored_app() {
         Return 0
+    } else if winactive_is_terminal() {
+        Send "!b"
     } else {
         Send "^{Left}"
     }
@@ -145,6 +147,8 @@ move_backward_word() {
 move_forward_word() {
     if winactive_is_ignored_app() {
         Return 0
+    } else if winactive_is_terminal() {
+        Send "!f"
     } else {
         Send "^{Right}"
     }

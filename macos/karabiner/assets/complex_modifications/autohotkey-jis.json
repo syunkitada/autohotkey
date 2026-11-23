@@ -102,16 +102,30 @@
         {
           "type": "basic",
           "from": {"key_code": "u","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "b","modifiers": ["left_option"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.apple\\.Terminal$","^com\\.googlecode\\.iterm2$"]}],
+          "description": "Terminal/iTerm2の英数/RCtrl+u でOption+Bを送信する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "i","modifiers": {"mandatory": ["right_control"]}},
+          "to": [{"key_code": "f","modifiers": ["left_option"]}],
+          "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "frontmost_application_if","bundle_identifiers": ["^com\\.apple\\.Terminal$","^com\\.googlecode\\.iterm2$"]}],
+          "description": "Terminal/iTerm2の英数/RCtrl+i でOption+Fを送信する"
+        },
+        {
+          "type": "basic",
+          "from": {"key_code": "u","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "left_arrow","modifiers": ["left_option"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+u でLeft Option+←を送る"
+          "description": "Terminal/iTerm2以外で英数/RCtrl+u を押すとLeft Option+←を送る"
         },
         {
           "type": "basic",
           "from": {"key_code": "i","modifiers": {"mandatory": ["right_control"]}},
           "to": [{"key_code": "right_arrow","modifiers": ["left_option"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]}],
-          "description": "英数/RCtrl+i でLeft Option+→を送る"
+          "description": "Terminal/iTerm2以外で英数/RCtrl+i を押すとLeft Option+→を送る"
         },
         {
           "type": "basic",

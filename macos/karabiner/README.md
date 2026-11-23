@@ -28,9 +28,15 @@ cp macos/karabiner/assets/complex_modifications/autohotkey-jis.json \
 
 Karabiner-Elements Settings を開き、**Complex Modifications** → **Add predefined rule** を選び、**AutoHotkey MacBook Pro JIS** のルールを追加して有効にします。内蔵キーボードのイベントだけに適用し、外付けキーボードには適用しません。
 
-### 4. iTerm2を使う場合の設定
+### 4. Terminal.app / iTerm2を使う場合の設定
 
-iTerm2でこのキーマップのOptionキーを使った操作を行うには、Left Option Keyを `Esc+` に設定してください。
+Terminal.appでSL1 + U / IをBashの単語移動として使うには、利用するプロファイルでOptionをMetaキーとして有効にしてください。
+
+1. Terminal → Settings
+2. Profiles → 使用するプロファイル → Keyboard
+3. **Use Option as Meta key** を有効にする
+
+iTerm2ではLeft Option Keyを `Esc+` に設定してください。
 
 1. iTerm2 → Settings（⌘ + ,）
 2. Profiles → Keys
@@ -50,6 +56,7 @@ Karabiner-EventViewer を開いて、次を確認します。
 - ChromeでSL2 + A を押すとタブ検索、SL2 + S を押すと履歴ページが開く。
 - RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
 - Terminal.app / iTerm2 で英数 + ; / : を押すと、Ctrl+A / Ctrl+E が送られる。
+- Terminal.app / iTerm2 で SL1 + U / I を押すと、Option+B / Option+F が送られ、Bashで前後の単語へ移動する。それ以外のアプリではOption+矢印を送る。
 - 英数 + N / M で Page Down / Page Up が送られる。
 
 JIS配列では、印字された記号とKarabinerの `key_code` 名が一致しないキーがあります。設定はJIS用のコードで記述しています。キー位置を確認するときは [KarabinerのJISキーコード表](https://karabiner-elements.pqrs.org/docs/help/troubleshooting/symbols-with-non-ansi-keyboard/)とEventViewerを参照してください。
@@ -63,6 +70,7 @@ JIS配列では、印字された記号とKarabinerの `key_code` 名が一致�
 - かな（SR1）はLeft Shiftです。SR1 + Space は英数入力、SR1 + SL1の単押しはかな入力に切り替えます。SR1 + ; / : はJIS配列の標準Shift入力、SR1 + SL1 + ; / : は `+` / `*` を入力します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力します。
 - Terminal.app / iTerm2 では英数 + ; / : が Ctrl+A / Ctrl+E、それ以外のアプリでは Command + ← / → になります。
+- Terminal.app / iTerm2 では SL1 + U / I が Option+B / Option+F、それ以外のアプリでは Option+← / → になります。iTerm2では前述のとおりLeft Option Keyを `Esc+` に設定します。
 - 英数 + N / M は Page Down / Page Up を送信します。
 - RCtrl・LAltの候補は `keymap.html` に記載されたMac向け出力で実装しています。無効化項目は入力を抑止し、要検討項目は実装していません。
 
