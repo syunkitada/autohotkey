@@ -76,6 +76,11 @@
     .keyboard { display: grid; gap: 7px; min-width: 1080px; padding: 18px; border: 1px solid var(--key-border); border-radius: 14px; background: var(--panel); box-shadow: var(--shadow); }
     .key-row { display: flex; gap: 6px; width: max-content; }
     .key { display: flex; flex-direction: column; justify-content: space-between; width: 48px; height: 48px; padding: 5px 6px; border: 1px solid var(--key-border); border-radius: 6px; background: var(--key); box-shadow: 0 2px 0 var(--key-border); color: var(--ink); text-align: left; cursor: pointer; }
+    .keyboard-aligned { position: relative; display: block; width: 1160px; height: 535px; min-width: 1160px; padding: 0; border: 0; border-radius: 18px; background: var(--panel); }
+    .keyboard-aligned .key-row { display: contents; }
+    .keyboard-aligned .key { position: absolute; justify-content: center; align-items: center; padding: 4px; border-width: 1.5px; border-radius: 7px; box-shadow: none; text-align: center; }
+    .keyboard-aligned .key.enter-key { clip-path: polygon(0 0, 100% 0, 100% 100%, 18.18% 100%, 18.18% 47.37%, 0 47.37%); }
+    .keyboard-aligned .key .legend { text-align: center; }
     .key .legend { font-size: 12px; font-weight: 650; line-height: 1; }
     .key .physical-key { overflow: hidden; max-width: 100%; color: var(--muted); font-size: 8px; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
     .key .hint { overflow: hidden; max-width: 100%; color: var(--muted); font-size: 9px; line-height: 1.05; text-overflow: ellipsis; white-space: nowrap; }
@@ -224,9 +229,9 @@
       [["left_shift", "Shift", "wide-3"], ["z", "Z"], ["x", "X"], ["c", "C"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], ["comma", ","], ["period", "."], ["slash", "/"], ["backslash", "\\"], ["right_shift", "Shift", "wide-3"]],
       [["sl4", "SL4", "virtual-modifier"], ["sl3", "SL3", "virtual-modifier"], ["sl2", "SL2", "virtual-modifier"], ["sl1", "SL1", "virtual-modifier"], ["space", "Space", "virtual-space"], ["sr1", "SR1", "virtual-modifier"], ["sr2", "SR2", "virtual-modifier"], ["sr3", "SR3", "virtual-modifier"], ["sr4", "SR4", "virtual-modifier"], ["sr5", "SR5", "virtual-modifier"]]
     ];
-    const WINDOWS_ROWS = KEYBOARD_ROWS;
-    const MACOS_ROWS = KEYBOARD_ROWS;
     const VIRTUAL_ROWS = KEYBOARD_ROWS;
+    const WINDOWS_ROWS = VIRTUAL_ROWS;
+    const MACOS_ROWS = VIRTUAL_ROWS;
     const VIRTUAL_SYMBOL_LABELS = { at: "[", open_bracket: "]", close_bracket: "@" };
     const BASE_REMAP_KEYS = ["at", "open_bracket", "close_bracket", "caps_control"];
     const VIRTUAL_ROW_GEOMETRY = [
@@ -259,12 +264,13 @@
       source: "windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md",
       cheatsheetLayers: ["base"],
       keyAliases: { caps_control: "caps_lock", sl4: "left_control", sl3: "left_win", sl2: "left_alt", sl1: "muhenkan", sr1: "henkan", sr2: "katakana", sr3: "right_alt", sr4: "right_win", sr5: "application" },
+      keyLabels: { caps_control: "Caps" },
       physicalKeys: { caps_control: "CapsLock", sl4: "Left Ctrl", sl3: "Left Win", sl2: "Left Alt", sl1: "無変換", sr1: "変換", sr2: "カタカナ", sr3: "Right Alt", sr4: "Right Win", sr5: "Application" },
       cheatsheetNotes: {
         base: "仮想配列と同じキー配置です。SL1・SL2・SR1などの位置には実際のキー名も表示しています。各起点キーの割り当ては仮想配列で確認できます。"
       },
       layers: {
-        base: { label: "通常 / Change Key", note: "Change Key による物理キー変換と共通ホットキー。通常時は修飾キーを他のキーと同じ表示にしています。", entries: {
+        base: { label: "通常", note: "Change Key による物理キー変換と共通ホットキー。通常時は修飾キーを他のキーと同じ表示にしています。", entries: {
           left_control: key("modifier", "Left Control", "通常の Left Control として使います。"),
           left_win: key("modifier", "Windows キー", "Windows 標準のショートカットに使います。キーを起点にするAHK独自割り当てはありません。"),
           left_alt: key("modifier", "Left Alt / LAlt レイヤー", "アプリ操作用の LAlt レイヤーを起動します。"),
@@ -311,10 +317,10 @@
       title: "macOS キーチートシート",
       rows: MACOS_ROWS,
       context: "MacBook Pro 内蔵 JIS キーボード向けです。決定済みと候補はKarabinerの配布用ルールに反映し、無効化は入力を抑止します。要検討と未割当には個別ルールがありません。",
-      source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows: windows/autohotkey/keymap/*.ahk",
+      source: "macos/karabiner/assets/complex_modifications/autohotkey-jis.json · macos/karabiner/README.md",
       cheatsheetLayers: ["base"],
       keyAliases: { zenkaku: "grave", backspace: "delete", caps_control: "left_control", sl4: "caps_lock", sl3: "left_option", sl2: "left_command", sl1: "eisu", sr1: "kana", sr2: "right_command", sr3: "fn", sr4: null, sr5: null },
-      keyLabels: { zenkaku: "半角", backspace: "Delete", return: "Return" },
+      keyLabels: { zenkaku: "半角", backspace: "Delete", return: "Return", caps_control: "Control" },
       physicalKeys: { caps_control: "Left Control", sl4: "CapsLock", sl3: "Left Option", sl2: "Left Command", sl1: "英数", sr1: "かな", sr2: "Right Command", sr3: "fn", sr4: "対応キーなし", sr5: "対応キーなし" },
       cheatsheetNotes: {
         base: "仮想配列と同じキー配置です。SL1・SL2・SR1などの位置には実際のキー名も表示しています。各起点キーの割り当ては仮想配列で確認できます。"
@@ -718,7 +724,7 @@
       });
 
       const keyboard = document.getElementById("keyboard");
-      keyboard.className = "keyboard";
+      keyboard.className = "keyboard keyboard-aligned";
       keyboard.replaceChildren();
       map.rows.forEach((row, rowIndex) => {
         const rowElement = document.createElement("div");
@@ -727,9 +733,16 @@
           const binding = mapBinding(map, layerId, id);
           const keyLabel = map.keyLabels?.[id] || label;
           const physicalKey = map.physicalKeys?.[id];
+          const geometry = VIRTUAL_KEY_GEOMETRY.get(id);
           const keyButton = document.createElement("button");
           keyButton.type = "button";
-          keyButton.className = `key${size ? ` ${size}` : ""}${binding ? ` ${binding.status}` : ""}${selectedKey === id ? " selected" : ""}`;
+          keyButton.className = `key${size ? ` ${size}` : ""}${id === "return" ? " enter-key" : ""}${binding ? ` ${binding.status}` : ""}${selectedKey === id ? " selected" : ""}`;
+          if (geometry) {
+            keyButton.style.left = `${geometry.x}px`;
+            keyButton.style.top = `${geometry.y}px`;
+            keyButton.style.width = `${geometry.width}px`;
+            keyButton.style.height = `${geometry.height}px`;
+          }
           keyButton.setAttribute("aria-label", `${keyLabel}${physicalKey ? `, 実キー ${physicalKey}` : ""}${binding ? `: ${binding.output}` : ""}`);
           const legend = document.createElement("span");
           legend.className = "legend";
@@ -791,7 +804,7 @@
         : "仮想配列と同じSpace基準の配列に、MacBook Pro内蔵JISキーボードの実キー名とKarabinerの出力を表示します。決定済みと候補は配布用ルールに反映し、無効化は入力を抑止します。";
       const source = document.createElement("p");
       source.className = "small";
-      source.textContent = view === "windows" ? "参照: windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md" : "参照: macos/karabiner/assets/complex_modifications/autohotkey-jis.json · Windows: windows/autohotkey/keymap/*.ahk";
+      source.textContent = view === "windows" ? "参照: windows/autohotkey/keymap/*.ahk · windows/autohotkey/README.md" : "参照: macos/karabiner/assets/complex_modifications/autohotkey-jis.json · macos/karabiner/README.md";
       panel.replaceChildren(title, description, source);
     }
 

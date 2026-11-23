@@ -25,4 +25,3 @@ RCtrl:: escape()
 
 #Include lalt.ahk
 #Include rctrl.ahk
-#Include windows.ahk
