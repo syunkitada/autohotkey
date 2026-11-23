@@ -440,8 +440,9 @@
         {
           "type": "basic",
           "from": {"key_code": "backslash","modifiers": {"mandatory": ["left_option"]}},
+          "to": [{"key_code": "4","modifiers": ["left_command","left_shift"]}],
           "conditions": [{"type": "device_if","identifiers": [{"is_built_in_keyboard": true}]},{"type": "variable_if","name": "autohotkey_jis_left_command_pressed","value": 1}],
-          "description": "左Command/LAlt+backslash（JIS ] / 仮想@）を無効化する"
+          "description": "左Command/LAlt+backslash（JIS ] / 仮想@）で範囲指定スクリーンショットを起動する"
         },
         {
           "type": "basic",

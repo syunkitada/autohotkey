@@ -53,6 +53,7 @@ Karabiner-EventViewer を開いて、次を確認します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力する。
 - 右Commandと物理Left Optionは通常どおり動作し、左CommandはLeft Option出力でLAltレイヤーとして働く。
 - SL2 + [ / ] で `"` / `'` を入力する。
+- SL2 + @ で範囲指定スクリーンショット（⌘+Shift+4）を起動する。
 - ChromeでSL2 + A を押すとタブ検索、SL2 + S を押すと履歴ページが開く。
 - RCtrl・LAltレイヤーの候補が割当どおりに動き、灰色の組み合わせが入力されない。
 - Terminal.app / iTerm2 で英数 + ; / : を押すと、Ctrl+A / Ctrl+E が送られる。
@@ -67,6 +68,7 @@ JIS配列では、印字された記号とKarabinerの `key_code` 名が一致�
 - 英数キーは単押しで英数入力に切り替えてからEscapeを送り、保持するとRight Controlになります。かな押下中の英数単押しはかな入力へ切り替えます。英数と左Controlの単押し／長押し判定は200msです。
 - 左CommandはLeft Optionを出力するLAltレイヤーです。物理Left Optionはレイヤー判定に使わず、通常のLeft Optionとして残します。
 - SL2 + A / S はChrome限定で、タブ検索（⌘+Shift+A）／履歴ページを開く（⌘+Y）を実行します。Chrome以外のアプリには個別ルールを適用しません。
+- SL2 + @ は ⌘+Shift+4 を送り、範囲指定スクリーンショットを起動します。
 - かな（SR1）はLeft Shiftです。SR1 + Space は英数入力、SR1 + SL1の単押しはかな入力に切り替えます。SR1 + ; / : はJIS配列の標準Shift入力、SR1 + SL1 + ; / : は `+` / `*` を入力します。
 - JISの `@` / `[` / `]` キーは、それぞれ `[` / `]` / `@` を入力します。
 - Terminal.app / iTerm2 では英数 + ; / : が Ctrl+A / Ctrl+E、それ以外のアプリでは Command + ← / → になります。

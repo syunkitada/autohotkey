@@ -58,8 +58,9 @@ LAlt:: Return
 <!;:: Return
 ; [KEYBIND] key=<!sc028; tags=keybind; action=このキーの組み合わせを無効にします;
 <!sc028:: Return ; sc028 = :
-; [KEYBIND] key=<!@; tags=keybind; action=このキーの組み合わせを無効にします;
-<!@:: Return
+; JIS ] キー位置はChange Key後に@として届き、仮想配列の@キーに対応します。
+; [KEYBIND] key=<!@; tags=screenshot; action=範囲指定スクリーンショットを起動します;
+<!@:: Send "#+s"
 
 ; row 3 left
 ; [KEYBIND] key=<!z; tags=window; action=カレントウィンドウを透明にします（濃い: カレントウィンドウにフォーカス）;
